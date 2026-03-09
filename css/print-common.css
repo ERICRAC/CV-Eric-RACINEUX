@@ -107,26 +107,9 @@
   .hero,
   .entry,
   .panel,
-  .contact-card,
-  .cv-note {
+  .contact-card {
     break-inside: avoid;
     page-break-inside: avoid;
-  }
-
-  .contact-link,
-  .note-link,
-  .contact-link:visited,
-  .note-link:visited,
-  .contact-link:hover,
-  .note-link:hover,
-  .contact-link:focus-visible {
-    color: inherit !important;
-    text-decoration: none !important;
-  }
-
-  .note-link:focus-visible {
-    color: inherit !important;
-    text-decoration: none !important;
   }
 
   .cv-page[data-page="1"] .side-col {

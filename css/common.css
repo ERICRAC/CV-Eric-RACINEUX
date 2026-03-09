@@ -311,16 +311,6 @@ h1 {
   white-space: nowrap;
 }
 
-.contact-link {
-  color: inherit;
-  text-decoration: none;
-}
-
-.contact-link:hover,
-.contact-link:focus-visible {
-  text-decoration: underline;
-}
-
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -511,16 +501,8 @@ h1 {
   gap: 12px;
 }
 
-.cv-page[data-page="1"] .main-col {
-  gap: 10px;
-}
-
 .main-col > .entry + .entry {
   margin-top: 2px;
-}
-
-.cv-page[data-page="1"] .main-col > .entry + .entry {
-  margin-top: 0;
 }
 
 .section-title {
@@ -554,11 +536,6 @@ h1 {
   background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
   break-inside: avoid;
   page-break-inside: avoid;
-}
-
-.cv-page[data-page="1"] .entry {
-  gap: calc(3px * var(--experience-scale));
-  padding: calc(9px * var(--experience-scale)) calc(11px * var(--experience-scale));
 }
 
 .panel {
@@ -622,11 +599,6 @@ ul.clean li {
   margin: 1px 0;
   font-size: calc(10.7px * var(--experience-scale));
   line-height: 1.18;
-}
-
-.cv-page[data-page="1"] .impact,
-.cv-page[data-page="1"] ul.clean li {
-  line-height: 1.14;
 }
 
 .zone p {
@@ -850,19 +822,6 @@ ul.clean li {
   );
   pointer-events: none;
   z-index: 0;
-}
-
-.cv-note {
-  margin: 8px 0 0;
-  font-size: 10px;
-  line-height: 1.25;
-  font-style: italic;
-  color: var(--muted);
-  text-align: right;
-}
-
-.note-link {
-  color: inherit;
 }
 
 #explorations-techniques {
