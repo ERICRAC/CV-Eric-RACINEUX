@@ -1,0 +1,44 @@
+/* Print ATS */
+@media print {
+  body[data-mode="ats"] .tags {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px 10px !important;
+    margin-top: 8px !important;
+  }
+
+  body[data-mode="ats"] .tag {
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #222222 !important;
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+  }
+
+  body[data-mode="ats"] .cv-page::before,
+  body[data-mode="ats"] .cv-page::after,
+  body[data-mode="ats"] .page-grid::before,
+  body[data-mode="ats"] .page-grid::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  body[data-mode="ats"] .timeline::before {
+    left: 10px !important;
+    width: 1px !important;
+    background: #b0b6bc !important;
+    opacity: 1 !important;
+  }
+
+  body[data-mode="ats"] .t-item::before {
+    left: 4px !important;
+    width: 12px !important;
+    height: 12px !important;
+    border: 2px solid #555555 !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+}
