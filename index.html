@@ -1516,6 +1516,12 @@ body[data-mode="ats"] .kpi-box strong {
     print-color-adjust: exact;
   }
 
+  html,
+  body {
+    width: var(--paper-width) !important;
+    overflow: hidden !important;
+  }
+
   h1,
   h2,
   h3,
@@ -1539,10 +1545,19 @@ body[data-mode="ats"] .kpi-box strong {
     visibility: hidden !important;
   }
 
+  body > :not(.cv-shell) {
+    display: none !important;
+  }
+
   .cv-shell {
+    display: block !important;
     max-width: none;
     gap: 0;
     padding: 0;
+  }
+
+  .cv-shell > .cv-page:nth-of-type(n + 3) {
+    display: none !important;
   }
 
   .hero::after,
@@ -1573,19 +1588,26 @@ body[data-mode="ats"] .kpi-box strong {
   body[data-page="2"] .cv-page[data-page="2"] {
     display: block !important;
     width: var(--paper-width);
-    height: calc(var(--paper-height) - 1mm);
+    height: calc(var(--paper-height) - 3mm);
+    min-height: 0 !important;
+    box-sizing: border-box !important;
     margin: 0;
     box-shadow: none !important;
     border-radius: 0 !important;
-    border: 1px solid #dfe7f0 !important;
+    border: 0 !important;
     overflow: hidden !important;
-    break-after: page;
-    page-break-after: always;
+    break-before: auto !important;
+    page-break-before: auto !important;
   }
 
-  .cv-page:last-child {
-    break-after: auto;
-    page-break-after: auto;
+  .cv-shell > .cv-page:first-of-type {
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  .cv-shell > .cv-page:last-of-type {
+    break-after: auto !important;
+    page-break-after: auto !important;
   }
 
   .hero {
@@ -1636,6 +1658,12 @@ body[data-mode="ats"] .kpi-box strong {
   .cv-page[data-page="1"] #technos-environnements,
   .cv-page[data-page="1"] #parcours {
     margin-top: 0 !important;
+  }
+
+  .cv-note {
+    margin-top: 5px !important;
+    font-size: 9px !important;
+    line-height: 1.18 !important;
   }
 
   * {
