@@ -136,6 +136,10 @@ html, body {
   padding: 0;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .visually-hidden {
   position: absolute !important;
   width: 1px;
@@ -247,6 +251,40 @@ body[data-theme="access"] {
   transform: translateY(0);
 }
 
+.page-jump {
+  position: fixed;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 24;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.page-jump-btn {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, white 40%, var(--blue-2));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--blue-1);
+  box-shadow: 0 10px 20px color-mix(in srgb, transparent 80%, var(--blue-1));
+  backdrop-filter: blur(8px);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.page-jump-btn:hover,
+.page-jump-btn:focus-visible {
+  transform: translateY(-1px);
+}
+
 .mobile-menu-icon {
   position: relative;
   width: 15px;
@@ -306,6 +344,74 @@ body[data-theme="access"] {
   text-align: left;
 }
 
+.control-btn--compact {
+  width: auto;
+  justify-content: center;
+}
+
+.control-btn--action {
+  justify-content: center;
+  text-align: center;
+}
+
+.control-btn--demarche {
+  justify-content: center;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.02rem;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  padding-inline: 1.32rem 1.38rem;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 18% 22%, color-mix(in srgb, white 38%, transparent) 0%, transparent 18%),
+    radial-gradient(circle at 80% 28%, color-mix(in srgb, white 18%, transparent) 0%, transparent 20%),
+    linear-gradient(135deg, color-mix(in srgb, var(--blue-3) 78%, #ffffff) 0%, color-mix(in srgb, var(--blue-2) 82%, #ffffff) 48%, color-mix(in srgb, var(--blue-1) 78%, #111111) 100%);
+  border-color: color-mix(in srgb, var(--blue-1) 55%, white);
+  box-shadow:
+    0 16px 28px color-mix(in srgb, transparent 74%, var(--blue-1)),
+    0 0 0 1px color-mix(in srgb, white 74%, transparent) inset,
+    inset 0 1px 0 color-mix(in srgb, white 78%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.control-btn--demarche:hover,
+.control-btn--demarche:focus-visible {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.control-btn--demarche::before {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -28%;
+  width: 36%;
+  transform: rotate(18deg) translateX(-170%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, white 78%, transparent) 44%,
+    color-mix(in srgb, white 28%, transparent) 56%,
+    transparent 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.control-btn--demarche::after {
+  content: "✦";
+  margin-left: 0.18rem;
+  font-size: 0.94em;
+  line-height: 1;
+  color: #ffd54a;
+  text-shadow: 0 0 6px rgba(255, 213, 74, 0.55);
+}
+
+body[data-layout="desktop"] .control-btn--demarche:hover::before {
+  opacity: 1;
+  animation: demarche-sheen 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
 .control-btn.is-active {
   background: var(--blue-2);
   border-color: var(--blue-2);
@@ -351,6 +457,258 @@ body[data-theme="access"] {
 
 .control-feedback[data-state="progress"] {
   border-color: color-mix(in srgb, var(--blue-2) 45%, white);
+}
+
+.demarche-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(11, 24, 38, 0.44);
+  backdrop-filter: blur(6px);
+}
+
+.demarche-panel {
+  width: min(920px, 100%);
+  max-height: min(92vh, 1020px);
+  overflow: auto;
+  padding: 24px 28px;
+  border-radius: 30px;
+  border: 1px solid color-mix(in srgb, white 58%, var(--blue-2));
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, transparent 82%, var(--blue-3)) 0%, transparent 26%),
+    radial-gradient(circle at 88% 8%, color-mix(in srgb, transparent 84%, var(--blue-3)) 0%, transparent 32%),
+    linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, white 76%, var(--blue-4)) 100%);
+  box-shadow:
+    0 28px 72px color-mix(in srgb, transparent 72%, var(--blue-1)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  position: relative;
+}
+
+.demarche-panel::before {
+  display: none;
+}
+
+.demarche-panel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.demarche-panel__actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.demarche-panel__eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.demarche-panel__header h2 {
+  margin: 0;
+  font-size: 1.68rem;
+  line-height: 1.06;
+  color: var(--blue-1);
+  text-wrap: balance;
+}
+
+.demarche-panel__lede {
+  margin: 10px 0 0;
+  max-width: 60ch;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.demarche-panel__body {
+  display: grid;
+  gap: 18px;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.demarche-feedback {
+  display: none !important;
+}
+
+.demarche-panel .control-btn--compact {
+  min-width: 122px;
+  justify-content: center;
+  align-self: flex-start;
+  font-weight: 700;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, white 88%, var(--blue-4)) 0%, color-mix(in srgb, white 78%, var(--blue-4)) 100%);
+  border-color: color-mix(in srgb, white 45%, var(--blue-2));
+  color: var(--blue-1);
+  box-shadow:
+    0 10px 20px color-mix(in srgb, transparent 86%, var(--blue-1)),
+    inset 0 1px 0 color-mix(in srgb, white 78%, transparent);
+}
+
+#btn-share-demarche {
+  min-width: 176px;
+  max-width: 176px;
+  overflow: hidden;
+  position: relative;
+}
+
+#btn-share-demarche.is-copied {
+  animation: demarche-share-flash 0.9s ease 2;
+}
+
+.share-demarche-label {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#btn-share-demarche.is-copied .share-demarche-label {
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  animation: share-demarche-marquee 5.6s linear infinite;
+}
+
+.demarche-panel__body p,
+.demarche-panel__body ul {
+  margin: 0;
+}
+
+.demarche-panel__body ul {
+  padding-left: 1.1rem;
+}
+
+.demarche-panel__body li + li {
+  margin-top: 0.3rem;
+}
+
+.demarche-summary {
+  display: grid;
+  gap: 12px;
+}
+
+.demarche-summary p + ul,
+.demarche-summary ul + p {
+  margin-top: -2px;
+}
+
+.demarche-flow {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+  padding: 18px 20px 20px;
+  border-radius: 24px;
+  border: 1px solid color-mix(in srgb, white 46%, var(--blue-2));
+  background:
+    radial-gradient(circle at 12% 16%, color-mix(in srgb, transparent 88%, var(--blue-3)) 0%, transparent 22%),
+    linear-gradient(135deg, color-mix(in srgb, white 88%, var(--blue-4)) 0%, color-mix(in srgb, white 62%, var(--blue-4)) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.demarche-flow::before {
+  content: "";
+  position: absolute;
+  left: 11%;
+  right: 11%;
+  top: 50.5%;
+  height: 3px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--blue-3) 28%, white) 0 34px,
+      transparent 34px 52px
+    );
+  transform: translateY(-50%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.demarche-flow__header {
+  display: grid;
+  gap: 4px;
+}
+
+.demarche-flow__eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.demarche-flow__header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--blue-1);
+}
+
+.demarche-flow__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.demarche-flow__node {
+  min-height: 126px;
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 14px 14px 13px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, white 36%, var(--blue-2));
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 14px 28px color-mix(in srgb, transparent 88%, var(--blue-1)),
+    inset 0 1px 0 color-mix(in srgb, white 82%, transparent);
+  position: relative;
+  z-index: 2;
+}
+
+.demarche-flow__node strong {
+  font-size: 0.92rem;
+  color: var(--blue-1);
+}
+
+.demarche-flow__node span {
+  font-size: 0.8rem;
+  line-height: 1.42;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.demarche-flow__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, white 28%, var(--blue-2));
+  background: color-mix(in srgb, white 78%, var(--blue-4));
+  box-shadow: 0 10px 22px color-mix(in srgb, transparent 90%, var(--blue-1));
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--blue-2);
+  position: relative;
+  z-index: 3;
 }
 
 .control-btn.is-busy {
@@ -412,6 +770,41 @@ body[data-theme="access"] {
 @keyframes control-spinner {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes demarche-share-flash {
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow:
+      0 10px 20px color-mix(in srgb, transparent 86%, var(--blue-1)),
+      inset 0 1px 0 color-mix(in srgb, white 78%, transparent);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, white 55%, var(--blue-2)),
+      0 12px 24px color-mix(in srgb, transparent 80%, var(--blue-1)),
+      inset 0 1px 0 color-mix(in srgb, white 82%, transparent);
+  }
+}
+
+@keyframes demarche-sheen {
+  from {
+    transform: rotate(18deg) translateX(-170%);
+  }
+  to {
+    transform: rotate(18deg) translateX(460%);
+  }
+}
+
+@keyframes share-demarche-marquee {
+  0% {
+    transform: translateX(105%);
+  }
+  100% {
+    transform: translateX(-115%);
   }
 }
 
@@ -544,7 +937,8 @@ body[data-theme="access"] .cv-note {
 
 body[data-theme="access"] .control-btn,
 body[data-theme="access"] .mobile-menu-btn,
-body[data-theme="access"] .scroll-top-btn {
+body[data-theme="access"] .scroll-top-btn,
+body[data-theme="access"] .page-jump-btn {
   border-color: #111111;
   color: #111111;
   background: #ffffff;
@@ -554,6 +948,43 @@ body[data-theme="access"] .scroll-top-btn {
 body[data-theme="access"] .control-feedback {
   border-color: #111111;
   background: #ffffff;
+  color: #111111;
+}
+
+body[data-theme="access"] .demarche-panel {
+  border-color: #111111;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+body[data-theme="access"] .control-btn--demarche {
+  background: #111111;
+  border-color: #111111;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+body[data-theme="access"] .control-btn--demarche::after {
+  content: "";
+  margin-left: 0;
+  filter: none;
+}
+
+body[data-theme="access"] .demarche-flow,
+body[data-theme="access"] .demarche-flow__node {
+  background: #ffffff;
+  border-color: #111111;
+}
+
+body[data-theme="access"] .demarche-panel .control-btn--compact,
+body[data-theme="access"] .demarche-flow__arrow {
+  background: #ffffff;
+  border-color: #111111;
+  box-shadow: none;
+}
+
+body[data-theme="access"] .demarche-flow__arrow,
+body[data-theme="access"] .demarche-flow__header h3 {
   color: #111111;
 }
 
@@ -1176,12 +1607,42 @@ body[data-theme="access"] .t-item::before {
 }
 
 .cv-note {
-  margin: 8px 0 0;
+  margin: 0;
   font-size: 10px;
   line-height: 1.25;
   font-style: italic;
   color: var(--muted);
-  text-align: right;
+  text-align: left;
+}
+
+.cv-footer {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+body[data-layout="desktop"] .cv-page[data-page="2"] .cv-footer {
+  margin-top: 0;
+  gap: 2px;
+}
+
+.cv-update {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, white 45%, var(--blue-2));
+  background: color-mix(in srgb, white 84%, var(--blue-4));
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--blue-1);
+  text-align: left;
+  white-space: nowrap;
 }
 
 body[data-layout="mobile"] .cv-controls {
@@ -1209,6 +1670,10 @@ body[data-layout="mobile"] .scroll-top-btn {
   display: inline-flex;
 }
 
+body[data-layout="mobile"] .page-jump {
+  display: none;
+}
+
 body[data-layout="mobile"] .cv-controls .controls-group {
   display: none;
 }
@@ -1227,7 +1692,16 @@ body[data-layout="mobile"] .cv-controls .controls-group--themes {
   gap: 6px;
 }
 
-body[data-layout="mobile"]:not(.is-controls-open) .cv-controls .controls-group--themes {
+body[data-layout="mobile"]:not(.is-controls-open) .cv-controls .controls-group--themes,
+body[data-layout="mobile"]:not(.is-controls-open) .cv-controls .controls-group[aria-label="Impression"] {
+  display: none;
+}
+
+body[data-layout="mobile"].is-controls-open .cv-controls .controls-group[aria-label="Impression"] {
+  display: grid;
+}
+
+body[data-layout="mobile"] #btn-print {
   display: none;
 }
 
@@ -1236,6 +1710,83 @@ body[data-layout="mobile"] .cv-controls .control-btn {
   padding: 7px 7px;
   font-size: 0.72rem;
   gap: 0.28rem;
+}
+
+body[data-layout="mobile"] .demarche-overlay {
+  padding: 12px;
+}
+
+body[data-layout="mobile"] .demarche-panel {
+  width: 100%;
+  max-height: calc(100vh - 20px);
+  padding: 16px 16px 18px;
+  border-radius: 22px;
+}
+
+body[data-layout="mobile"] .demarche-panel__header {
+  align-items: stretch;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body[data-layout="mobile"] .demarche-panel__actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+body[data-layout="mobile"] .demarche-panel__header h2 {
+  font-size: 1.24rem;
+}
+
+body[data-layout="mobile"] .demarche-panel__lede {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+body[data-layout="mobile"] .demarche-panel__body {
+  gap: 16px;
+  font-size: 0.88rem;
+  line-height: 1.42;
+}
+
+body[data-layout="mobile"] .demarche-panel .control-btn--compact {
+  width: 100%;
+}
+
+body[data-layout="mobile"] .demarche-feedback {
+  display: none !important;
+}
+
+body[data-layout="mobile"] .demarche-flow {
+  padding: 14px;
+}
+
+body[data-layout="mobile"] .demarche-flow__grid {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+body[data-layout="mobile"] .demarche-flow__node {
+  min-height: 0;
+}
+
+body[data-layout="mobile"] .demarche-flow__arrow {
+  transform: rotate(90deg);
+  justify-self: center;
+  min-height: 36px;
+}
+
+body[data-layout="mobile"] .demarche-flow::before {
+  left: 26px;
+  right: auto;
+  top: 56px;
+  bottom: 22px;
+  width: 2px;
+  height: auto;
+  transform: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--blue-3) 28%, white) 0%, var(--blue-2) 48%, color-mix(in srgb, var(--blue-3) 34%, white) 100%);
 }
 
 body[data-layout="mobile"] .cv-shell {
@@ -1447,6 +1998,13 @@ body[data-layout="mobile"] .cv-note {
   font-size: 9.4px;
 }
 
+body[data-layout="mobile"] .cv-footer {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+
 body[data-layout="mobile"] #explorations-techniques,
 body[data-layout="mobile"] #realisations-resultats {
   margin-top: 0;
@@ -1482,6 +2040,10 @@ body[data-layout="mobile"] #realisations-resultats {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  body[data-layout="desktop"] .control-btn--demarche:hover {
+    animation: none !important;
   }
 }
 
@@ -2055,8 +2617,9 @@ body[data-mode="ats"] .kpi-box strong {
     </div>
     <div class="controls-group" role="group" aria-label="Impression">
       <div class="controls-title">Action</div>
-      <button type="button" id="btn-print" class="control-btn">Imprimer navigateur</button>
-      <button type="button" id="btn-download-pdf" class="control-btn">Telecharger PDF maitrise</button>
+      <button type="button" id="btn-demarche" class="control-btn control-btn--demarche">Démarche</button>
+      <button type="button" id="btn-print" class="control-btn control-btn--action">Imprimer via navigateur</button>
+      <button type="button" id="btn-download-pdf" class="control-btn control-btn--action">Telecharger PDF</button>
       <p id="pdf-feedback" class="control-feedback" aria-live="polite" aria-atomic="true" hidden></p>
     </div>
   </aside>
@@ -2095,13 +2658,73 @@ body[data-mode="ats"] .kpi-box strong {
         <h1 id="page-2-title">Eric Racineux</h1>
       </header>
       <div class="page-grid page-grid--footer"><section class="section stack main-col"><h2 class="section-title">Parcours complementaire</h2><article class="entry" id="exp-04"><div class="entry-head"><div><h3>Pilote essais et intégration systèmes</h3><div class="meta">ENGIE Ineo Rail / UTS</div></div><div class="pill">2021</div></div><p class="impact"><strong>Impact principal:</strong> structuration et pilotage des essais d’intégration sur un projet ferroviaire complexe.</p><ul class="clean"><li>Définition de la stratégie de validation et des plans d’essais.</li><li>Structuration des méthodes et outils d’intégration.</li><li>Coordination technique entre ingénierie, production et maîtrise d’ouvrage.</li><li>Sécurisation des jalons de validation et de mise en service.</li></ul></article><article class="entry" id="exp-05"><div class="entry-head"><div><h3>Responsable Bureau d’Études</h3><div class="meta">VMI</div></div><div class="pill">2012-2016</div></div><p class="impact"><strong>Impact principal:</strong> transformation et structuration du bureau d’études d’un constructeur de machines industrielles.</p><ul class="clean"><li>Management d’une équipe de 13 à 20 ingénieurs et techniciens.</li><li>Refonte des architectures machines et harmonisation des méthodes.</li><li>Pilotage d’un projet MES pour un site industriel du groupe LVMH.</li><li>Structuration des interfaces entre bureau d’études, production et SI.</li><li>Participation aux choix d’architectures techniques machines et automatisme.</li></ul></article><article class="entry" id="exp-06"><div class="entry-head"><div><h3>Manager Informatique Industrielle</h3><div class="meta">GOSS International</div></div><div class="pill">2000-2011</div></div><p class="impact"><strong>Impact principal:</strong> création et structuration du pôle informatique industrielle.</p><ul class="clean"><li>Architecture et administration de l’infrastructure technique industrielle.</li><li>Mise en place d’un laboratoire de validation et de test.</li><li>Déploiement de solutions de supervision et télé-monitoring.</li><li>Intégration des systèmes informatiques embarqués sur lignes industrielles.</li><li>Coordination technique internationale avec équipes engineering.</li></ul></article><article class="entry" id="exp-09"><div class="entry-head"><div><h3>Développeur logiciel scientifique</h3><div class="meta">ARTUS / Meggitt</div></div><div class="pill">1992-1994</div></div><p class="impact"><strong>Impact principal:</strong> - Développement d’outils logiciels scientifiques pour bancs d’essais.</p><ul class="clean"><li>Traitement de données techniques et visualisation.</li><li>Support aux équipes d’ingénierie.</li></ul></article><article class="entry" id="exp-10"><div class="entry-head"><div><h3>Technicien maintenance industrielle</h3><div class="meta">NOPLY - WEST MI</div></div><div class="pill">1990-1992</div></div><p class="impact"><strong>Impact principal:</strong> - Maintenance d’équipements industriels.</p><ul class="clean"><li>Diagnostic et résolution de pannes techniques.</li><li>Intervention sur systèmes électromécaniques.</li></ul></article></section><aside class="section stack side-col"><section class="section stack side-section zone-bloc-complementaire" id="bloc-complementaire"><h2 class="section-title">Informations complementaires</h2><div class="panel mini-list"><div><strong>Langues:</strong> Français, Anglais, Espagnol.</div><div><strong>Secteurs:</strong> industrie, systèmes critiques, infrastructure IT.</div><div>Profil LinkedIn disponible pour détails du parcours et publications.</div></div></section><section class="section stack side-section zone-explorations-techniques" id="explorations-techniques"><h2 class="section-title">Explorations techniques</h2><div class="panel mini-list"><div>Expérimentation d’outils d’ingénierie assistée par IA.</div><div>Conception d’un agent IA local destiné à assister l’architecture logicielle et l’automatisation de tâches techniques.</div><div>Exploration d’architectures logicielles intégrant IA, automatisation et outils de développement.</div><div>Veille active sur l’évolution des architectures cloud, logiciel et IA.</div></div></section></aside><section class="section stack main-section zone-kpi full-width-zone" id="realisations-resultats"><h2 class="section-title">Realisations / Resultats</h2><div class="kpi"><div class="kpi-box"><strong>30 ans+</strong><span class="muted">d’expérience dans l’IT et les systèmes industriels.</span></div><div class="kpi-box"><strong>Architectures</strong><span class="muted">SI, infrastructure et systèmes industriels.</span></div><div class="kpi-box"><strong>Environnements critiques</strong><span class="muted">industrie, offshore, ferroviaire, plateformes techniques.</span></div><div class="kpi-box"><strong>Pilotage transverse</strong><span class="muted">interface direction, métiers et équipes techniques.</span></div></div></section></div>
-      <p class="cv-note">Ce site a ete cree de maniere experimentale avec Codex 5.4, il utilise une chaine CI/CD GitHub : <a href="https://ericrac.github.io/CV-Eric-RACINEUX/" class="note-link" target="_blank" rel="noreferrer noopener">https://ericrac.github.io/CV-Eric-RACINEUX/</a></p>
+      <footer class="cv-footer">
+        <p class="cv-note">Ce site a ete cree de maniere experimentale avec Codex 5.4, il utilise une chaine CI/CD GitHub : <a href="https://ericrac.github.io/CV-Eric-RACINEUX/" class="note-link" target="_blank" rel="noreferrer noopener">https://ericrac.github.io/CV-Eric-RACINEUX/</a></p>
+        <p class="cv-update">Derniere mise a jour : 25/03/2026 23:24 (dernier commit)</p>
+      </footer>
     </section>
   </main>
+
+  <div id="demarche-overlay" class="demarche-overlay no-print" hidden>
+    <section class="demarche-panel" role="dialog" aria-modal="true" aria-labelledby="demarche-title">
+      <header class="demarche-panel__header">
+        <div>
+          <p class="demarche-panel__eyebrow">Démarche</p>
+          <h2 id="demarche-title">CV web, méthode et laboratoire IA</h2>
+          <p class="demarche-panel__lede">Un CV hybride qui sert a la fois de support public, de PDF maitrisé, et de terrain d’expérimentation sur l’usage encadré des agents IA.</p>
+        </div>
+        <div class="demarche-panel__actions">
+          <button type="button" id="btn-share-demarche" class="control-btn control-btn--compact" aria-label="Partager cette demarche"><span id="share-demarche-label" class="share-demarche-label">Partager cette démarche</span></button>
+          <button type="button" id="btn-close-demarche" class="control-btn control-btn--compact" aria-label="Fermer la demarche">Fermer</button>
+        </div>
+      </header>
+      <div class="demarche-panel__body">
+        <p id="demarche-feedback" class="control-feedback demarche-feedback" aria-live="polite" aria-atomic="true" hidden></p>
+        <section class="demarche-summary">
+          <p>Ce CV web ne sert pas seulement a rendre un parcours consultable en ligne. Il sert aussi de demonstrateur de methode.</p><p>Sur ce projet, l&#x27;humain n&#x27;a pas ecrit directement le code: la production est pilotee via l&#x27;agent IA, sur la base du besoin, des arbitrages et de la connaissance metier.</p><p>Le projet combine dans un meme objet:</p><ul><li>une presentation web lisible et themable</li><li>une impression PDF</li><li>une source de contenu structuree</li><li>une chaine de qualification et de publication automatisee</li><li>une experimentation encadree des agents IA</li></ul><p>L&#x27;objectif n&#x27;est pas de &quot;faire un site avec de l&#x27;IA&quot;, mais de travailler en conditions reelles sur ce qu&#x27;elle accelere, ce qu&#x27;elle fragilise et ce qui doit rester sous controle humain.</p><p>La logique de travail est volontairement courte et iterative: je fais, je verifie, j&#x27;ameliore; puis je recommence. Les evolutions se stabilisent par petits increments, avec commit local regulier puis push CI/CD quand l&#x27;etat est defendable.</p><p>Ce projet montre en pratique:</p><ul><li>la capacite a cadrer un besoin hybride web / document / PDF</li><li>la capacite a industrialiser un petit perimetre sans le rendre opaque</li><li>la capacite a qualifier, publier et faire evoluer un support visible</li><li>la volonte d&#x27;utiliser l&#x27;IA comme levier de travail, avec recul sur ses limites et ses risques</li><li>une facon tres concrete de faire evoluer un projet en mode agile, avec une IA force de proposition mais un cadrage, une verification et un arbitrage qui restent humains</li></ul>
+        </section>
+        <section class="demarche-flow" aria-labelledby="demarche-flow-title">
+          <div class="demarche-flow__header">
+            <p class="demarche-flow__eyebrow">Schéma synthèse</p>
+            <h3 id="demarche-flow-title">Chaîne CI/CD et fonctions de l’agent IA</h3>
+          </div>
+          <div class="demarche-flow__grid">
+            <div class="demarche-flow__node">
+              <strong>Source</strong>
+              <span>JSON CV<br>Template HTML<br>CSS / JS</span>
+            </div>
+            <div class="demarche-flow__arrow" aria-hidden="true">→</div>
+            <div class="demarche-flow__node">
+              <strong>Agent IA</strong>
+              <span>Cadrage<br>Refactor<br>Tests<br>Documentation</span>
+            </div>
+            <div class="demarche-flow__arrow" aria-hidden="true">→</div>
+            <div class="demarche-flow__node">
+              <strong>Qualification</strong>
+              <span>Smoke<br>Playwright<br>axe-core<br>PDF</span>
+            </div>
+            <div class="demarche-flow__arrow" aria-hidden="true">→</div>
+            <div class="demarche-flow__node">
+              <strong>Publication</strong>
+              <span>GitHub Actions<br>Pages<br>PDF publics</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
 
   <button type="button" id="btn-scroll-top" class="scroll-top-btn no-print" aria-label="Revenir en haut de page">
     <span aria-hidden="true">↑</span>
   </button>
+  <div class="page-jump no-print" aria-label="Navigation rapide entre pages">
+    <button type="button" id="btn-jump-page-1" class="page-jump-btn" aria-label="Aller a la page 1">
+      <span aria-hidden="true">↑</span>
+    </button>
+    <button type="button" id="btn-jump-page-2" class="page-jump-btn" aria-label="Aller a la page 2">
+      <span aria-hidden="true">↓</span>
+    </button>
+  </div>
 
   <script>
 (() => {
@@ -2116,12 +2739,23 @@ body[data-mode="ats"] .kpi-box strong {
   const btnPage2 = document.getElementById("btn-page-2");
   const btnPrint = document.getElementById("btn-print");
   const btnDownloadPdf = document.getElementById("btn-download-pdf");
+  const btnDemarche = document.getElementById("btn-demarche");
+  const btnShareDemarche = document.getElementById("btn-share-demarche");
+  const shareDemarcheLabel = document.getElementById("share-demarche-label");
+  const btnCloseDemarche = document.getElementById("btn-close-demarche");
+  const demarcheOverlay = document.getElementById("demarche-overlay");
+  const demarcheFeedback = document.getElementById("demarche-feedback");
   const pdfFeedback = document.getElementById("pdf-feedback");
   const btnMobileMenu = document.getElementById("btn-mobile-menu");
   const btnScrollTop = document.getElementById("btn-scroll-top");
+  const btnJumpPage1 = document.getElementById("btn-jump-page-1");
+  const btnJumpPage2 = document.getElementById("btn-jump-page-2");
   const mainContent = document.getElementById("main-content");
   const statusRegion = document.getElementById("cv-status");
   const themeButtons = Array.from(document.querySelectorAll("[data-theme-value]"));
+  const cvUpdate = document.querySelector(".cv-update");
+  const demarcheSummary = document.querySelector(".demarche-summary");
+  const pageJump = document.querySelector(".page-jump");
 
   const STORAGE_KEYS = {
     mode: "cv-mode",
@@ -2133,8 +2767,14 @@ body[data-mode="ats"] .kpi-box strong {
   const contrastPreferenceQuery = window.matchMedia("(prefers-contrast: more), (forced-colors: active)");
   const defaultPrintLabel = btnPrint ? btnPrint.textContent : "";
   const defaultDownloadLabel = btnDownloadPdf ? btnDownloadPdf.textContent : "";
+  const defaultShareDemarcheLabel = shareDemarcheLabel ? shareDemarcheLabel.textContent : "";
   let themeBeforePrint = null;
   let pdfDownloadInProgress = false;
+  let pdfFeedbackTimerId = null;
+  let shareDemarcheTimerId = null;
+  let demarcheRouteSyncMuted = false;
+  const TEMPLATE_TOKEN_PREFIX = "{".repeat(2);
+  const DEMARCHE_PLACEHOLDER = `${TEMPLATE_TOKEN_PREFIX}DEMARCHE_SHORT_HTML}}`;
 
   const isLocalManagedPdf = () => ["127.0.0.1", "localhost"].includes(window.location.hostname);
   const getManagedPdfFilename = () => {
@@ -2145,6 +2785,59 @@ body[data-mode="ats"] .kpi-box strong {
     return `cv-${theme}.pdf`;
   };
   const getPublicManagedPdfUrl = () => new URL(`pdf/${getManagedPdfFilename()}`, window.location.href).toString();
+  const getDemarcheShareUrl = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("demarche");
+    url.hash = "demarche";
+    return url.toString();
+  };
+  const urlRequestsDemarche = () => {
+    const url = new URL(window.location.href);
+    return url.searchParams.get("demarche") === "1" || url.hash === "#demarche";
+  };
+  const syncDemarcheUrl = (isOpen) => {
+    if (demarcheRouteSyncMuted) return;
+    const url = new URL(window.location.href);
+    if (isOpen) {
+      url.hash = "demarche";
+    } else {
+      if (url.hash === "#demarche") {
+        url.hash = "";
+      }
+      if (url.searchParams.get("demarche") === "1") {
+        url.searchParams.delete("demarche");
+      }
+    }
+    const next = `${url.pathname}${url.search}${url.hash}`;
+    window.history.replaceState({}, "", next);
+  };
+  const cleanupTemplateArtifacts = () => {
+    if (cvUpdate && cvUpdate.textContent.includes(TEMPLATE_TOKEN_PREFIX)) {
+      cvUpdate.hidden = true;
+    }
+    if (demarcheSummary && demarcheSummary.innerHTML.includes(DEMARCHE_PLACEHOLDER)) {
+      demarcheSummary.innerHTML = "";
+    }
+  };
+  const closeDemarche = () => {
+    if (!demarcheOverlay) return;
+    demarcheOverlay.hidden = true;
+    body.classList.remove("is-demarche-open");
+    if (btnDemarche) {
+      btnDemarche.setAttribute("aria-expanded", "false");
+    }
+    syncDemarcheUrl(false);
+  };
+  const openDemarche = () => {
+    if (!demarcheOverlay) return;
+    demarcheOverlay.hidden = false;
+    body.classList.add("is-demarche-open");
+    if (btnDemarche) {
+      btnDemarche.setAttribute("aria-expanded", "true");
+    }
+    syncDemarcheUrl(true);
+    announce("Ouverture de la demarche du projet.");
+  };
 
   const announce = (message) => {
     if (!statusRegion) return;
@@ -2154,7 +2847,31 @@ body[data-mode="ats"] .kpi-box strong {
     }, 20);
   };
 
+  const setShareDemarcheState = (label, state = "success") => {
+    if (!btnShareDemarche || !shareDemarcheLabel) return;
+    if (shareDemarcheTimerId) {
+      window.clearTimeout(shareDemarcheTimerId);
+      shareDemarcheTimerId = null;
+    }
+    if (!label) {
+      shareDemarcheLabel.textContent = defaultShareDemarcheLabel;
+      btnShareDemarche.removeAttribute("data-state");
+      btnShareDemarche.classList.remove("is-copied");
+      return;
+    }
+    shareDemarcheLabel.textContent = label;
+    btnShareDemarche.dataset.state = state;
+    btnShareDemarche.classList.add("is-copied");
+    shareDemarcheTimerId = window.setTimeout(() => {
+      setShareDemarcheState("");
+    }, 8000);
+  };
+
   const setPdfFeedback = (message, state = "progress") => {
+    if (pdfFeedbackTimerId) {
+      window.clearTimeout(pdfFeedbackTimerId);
+      pdfFeedbackTimerId = null;
+    }
     if (!pdfFeedback) return;
     if (!message) {
       pdfFeedback.hidden = true;
@@ -2165,6 +2882,11 @@ body[data-mode="ats"] .kpi-box strong {
     pdfFeedback.hidden = false;
     pdfFeedback.textContent = message;
     pdfFeedback.dataset.state = state;
+    if (state !== "progress") {
+      pdfFeedbackTimerId = window.setTimeout(() => {
+        setPdfFeedback("");
+      }, 15000);
+    }
   };
 
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -2204,7 +2926,8 @@ body[data-mode="ats"] .kpi-box strong {
     if (!grid) return 0;
     const styles = window.getComputedStyle(page);
     const paddingBottom = parseFloat(styles.paddingBottom) || 0;
-    const available = Math.max(0, page.clientHeight - grid.offsetTop - paddingBottom);
+    const footerHeight = page.querySelector(".cv-footer")?.offsetHeight || 0;
+    const available = Math.max(0, page.clientHeight - grid.offsetTop - paddingBottom - footerHeight - 4);
     grid.style.height = `${available}px`;
     return available;
   };
@@ -2367,6 +3090,13 @@ body[data-mode="ats"] .kpi-box strong {
       btnPage2.setAttribute("aria-pressed", page1Active ? "false" : "true");
     }
 
+    if (pageJump) {
+      const desktopVisible = body.dataset.layout !== "mobile";
+      pageJump.hidden = !desktopVisible;
+      if (btnJumpPage1) btnJumpPage1.hidden = page === "1";
+      if (btnJumpPage2) btnJumpPage2.hidden = page === "2";
+    }
+
     themeButtons.forEach((button) => {
       button.classList.toggle("is-active", button.dataset.themeValue === theme);
       button.setAttribute("aria-pressed", button.dataset.themeValue === theme ? "true" : "false");
@@ -2378,7 +3108,7 @@ body[data-mode="ats"] .kpi-box strong {
       btnPrint.disabled = buttonDisabled;
       btnPrint.setAttribute("aria-disabled", buttonDisabled ? "true" : "false");
       btnPrint.title = printDisabled ? "Le PDF est indisponible en mode haut contraste." : "";
-      btnPrint.textContent = printDisabled ? "PDF indisponible" : defaultPrintLabel;
+      btnPrint.textContent = printDisabled ? "Impression indisponible" : defaultPrintLabel;
     }
 
     if (btnDownloadPdf) {
@@ -2387,7 +3117,7 @@ body[data-mode="ats"] .kpi-box strong {
       btnDownloadPdf.classList.toggle("is-busy", pdfDownloadInProgress);
       btnDownloadPdf.disabled = downloadDisabled;
       btnDownloadPdf.setAttribute("aria-disabled", downloadDisabled ? "true" : "false");
-      btnDownloadPdf.title = theme === "access" ? "Le PDF maitrise est indisponible en mode haut contraste." : "";
+      btnDownloadPdf.title = theme === "access" ? "Le PDF est indisponible en mode haut contraste." : "";
       btnDownloadPdf.textContent = pdfDownloadInProgress
         ? "Generation PDF..."
         : (theme === "access" ? "PDF indisponible" : defaultDownloadLabel);
@@ -2447,8 +3177,8 @@ body[data-mode="ats"] .kpi-box strong {
 
     pdfDownloadInProgress = true;
     syncUi();
-    announce("Generation du PDF maitrise...");
-    setPdfFeedback("Generation du PDF maitrise en cours...", "progress");
+    announce("Generation du PDF...");
+    setPdfFeedback("Generation du PDF en cours...", "progress");
 
     try {
       const link = document.createElement("a");
@@ -2483,11 +3213,11 @@ body[data-mode="ats"] .kpi-box strong {
       link.click();
       link.remove();
       cleanup();
-      announce("PDF maitrise telecharge.");
-      setPdfFeedback("PDF maitrise pret et telecharge.", "success");
+      announce("PDF telecharge.");
+      setPdfFeedback("PDF pret et telecharge.", "success");
     } catch (_) {
-      announce("Echec de generation du PDF maitrise.");
-      setPdfFeedback("Echec de generation du PDF maitrise.", "error");
+      announce("Echec de generation du PDF.");
+      setPdfFeedback("Echec de generation du PDF.", "error");
     } finally {
       pdfDownloadInProgress = false;
       syncUi();
@@ -2520,8 +3250,47 @@ body[data-mode="ats"] .kpi-box strong {
   if (btnPage2) btnPage2.addEventListener("click", () => setPage("2", { focusContent: true, scrollBehavior: "smooth" }));
   if (btnPrint) btnPrint.addEventListener("click", printCv);
   if (btnDownloadPdf) btnDownloadPdf.addEventListener("click", downloadManagedPdf);
+  if (btnDemarche) {
+    btnDemarche.setAttribute("aria-haspopup", "dialog");
+    btnDemarche.setAttribute("aria-expanded", "false");
+    btnDemarche.addEventListener("click", () => {
+      if (demarcheOverlay?.hidden === false) {
+        closeDemarche();
+      } else {
+        openDemarche();
+      }
+    });
+  }
+  if (btnCloseDemarche) btnCloseDemarche.addEventListener("click", closeDemarche);
+  if (btnShareDemarche) {
+    btnShareDemarche.addEventListener("click", async () => {
+      const shareUrl = getDemarcheShareUrl();
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(shareUrl);
+          setShareDemarcheState("Le lien de la démarche est copié", "success");
+          announce("Lien de la demarche copie.");
+        } else {
+          window.prompt("Copier le lien de la démarche :", shareUrl);
+          setShareDemarcheState("Le lien de la démarche est copié", "progress");
+        }
+      } catch (_) {
+        window.prompt("Copier le lien de la démarche :", shareUrl);
+        setShareDemarcheState("Le lien de la démarche est copié", "progress");
+      }
+    });
+  }
+  if (demarcheOverlay) {
+    demarcheOverlay.addEventListener("click", (event) => {
+      if (event.target === demarcheOverlay) {
+        closeDemarche();
+      }
+    });
+  }
   if (btnMobileMenu) btnMobileMenu.addEventListener("click", toggleMobileControls);
   if (btnScrollTop) btnScrollTop.addEventListener("click", scrollToTop);
+  if (btnJumpPage1) btnJumpPage1.addEventListener("click", () => setPage("1", { focusContent: true, scrollBehavior: "smooth" }));
+  if (btnJumpPage2) btnJumpPage2.addEventListener("click", () => setPage("2", { focusContent: true, scrollBehavior: "smooth" }));
   themeButtons.forEach((button) => {
     button.addEventListener("click", () => {
       setTheme(button.dataset.themeValue || "blue");
@@ -2550,6 +3319,26 @@ body[data-mode="ats"] .kpi-box strong {
     }
     body.classList.remove("is-printing");
     requestAnimationFrame(layoutCv);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && demarcheOverlay?.hidden === false) {
+      closeDemarche();
+    }
+  });
+
+  window.addEventListener("hashchange", () => {
+    if (!demarcheOverlay) return;
+    demarcheRouteSyncMuted = true;
+    try {
+      if (urlRequestsDemarche()) {
+        openDemarche();
+      } else if (demarcheOverlay.hidden === false) {
+        closeDemarche();
+      }
+    } finally {
+      demarcheRouteSyncMuted = false;
+    }
   });
 
   window.addEventListener("beforeprint", () => {
@@ -2593,9 +3382,13 @@ body[data-mode="ats"] .kpi-box strong {
   };
 
   const defaultTheme = contrastPreferenceQuery.matches ? "access" : (body.dataset.theme || "blue");
+  cleanupTemplateArtifacts();
   setTheme(readPreference(STORAGE_KEYS.theme, defaultTheme));
   setMode(readPreference(STORAGE_KEYS.mode, body.dataset.mode || "premium"));
   setPage(readPreference(STORAGE_KEYS.page, body.dataset.page || "1"), { focusContent: false, scrollBehavior: "auto" });
+  if (urlRequestsDemarche()) {
+    openDemarche();
+  }
   requestAnimationFrame(layoutCv);
   requestAnimationFrame(syncScrollTopButton);
   if (document.fonts && document.fonts.ready) {
