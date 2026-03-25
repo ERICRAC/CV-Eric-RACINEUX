@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ericrac.github.io/CV-Eric-RACINEUX/sitemap.xml
