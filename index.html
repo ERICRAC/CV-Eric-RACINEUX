@@ -50,7 +50,16 @@
   --page-1-parcours-offset: 12px;
   --page-2-kpi-offset: 0px;
   --page-2-exploration-offset: 0px;
-  --control-width: 158px;
+  --control-width: 170px;
+  --controls-offset: 170px;
+  --dark-bg-start: rgba(45, 91, 132, 0.34);
+  --dark-bg-mid: rgba(10, 17, 24, 0.96);
+  --dark-bg-end: #081018;
+  --dark-surface-top: color-mix(in srgb, #142231 84%, var(--blue-4));
+  --dark-surface-bottom: color-mix(in srgb, #0f1924 92%, var(--blue-4));
+  --dark-control-bg: #122130;
+  --dark-control-active-text: #081018;
+  --dark-bar: #21384c;
 }
 
 body[data-theme="blue"] {
@@ -127,6 +136,28 @@ body[data-theme="access"] {
   --shadow: none;
 }
 
+body[data-auto-dark="true"][data-mode="premium"] {
+  --bg: #0a1118;
+  --paper: #0f1924;
+  --ink: #edf4fb;
+  --muted: #9fb1c4;
+  --line: #284055;
+  --blue-1: #8cc8ff;
+  --blue-2: #58a8f3;
+  --blue-3: #a7d8ff;
+  --blue-4: #163147;
+  --accent: #7cbcff;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+  --dark-bg-start: rgba(45, 91, 132, 0.34);
+  --dark-bg-mid: rgba(10, 17, 24, 0.96);
+  --dark-bg-end: #081018;
+  --dark-surface-top: color-mix(in srgb, #142231 84%, var(--blue-4));
+  --dark-surface-bottom: color-mix(in srgb, #0f1924 92%, var(--blue-4));
+  --dark-control-bg: #122130;
+  --dark-control-active-text: #081018;
+  --dark-bar: #21384c;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -168,6 +199,11 @@ body[data-theme="access"] {
   background: #ffffff;
 }
 
+body[data-auto-dark="true"][data-mode="premium"] {
+  background:
+    radial-gradient(circle at top left, var(--dark-bg-start) 0%, var(--dark-bg-mid) 42%, var(--dark-bg-end) 100%);
+}
+
 .skip-link {
   position: fixed;
   top: 10px;
@@ -202,6 +238,78 @@ body[data-theme="access"] {
   background: rgba(248, 252, 255, 0.94);
   backdrop-filter: blur(6px);
   box-shadow: 0 14px 28px color-mix(in srgb, transparent 78%, var(--blue-1));
+  transition:
+    width 0.24s ease,
+    padding 0.24s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cv-controls-groups {
+  display: contents;
+}
+
+.controls-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--blue-3) 35%, white);
+  background: #ffffff;
+  color: var(--blue-1);
+  border-radius: 999px;
+  padding: 0.52rem 0.78rem;
+  cursor: pointer;
+}
+
+.controls-toggle-icon {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.controls-toggle-icon::before,
+.controls-toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.controls-toggle-icon::before {
+  top: -5px;
+}
+
+.controls-toggle-icon::after {
+  top: 5px;
+}
+
+body.is-controls-collapsed .cv-controls {
+  width: 52px;
+  padding: 0.6rem 0.45rem;
+  align-items: center;
+}
+
+body.is-controls-collapsed .cv-controls-groups {
+  display: none;
+}
+
+body.is-controls-collapsed .controls-toggle-btn {
+  width: 40px;
+  padding-inline: 0;
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .cv-controls {
+  background: color-mix(in srgb, var(--dark-control-bg) 92%, transparent);
+  border-color: color-mix(in srgb, var(--blue-3) 32%, #0f1924);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
 }
 
 .mobile-menu-btn {
@@ -218,6 +326,22 @@ body[data-theme="access"] {
   font-size: 0.84rem;
   font-weight: 700;
   cursor: pointer;
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .mobile-menu-btn,
+body[data-auto-dark="true"][data-mode="premium"] .controls-toggle-btn,
+body[data-auto-dark="true"][data-mode="premium"] .scroll-top-btn,
+body[data-auto-dark="true"][data-mode="premium"] .page-jump-btn,
+body[data-auto-dark="true"][data-mode="premium"] .control-btn {
+  background: var(--dark-control-bg);
+  border-color: color-mix(in srgb, var(--blue-3) 32%, #0f1924);
+  color: var(--blue-1);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .control-btn.is-active {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--blue-2) 88%, var(--dark-control-bg)), color-mix(in srgb, var(--blue-1) 72%, #111111));
+  border-color: color-mix(in srgb, var(--blue-2) 70%, #0f1924);
+  color: var(--dark-control-active-text);
 }
 
 .scroll-top-btn {
@@ -285,6 +409,137 @@ body[data-theme="access"] {
   transform: translateY(-1px);
 }
 
+.cv-debug {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 26;
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
+.cv-debug-toggle {
+  border: 1px solid color-mix(in srgb, white 42%, var(--blue-2));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--blue-1);
+  padding: 0.44rem 0.82rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 10px 22px color-mix(in srgb, transparent 84%, var(--blue-1));
+  backdrop-filter: blur(8px);
+}
+
+.cv-debug-panel {
+  width: min(320px, calc(100vw - 32px));
+  display: grid;
+  gap: 10px;
+  padding: 12px 13px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, white 42%, var(--blue-2));
+  background: rgba(249, 252, 255, 0.96);
+  box-shadow: 0 16px 34px color-mix(in srgb, transparent 80%, var(--blue-1));
+  backdrop-filter: blur(10px);
+}
+
+.cv-debug-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-1);
+}
+
+.cv-debug-list {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.cv-debug-list div {
+  display: grid;
+  grid-template-columns: minmax(0, 104px) minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.cv-debug-list dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.cv-debug-list dd {
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.cv-debug-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cv-debug-group {
+  display: grid;
+  gap: 6px;
+}
+
+.cv-debug-group-title {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cv-debug-btn {
+  border: 1px solid color-mix(in srgb, white 42%, var(--blue-2));
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--blue-1);
+  padding: 0.34rem 0.7rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cv-debug-btn--reset {
+  justify-self: start;
+  font-size: 0.72rem;
+  padding-inline: 0.9rem;
+}
+
+.cv-debug-btn.is-active,
+.cv-debug-toggle:hover,
+.cv-debug-toggle:focus-visible,
+.cv-debug-btn:hover,
+.cv-debug-btn:focus-visible {
+  background: color-mix(in srgb, white 66%, var(--blue-4));
+  outline: none;
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .cv-debug-toggle,
+body[data-auto-dark="true"][data-mode="premium"] .cv-debug-panel,
+body[data-auto-dark="true"][data-mode="premium"] .cv-debug-btn {
+  background: rgba(15, 25, 36, 0.96);
+  border-color: color-mix(in srgb, var(--blue-3) 28%, #0f1924);
+  color: var(--blue-1);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .cv-debug-list dd {
+  color: var(--ink);
+}
+
 .mobile-menu-icon {
   position: relative;
   width: 15px;
@@ -316,6 +571,23 @@ body[data-theme="access"] {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
+}
+
+.controls-subgroup {
+  margin-top: 0.18rem;
+  padding: 0.56rem;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, white 44%, var(--blue-2));
+  background: color-mix(in srgb, white 82%, var(--blue-4));
+}
+
+.controls-subtitle {
+  margin: 0 0 0.38rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .controls-title {
@@ -354,6 +626,65 @@ body[data-theme="access"] {
   text-align: center;
 }
 
+.control-btn--appearance {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  grid-template-areas:
+    "icon label"
+    ". state";
+  align-items: center;
+  column-gap: 0.46rem;
+  row-gap: 0.34rem;
+  padding-inline: 0.86rem;
+  padding-block: 0.56rem;
+}
+
+.appearance-toggle__icon {
+  grid-area: icon;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  font-size: 0.92rem;
+  color: var(--blue-2);
+  align-self: start;
+  margin-top: 0.04rem;
+}
+
+.appearance-toggle__label {
+  grid-area: label;
+  min-width: 0;
+  font-size: 0.75rem;
+  line-height: 1.15;
+  font-weight: 700;
+  text-align: left;
+}
+
+.appearance-toggle__state {
+  grid-area: state;
+  justify-self: end;
+  min-width: 68px;
+  padding: 0.28rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--blue-3) 42%, white);
+  background:
+    radial-gradient(circle at 24% 22%, color-mix(in srgb, white 38%, transparent) 0%, transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, white 95%, var(--blue-4)) 0%, color-mix(in srgb, white 72%, var(--blue-4)) 100%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 82%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, transparent 86%, var(--blue-2)),
+    0 2px 6px color-mix(in srgb, transparent 90%, var(--blue-1));
+  font-size: 0.6rem;
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-align: center;
+  color: var(--blue-1);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+
 .control-btn--demarche {
   justify-content: center;
   text-align: center;
@@ -376,9 +707,19 @@ body[data-theme="access"] {
   overflow: hidden;
 }
 
-.control-btn--demarche:hover,
+.control-btn--demarche:hover {
+  transform: translateY(-1px) scale(1.01);
+}
+
 .control-btn--demarche:focus-visible {
   transform: translateY(-1px) scale(1.01);
+  outline: none;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, white 18%, var(--blue-2)),
+    0 0 0 8px color-mix(in srgb, transparent 80%, var(--blue-3)),
+    0 16px 28px color-mix(in srgb, transparent 74%, var(--blue-1)),
+    0 0 0 1px color-mix(in srgb, white 74%, transparent) inset,
+    inset 0 1px 0 color-mix(in srgb, white 78%, transparent);
 }
 
 .control-btn--demarche::before {
@@ -416,6 +757,23 @@ body[data-layout="desktop"] .control-btn--demarche:hover::before {
   background: var(--blue-2);
   border-color: var(--blue-2);
   color: #ffffff;
+}
+
+.control-btn--appearance.is-active .appearance-toggle__icon {
+  color: currentColor;
+}
+
+.control-btn--appearance.is-active .appearance-toggle__state {
+  background:
+    radial-gradient(circle at 26% 24%, color-mix(in srgb, white 24%, transparent) 0%, transparent 22%),
+    linear-gradient(180deg, color-mix(in srgb, var(--blue-2) 88%, white) 0%, color-mix(in srgb, var(--blue-1) 84%, white) 100%);
+  border-color: color-mix(in srgb, var(--blue-1) 66%, white);
+  color: #ffffff;
+  box-shadow:
+    inset 0 2px 5px color-mix(in srgb, transparent 78%, var(--blue-1)),
+    inset 0 -1px 0 color-mix(in srgb, transparent 82%, #0f1b28),
+    0 0 0 1px color-mix(in srgb, white 68%, transparent);
+  transform: translateY(1px);
 }
 
 .control-btn:focus-visible,
@@ -459,6 +817,36 @@ body[data-layout="desktop"] .control-btn--demarche:hover::before {
   border-color: color-mix(in srgb, var(--blue-2) 45%, white);
 }
 
+body[data-auto-dark="true"][data-mode="premium"] .controls-subgroup {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--dark-control-bg) 92%, transparent), color-mix(in srgb, var(--dark-surface-bottom) 92%, transparent));
+  border-color: color-mix(in srgb, var(--blue-3) 24%, #0f1924);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .control-btn--appearance .appearance-toggle__state {
+  background: linear-gradient(180deg, color-mix(in srgb, #0d141c 82%, var(--dark-surface-bottom)) 0%, color-mix(in srgb, #12202d 88%, var(--dark-surface-top)) 100%);
+  border-color: color-mix(in srgb, var(--blue-3) 36%, var(--dark-surface-bottom));
+  color: var(--blue-1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.24),
+    0 1px 0 rgba(0, 0, 0, 0.18);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .control-btn--appearance.is-active .appearance-toggle__state {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--blue-2) 78%, var(--dark-control-bg)) 0%, color-mix(in srgb, var(--blue-1) 58%, var(--dark-surface-top)) 100%);
+  color: var(--dark-control-active-text);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.28),
+    0 0 0 1px color-mix(in srgb, white 14%, transparent);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .control-feedback {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--dark-control-bg) 94%, transparent), color-mix(in srgb, var(--dark-surface-bottom) 94%, transparent));
+  border-color: color-mix(in srgb, var(--blue-3) 28%, #0f1924);
+  color: var(--blue-1);
+}
+
 .demarche-overlay {
   position: fixed;
   inset: 0;
@@ -469,6 +857,41 @@ body[data-layout="desktop"] .control-btn--demarche:hover::before {
   padding: 24px;
   background: rgba(11, 24, 38, 0.44);
   backdrop-filter: blur(6px);
+}
+
+.demarche-mobile-actions {
+  position: fixed;
+  right: 14px;
+  bottom: 16px;
+  z-index: 38;
+  display: none;
+  pointer-events: none;
+}
+
+.demarche-mobile-btn {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, white 40%, var(--blue-2));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--blue-1);
+  box-shadow: 0 12px 24px color-mix(in srgb, transparent 82%, var(--blue-1));
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.demarche-mobile-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .demarche-panel {
@@ -651,6 +1074,38 @@ body[data-layout="desktop"] .control-btn--demarche:hover::before {
   color: var(--muted);
 }
 
+body[data-auto-dark="true"][data-mode="premium"] .demarche-overlay {
+  background: rgba(4, 10, 16, 0.62);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .demarche-panel {
+  border-color: color-mix(in srgb, var(--blue-3) 26%, #0f1924);
+  background:
+    radial-gradient(circle at 14% 16%, color-mix(in srgb, transparent 82%, var(--blue-3)) 0%, transparent 24%),
+    radial-gradient(circle at 86% 8%, color-mix(in srgb, transparent 86%, var(--blue-3)) 0%, transparent 28%),
+    linear-gradient(180deg, var(--dark-surface-top) 0%, var(--dark-surface-bottom) 100%);
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .demarche-flow,
+body[data-auto-dark="true"][data-mode="premium"] .demarche-flow__node {
+  border-color: color-mix(in srgb, var(--blue-3) 26%, #0f1924);
+  background:
+    radial-gradient(circle at 14% 16%, color-mix(in srgb, transparent 88%, var(--blue-3)) 0%, transparent 22%),
+    linear-gradient(180deg, color-mix(in srgb, var(--dark-control-bg) 78%, var(--dark-surface-top)) 0%, color-mix(in srgb, var(--dark-surface-bottom) 90%, var(--dark-control-bg)) 100%);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .demarche-panel .control-btn--compact,
+body[data-auto-dark="true"][data-mode="premium"] .demarche-flow__arrow,
+body[data-auto-dark="true"][data-mode="premium"] .demarche-mobile-btn {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--dark-control-bg) 88%, transparent), color-mix(in srgb, var(--dark-surface-bottom) 90%, transparent));
+  border-color: color-mix(in srgb, var(--blue-3) 28%, #0f1924);
+  color: var(--blue-1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+}
+
 .demarche-flow__header h3 {
   margin: 0;
   font-size: 1rem;
@@ -809,11 +1264,14 @@ body[data-layout="desktop"] .control-btn--demarche:hover::before {
 }
 
 .cv-shell {
-  max-width: calc(var(--screen-paper-width) + var(--control-width) + 2.8rem);
+  max-width: calc(var(--screen-paper-width) + var(--controls-offset) + 2.8rem);
   margin: 0 auto;
   display: grid;
   gap: 24px;
-  padding: 20px 10px 24px calc(var(--control-width) + 36px);
+  padding: 20px 10px 24px calc(var(--controls-offset) + 36px);
+  transition:
+    max-width 0.24s ease,
+    padding-left 0.24s ease;
 }
 
 #main-content {
@@ -831,6 +1289,152 @@ body[data-layout="desktop"] .control-btn--demarche:hover::before {
   box-shadow: var(--shadow);
   overflow: hidden;
   position: relative;
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .cv-page,
+body[data-auto-dark="true"][data-mode="premium"] .hero,
+body[data-auto-dark="true"][data-mode="premium"] .entry,
+body[data-auto-dark="true"][data-mode="premium"] .panel,
+body[data-auto-dark="true"][data-mode="premium"] .contact-card,
+body[data-auto-dark="true"][data-mode="premium"] .kpi-box {
+  background: linear-gradient(180deg, var(--dark-surface-top) 0%, var(--dark-surface-bottom) 100%);
+  border-color: color-mix(in srgb, var(--blue-3) 28%, #0f1924);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] {
+  --bg: #0b1711;
+  --paper: #101d16;
+  --muted: #a6c7b2;
+  --blue-1: #9de7ba;
+  --blue-2: #68c58f;
+  --blue-3: #b4efc7;
+  --blue-4: #113225;
+  --accent: #7cd39b;
+  --dark-bg-start: rgba(41, 114, 80, 0.34);
+  --dark-bg-mid: rgba(11, 23, 17, 0.96);
+  --dark-bg-end: #08110c;
+  --dark-surface-top: color-mix(in srgb, #13261c 82%, var(--blue-4));
+  --dark-surface-bottom: color-mix(in srgb, #0c1611 92%, var(--blue-4));
+  --dark-control-bg: #122319;
+  --dark-control-active-text: #08110c;
+  --dark-bar: #1e4230;
+}
+
+body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] {
+  --bg: #140f19;
+  --paper: #1a1320;
+  --muted: #c6b7d5;
+  --blue-1: #e0b9ff;
+  --blue-2: #c58cff;
+  --blue-3: #edd1ff;
+  --blue-4: #2b1739;
+  --accent: #d4a1ff;
+  --dark-bg-start: rgba(115, 76, 164, 0.34);
+  --dark-bg-mid: rgba(20, 15, 25, 0.96);
+  --dark-bg-end: #0f0b14;
+  --dark-surface-top: color-mix(in srgb, #24172d 82%, var(--blue-4));
+  --dark-surface-bottom: color-mix(in srgb, #17101f 92%, var(--blue-4));
+  --dark-control-bg: #241731;
+  --dark-control-active-text: #120d17;
+  --dark-bar: #45305b;
+}
+
+body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] {
+  --bg: #1a1209;
+  --paper: #21170d;
+  --muted: #d2bca3;
+  --blue-1: #ffd18a;
+  --blue-2: #ffb24f;
+  --blue-3: #ffe0b4;
+  --blue-4: #3c2410;
+  --accent: #ffc46d;
+  --dark-bg-start: rgba(194, 110, 35, 0.32);
+  --dark-bg-mid: rgba(26, 18, 9, 0.96);
+  --dark-bg-end: #120b05;
+  --dark-surface-top: color-mix(in srgb, #2f1c0e 82%, var(--blue-4));
+  --dark-surface-bottom: color-mix(in srgb, #1c120a 92%, var(--blue-4));
+  --dark-control-bg: #2c1b0d;
+  --dark-control-active-text: #140c05;
+  --dark-bar: #51331a;
+}
+
+body[data-auto-dark="true"][data-mode="premium"][data-theme="black"] {
+  --bg: #0f1113;
+  --paper: #16181b;
+  --muted: #b1b7bd;
+  --blue-1: #e8edf2;
+  --blue-2: #c9d1d9;
+  --blue-3: #f4f7fa;
+  --blue-4: #20252a;
+  --accent: #dde3ea;
+  --dark-bg-start: rgba(86, 101, 116, 0.28);
+  --dark-bg-mid: rgba(15, 17, 19, 0.96);
+  --dark-bg-end: #090a0c;
+  --dark-surface-top: color-mix(in srgb, #1b1e22 84%, var(--blue-4));
+  --dark-surface-bottom: color-mix(in srgb, #111316 92%, var(--blue-4));
+  --dark-control-bg: #1c2024;
+  --dark-control-active-text: #0b0d0f;
+  --dark-bar: #32383f;
+}
+
+body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] .cv-page,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] .hero,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] .entry,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] .panel,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] .contact-card,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] .kpi-box {
+  background:
+    radial-gradient(circle at top left, rgba(72, 155, 111, 0.16) 0%, transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--dark-surface-top) 82%, #163025) 0%, color-mix(in srgb, var(--dark-surface-bottom) 92%, #102119) 100%);
+}
+
+body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] .cv-page,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] .hero,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] .entry,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] .panel,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] .contact-card,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] .kpi-box {
+  background:
+    radial-gradient(circle at top left, rgba(177, 126, 255, 0.16) 0%, transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--dark-surface-top) 82%, #2b1f37) 0%, color-mix(in srgb, var(--dark-surface-bottom) 92%, #1b1322) 100%);
+}
+
+body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] .cv-page,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] .hero,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] .entry,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] .panel,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] .contact-card,
+body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] .kpi-box {
+  background:
+    radial-gradient(circle at top left, rgba(255, 176, 72, 0.18) 0%, transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--dark-surface-top) 82%, #382615) 0%, color-mix(in srgb, var(--dark-surface-bottom) 92%, #24170f) 100%);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .bar {
+  background: var(--dark-bar);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .pill,
+body[data-auto-dark="true"][data-mode="premium"] .tag,
+body[data-auto-dark="true"][data-mode="premium"] .cv-update {
+  background: linear-gradient(135deg, color-mix(in srgb, #193149 84%, var(--blue-4)), color-mix(in srgb, #132536 94%, var(--blue-4)));
+  border-color: color-mix(in srgb, var(--blue-3) 38%, #0f1924);
+  color: var(--blue-1);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .cv-note,
+body[data-auto-dark="true"][data-mode="premium"] .entry .meta,
+body[data-auto-dark="true"][data-mode="premium"] .muted,
+body[data-auto-dark="true"][data-mode="premium"] .demarche-panel__lede,
+body[data-auto-dark="true"][data-mode="premium"] .demarche-flow__eyebrow,
+body[data-auto-dark="true"][data-mode="premium"] .controls-title {
+  color: var(--muted);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .note-link,
+body[data-auto-dark="true"][data-mode="premium"] .contact-link {
+  color: var(--blue-1);
 }
 
 body[data-theme="access"] .cv-controls {
@@ -1645,6 +2249,40 @@ body[data-layout="desktop"] .cv-page[data-page="2"] .cv-footer {
   white-space: nowrap;
 }
 
+.site-meta {
+  width: min(calc(var(--screen-paper-width) + var(--controls-offset) + 2.8rem), 100%);
+  margin: -6px auto 18px;
+  padding-left: calc(var(--controls-offset) + 36px);
+  padding-right: 10px;
+  transition: padding-left 0.24s ease, width 0.24s ease;
+}
+
+.site-legal {
+  width: min(100%, var(--screen-paper-width));
+  margin: 0 auto;
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--muted);
+  text-align: left;
+}
+
+.site-legal__policy,
+.site-legal__author {
+  display: block;
+}
+
+.site-legal__policy {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.site-legal__author {
+  margin-top: 2px;
+  font-size: 10.4px;
+  font-weight: 600;
+  color: var(--blue-1);
+}
+
 body[data-layout="mobile"] .cv-controls {
   position: sticky;
   top: 0;
@@ -1666,11 +2304,19 @@ body[data-layout="mobile"] .mobile-menu-btn {
   display: inline-flex;
 }
 
+body[data-layout="mobile"] .controls-toggle-btn {
+  display: none;
+}
+
 body[data-layout="mobile"] .scroll-top-btn {
   display: inline-flex;
 }
 
 body[data-layout="mobile"] .page-jump {
+  display: none;
+}
+
+body[data-layout="mobile"] .cv-debug {
   display: none;
 }
 
@@ -1721,6 +2367,10 @@ body[data-layout="mobile"] .demarche-panel {
   max-height: calc(100vh - 20px);
   padding: 16px 16px 18px;
   border-radius: 22px;
+}
+
+body[data-layout="mobile"] .demarche-mobile-actions {
+  display: flex;
 }
 
 body[data-layout="mobile"] .demarche-panel__header {
@@ -1998,10 +2648,25 @@ body[data-layout="mobile"] .cv-note {
   font-size: 9.4px;
 }
 
+body[data-layout="mobile"] .cv-legal {
+  font-size: 9px;
+}
+
 body[data-layout="mobile"] .cv-footer {
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+}
+
+body[data-layout="mobile"] .site-meta {
+  width: 100%;
+  margin: 8px 0 16px;
+  padding: 0 14px;
+}
+
+body[data-layout="mobile"] .site-legal {
+  width: 100%;
+  font-size: 9px;
 }
 
 
@@ -2048,7 +2713,9 @@ body[data-layout="mobile"] #realisations-resultats {
 }
 
 .note-link {
-  color: inherit;
+  color: #0b5fd1;
+  text-decoration: underline;
+  text-underline-offset: 1px;
 }
 
 #explorations-techniques {
@@ -2585,147 +3252,125 @@ body[data-mode="ats"] .kpi-box strong {
 
 </style>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJDViI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMWY2ZmIyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzVlYTNkYSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgeD0iOCIgeT0iNCIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjU2IiByeD0iOCIgZmlsbD0idXJsKCNnKSIvPgogIDxyZWN0IHg9IjE0IiB5PSIxMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjZmZmZmZmIi8+CiAgPHJlY3QgeD0iMTQiIHk9IjI0IiB3aWR0aD0iMzAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiNlOGY0ZmYiLz4KICA8cmVjdCB4PSIxNCIgeT0iMzIiIHdpZHRoPSIzNCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iI2U4ZjRmZiIvPgogIDxyZWN0IHg9IjE0IiB5PSI0MCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSIjZThmNGZmIi8+CiAgPHRleHQgeD0iMzIiIHk9IjU1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiPkNWPC90ZXh0Pgo8L3N2Zz4K">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "inLanguage": "fr-FR", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "name": "CV - Eric Racineux", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "mainEntity": {"@type": "Person", "name": "Eric Racineux", "jobTitle": "RSI | Architecte & Référent SI senior", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "email": "mailto:eric.racineux@outlook.fr", "telephone": "+33 6 34 98 67 21", "address": {"@type": "PostalAddress", "addressLocality": "Nantes / Vertou"}, "sameAs": ["https://ericrac.github.io/CV-Eric-RACINEUX/", "https://www.linkedin.com/in/eric-racineux-75475a7/"], "knowsAbout": ["Eric Racineux", "CV Eric Racineux", "RSI", "Architecte SI", "Infrastructure", "Systemes industriels", "Cybersecurite", "Nantes"]}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "inLanguage": "fr-FR", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "name": "CV - Eric Racineux", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "mainEntity": {"@type": "Person", "name": "Eric Racineux", "jobTitle": "RSI | Architecte & Référent SI senior", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "email": "mailto:eric.racineux@outlook.fr", "telephone": "+33 6 34 98 67 21", "address": {"@type": "PostalAddress", "addressLocality": "Nantes / Vertou"}, "sameAs": ["https://ericrac.github.io/CV-Eric-RACINEUX/", "https://www.linkedin.com/in/eric-racineux-75475a7/"], "knowsAbout": ["Eric Racineux", "CV Eric Racineux", "RSI", "Architecte SI", "Infrastructure", "Systemes industriels", "Cybersecurite", "Nantes"]}, "publisher": {"@type": "Organization", "name": "CV Eric Racineux", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/"}, "_meta": {"og_locale": "fr_FR", "escaped_canonical": "https://ericrac.github.io/CV-Eric-RACINEUX/"}}</script>
 </head>
 <body data-mode="premium" data-page="1" data-theme="blue" data-layout="desktop">
-  <a class="skip-link no-print" href="#main-content">Aller au contenu principal</a>
+  <a class="skip-link no-print" href="#main-content" id="skip-link">Aller au contenu principal</a>
   <div id="cv-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
 
-  <aside class="cv-controls no-print" aria-label="Controles CV">
-    <button type="button" id="btn-mobile-menu" class="mobile-menu-btn" aria-expanded="false" aria-controls="cv-theme-group" aria-label="Ouvrir le menu des themes">
-      <span class="mobile-menu-icon" aria-hidden="true"></span>
-      <span>Themes</span>
+  <aside class="cv-controls no-print" id="cv-controls" aria-label="Controles CV">
+    <button type="button" id="btn-controls-toggle" class="controls-toggle-btn" aria-expanded="true" aria-controls="cv-controls-groups" aria-label="Replier ou deplier le panneau de controles">
+      <span class="controls-toggle-icon" aria-hidden="true"></span>
     </button>
+    <button type="button" id="btn-mobile-menu" class="mobile-menu-btn" aria-expanded="false" aria-controls="cv-theme-group" aria-label="Ouvrir le menu des thèmes">
+      <span class="mobile-menu-icon" aria-hidden="true"></span>
+      <span id="mobile-menu-label">Thèmes</span>
+    </button>
+    <div id="cv-controls-groups" class="cv-controls-groups">
     <div class="controls-group controls-group--themes" id="cv-theme-group" role="group" aria-label="Themes de couleur">
-      <div class="controls-title">Themes</div>
-      <button type="button" id="btn-theme-blue" class="control-btn control-btn--theme is-active" data-theme-value="blue"><span class="control-swatch control-swatch--blue" aria-hidden="true"></span><span>Bleu</span></button>
-      <button type="button" id="btn-theme-green" class="control-btn control-btn--theme" data-theme-value="green"><span class="control-swatch control-swatch--green" aria-hidden="true"></span><span>Vert</span></button>
-      <button type="button" id="btn-theme-violet" class="control-btn control-btn--theme" data-theme-value="violet"><span class="control-swatch control-swatch--violet" aria-hidden="true"></span><span>Rose / Violet</span></button>
-      <button type="button" id="btn-theme-sunset" class="control-btn control-btn--theme" data-theme-value="sunset"><span class="control-swatch control-swatch--sunset" aria-hidden="true"></span><span>Orange / Jaune</span></button>
-      <button type="button" id="btn-theme-black" class="control-btn control-btn--theme" data-theme-value="black"><span class="control-swatch control-swatch--black" aria-hidden="true"></span><span>Noir</span></button>
-      <button type="button" id="btn-theme-access" class="control-btn control-btn--theme" data-theme-value="access"><span class="control-swatch control-swatch--access" aria-hidden="true"></span><span>Accessibilite</span></button>
+      <div class="controls-title" id="controls-title-themes">Thèmes</div>
+      <button type="button" id="btn-theme-blue" class="control-btn control-btn--theme is-active" data-theme-value="blue"><span class="control-swatch control-swatch--blue" aria-hidden="true"></span><span id="theme-label-blue">Bleu</span></button>
+      <button type="button" id="btn-theme-green" class="control-btn control-btn--theme" data-theme-value="green"><span class="control-swatch control-swatch--green" aria-hidden="true"></span><span id="theme-label-green">Vert</span></button>
+      <button type="button" id="btn-theme-violet" class="control-btn control-btn--theme" data-theme-value="violet"><span class="control-swatch control-swatch--violet" aria-hidden="true"></span><span id="theme-label-violet">Rose / Violet</span></button>
+      <button type="button" id="btn-theme-sunset" class="control-btn control-btn--theme" data-theme-value="sunset"><span class="control-swatch control-swatch--sunset" aria-hidden="true"></span><span id="theme-label-sunset">Orange / Jaune</span></button>
+      <button type="button" id="btn-theme-black" class="control-btn control-btn--theme" data-theme-value="black"><span class="control-swatch control-swatch--black" aria-hidden="true"></span><span id="theme-label-black">Noir</span></button>
+      <button type="button" id="btn-theme-access" class="control-btn control-btn--theme" data-theme-value="access"><span class="control-swatch control-swatch--access" aria-hidden="true"></span><span id="theme-label-access">Accessibilité</span></button>
     </div>
     <div class="controls-group" role="group" aria-label="Mode">
-      <div class="controls-title">Mode</div>
+      <div class="controls-title" id="controls-title-mode">Mode</div>
       <button type="button" id="btn-mode-premium" class="control-btn is-active" aria-controls="page-1 page-2">Premium</button>
       <button type="button" id="btn-mode-ats" class="control-btn" aria-controls="page-1 page-2">ATS</button>
+      <div class="controls-subgroup controls-subgroup--appearance">
+        <p class="controls-subtitle" id="controls-subtitle-appearance">Premium uniquement</p>
+        <button type="button" id="btn-appearance-cycle" class="control-btn control-btn--appearance" aria-pressed="false">
+          <span class="appearance-toggle__icon" aria-hidden="true">◐</span>
+          <span class="appearance-toggle__label">Affichage inverse</span>
+          <span class="appearance-toggle__state" id="appearance-state-label" aria-hidden="true">Normal</span>
+        </button>
+      </div>
     </div>
     <div class="controls-group" role="group" aria-label="Pages">
-      <div class="controls-title">Pages</div>
+      <div class="controls-title" id="controls-title-pages">Pages</div>
       <button type="button" id="btn-page-1" class="control-btn is-active" aria-controls="page-1">Page 1</button>
       <button type="button" id="btn-page-2" class="control-btn" aria-controls="page-2">Page 2</button>
     </div>
     <div class="controls-group" role="group" aria-label="Impression">
-      <div class="controls-title">Action</div>
+      <div class="controls-title" id="controls-title-actions">Action</div>
       <button type="button" id="btn-demarche" class="control-btn control-btn--demarche">Démarche</button>
       <button type="button" id="btn-print" class="control-btn control-btn--action">Imprimer via navigateur</button>
-      <button type="button" id="btn-download-pdf" class="control-btn control-btn--action">Telecharger PDF</button>
+      <button type="button" id="btn-download-pdf" class="control-btn control-btn--action">Télécharger PDF</button>
       <p id="pdf-feedback" class="control-feedback" aria-live="polite" aria-atomic="true" hidden></p>
+    </div>
     </div>
   </aside>
 
   <main class="cv-shell" id="main-content" tabindex="-1">
     <section class="cv-page" id="page-1" data-page="1" aria-labelledby="page-1-title">
-      <section class="hero">
-        <div>
-          <h1 id="page-1-title">Eric Racineux</h1>
-          <div class="role">RSI | Architecte &amp; Référent SI senior</div>
-          <p class="summary"><strong>Architecte SI | Infrastructure | Systèmes industriels</strong><br>RSI et architecte SI senior avec plus de 30 ans d’expérience dans des environnements industriels et techniques exigeants. Spécialisé dans l’architecture des systèmes, l’infrastructure, la cybersécurité et la structuration de systèmes d’information robustes et maintenables.</p>
-          <div class="tags"><span class="tag">Cybersécurité industrielle</span><span class="tag">Infrastructures critiques</span><span class="tag">Vision transverse SI / métier</span><span class="tag">Agilité</span></div>
-        </div>
-        <aside class="hero-right">
-          <div class="contact-card">
-            <div class="contact-grid">
-              <div><span class="label">Telephone</span><span class="value">+33 6 34 98 67 21</span></div>
-              <div><span class="label">Email</span><span class="value">eric.racineux@outlook.fr</span></div>
-              <div><span class="label">Ville</span><span class="value">Nantes / Vertou</span></div>
-              <div><span class="label">LinkedIn</span><span class="value"><a href="https://www.linkedin.com/in/eric-racineux-75475a7/" class="contact-link" target="_blank" rel="noreferrer noopener">eric-racineux-75475a7</a></span></div>
-              <div><span class="label">Mobilite</span><span class="value">Nantes / Hybride</span></div>
-              <div><span class="label">Disponibilite</span><span class="value">3 mois</span></div>
-            </div>
-          </div>
-          <section class="panel positioning">
-            <h2 class="section-title">Positionnement</h2>
-            <div class="mini-list"><div>Architecte SI orienté cohérence globale des systèmes, structuration des architectures techniques et pilotage des transformations IT dans des environnements industriels et techniques exigeants.</div></div>
-          </section>
-        </aside>
-      </section>
-      <div class="page-grid"><section class="section stack main-col"><h2 class="section-title">Experiences cles</h2><article class="entry" id="exp-01"><div class="entry-head"><div><h3>RSI</h3><div class="meta">Fondation OPEN-C - Nantes</div></div><div class="pill">2024-Present</div></div><p class="impact"><strong>Impact principal:</strong> pilotage et sécurisation du système d’information d’une fondation opérant des plateformes critiques en environnement maritime et industriel.</p><ul class="clean"><li>Définition et évolution de l’architecture SI multi-sites (réseaux, cloud, systèmes industriels, cybersécurité).</li><li>Structuration de la gouvernance SSI, segmentation réseau et supervision des flux.</li><li>Mise en place d’une stratégie de résilience et de continuité de service (PRA/PCA).</li><li>Pilotage des projets d’infrastructure et interface directe avec direction, partenaires industriels et équipes techniques.</li></ul></article><article class="entry" id="exp-02"><div class="entry-head"><div><h3>Product Owner Infrastructure &amp; Cloud</h3><div class="meta">DSI Groupe La Poste</div></div><div class="pill">2023</div></div><p class="impact"><strong>Impact principal:</strong> conception et mise en place de l’infrastructure cible d’un programme de transformation vers un cloud privé.</p><ul class="clean"><li>Définition de l’architecture infrastructure et réseau du cloud privé.</li><li>Structuration de la trajectoire de migration et décommissionnement des socles existants.</li><li>Mise en place des services IaaS et coordination des équipes techniques en mode Agile.</li></ul></article><article class="entry" id="exp-03"><div class="entry-head"><div><h3>Service Owner</h3><div class="meta">Catalogue de services IT - DSI Groupe La Poste</div></div><div class="pill">2022-2023</div></div><p class="impact"><strong>Impact principal:</strong> structuration et industrialisation du catalogue de services d’infrastructure.</p><ul class="clean"><li>Pilotage d’un portefeuille de plus de 1000 services d’infrastructure.</li><li>Mise en place des processus MCO, cycle de vie et gouvernance des services.</li><li>Remise à niveau de la CMDB et industrialisation du catalogue via ServiceNow, en intégrant les enjeux de performance, sécurité et exploitation.</li></ul></article><article class="entry" id="exp-07"><div class="entry-head"><div><h3>Chef de projet informatique &amp; Architecte logiciel</h3><div class="meta">Spécinov</div></div><div class="pill">1994-2000</div></div><p class="impact"><strong>Impact principal:</strong> conception et déploiement de solutions logicielles industrielles distribuées.</p><ul class="clean"><li>Conception et développement d’applications client/serveur en C++.</li><li>Architecture de systèmes logiciels distribués et pilotage de projets au forfait.</li><li>Déploiement de solutions sur plus de 120 sites industriels et relation client.</li></ul></article><article class="entry" id="exp-08"><div class="entry-head"><div><h3>Projets et expériences complémentaires</h3></div></div><p class="impact"><strong>Impact principal:</strong> portefeuille autour de l’innovation, de l’architecture SI et de l’IA.</p><ul class="clean"><li>PMO AGILE industriel et structuration de projets complexes (ENGIE).</li><li>Prototype IoT de maintenance prédictive (Bubbleio).</li><li>Activité indépendante autour de l’architecture SI et de l’IA (DeepRacine).</li></ul></article></section><aside class="section stack side-col"><section class="section stack side-section zone-competences" id="competences"><h2 class="section-title">Competences</h2><div class="panel skill-group"><div class="skill-row"><header><strong>Architecture SI</strong><span class="muted">expert</span></header><div class="bar"><span style="width: 95%"></span></div></div><div class="skill-row"><header><strong>Infrastructure &amp; reseaux</strong><span class="muted">expert</span></header><div class="bar"><span style="width: 92%"></span></div></div><div class="skill-row"><header><strong>Cybersecurite</strong><span class="muted">avance</span></header><div class="bar"><span style="width: 85%"></span></div></div><div class="skill-row"><header><strong>Transformation IT</strong><span class="muted">avance</span></header><div class="bar"><span style="width: 82%"></span></div></div><div class="skill-row"><header><strong>Systemes industriels</strong><span class="muted">avance</span></header><div class="bar"><span style="width: 68%"></span></div></div></div></section><section class="section stack side-section zone-technos-environnements" id="technos-environnements"><h2 class="section-title">Technos / Environnements</h2><div class="panel mini-list"><div>Microsoft 365, Entra ID, Intune, Defender.</div><div>Fortinet, SD-WAN, VPN, firewalling.</div><div>Windows Server, Linux, VMware.</div><div>Cloud privé / hybride.</div><div>Automatisation et scripting.</div><div>ITIL, PRA/PCA, gouvernance SI.</div></div></section><section class="section stack side-section zone-parcours" id="parcours"><h2 class="section-title">Parcours</h2><div class="panel timeline"><div class="t-item"><strong>ESAIP</strong><div class="muted">Ingénieur maître Informatique Réseau et Télécommunication.</div></div><div class="t-item"><strong>IMIE</strong><div class="muted">Concepteur Développeur Informatique.</div></div><div class="t-item"><strong>Formations complémentaires</strong><div class="muted">en cybersécurité industrielle et gouvernance des systèmes.</div></div></div></section></aside></div>
+      <div id="page-1-hero"><section class="hero"><div><h1 id="page-1-title">Eric Racineux</h1><div class="role">RSI | Architecte &amp; Référent SI senior</div><p class="summary"><strong>Architecte SI | Infrastructure | Systèmes industriels</strong><br>RSI et architecte SI senior avec plus de 30 ans d’expérience dans des environnements industriels et techniques exigeants. Spécialisé dans l’architecture des systèmes, l’infrastructure, la cybersécurité et la structuration de systèmes d’information robustes et maintenables.</p><div class="tags"><span class="tag">Cybersécurité industrielle</span><span class="tag">Infrastructures critiques</span><span class="tag">Vision transverse SI / métier</span><span class="tag">Agilité</span></div></div><aside class="hero-right"><div class="contact-card"><div class="contact-grid"><div><span class="label">Telephone</span><span class="value">+33 6 34 98 67 21</span></div><div><span class="label">Email</span><span class="value">eric.racineux@outlook.fr</span></div><div><span class="label">Ville</span><span class="value">Nantes / Vertou</span></div><div><span class="label">LinkedIn</span><span class="value"><a href="https://www.linkedin.com/in/eric-racineux-75475a7/" class="contact-link" target="_blank" rel="noreferrer noopener">eric-racineux-75475a7</a></span></div><div><span class="label">Mobilité</span><span class="value">Nantes / Hybride</span></div><div><span class="label">Disponibilité</span><span class="value">3 mois</span></div></div></div><section class="panel positioning"><h2 class="section-title">Positionnement</h2><div class="mini-list"><div>Architecte SI orienté cohérence globale des systèmes, structuration des architectures techniques et pilotage des transformations IT dans des environnements industriels et techniques exigeants.</div></div></section></aside></section></div>
+      <div id="page-1-zones"><div class="page-grid"><section class="section stack main-col"><h2 class="section-title">Expériences clés</h2><article class="entry" id="exp-01"><div class="entry-head"><div><h3>RSI</h3><div class="meta">Fondation OPEN-C - Nantes</div></div><div class="pill">2024-Present</div></div><p class="impact"><strong>Impact principal:</strong> pilotage et sécurisation du système d’information d’une fondation opérant des plateformes critiques en environnement maritime et industriel.</p><ul class="clean"><li>Définition et évolution de l’architecture SI multi-sites (réseaux, cloud, systèmes industriels, cybersécurité).</li><li>Structuration de la gouvernance SSI, segmentation réseau et supervision des flux.</li><li>Mise en place d’une stratégie de résilience et de continuité de service (PRA/PCA).</li><li>Pilotage des projets d’infrastructure et interface directe avec direction, partenaires industriels et équipes techniques.</li></ul></article><article class="entry" id="exp-02"><div class="entry-head"><div><h3>Product Owner Infrastructure &amp; Cloud</h3><div class="meta">DSI Groupe La Poste</div></div><div class="pill">2023</div></div><p class="impact"><strong>Impact principal:</strong> conception et mise en place de l’infrastructure cible d’un programme de transformation vers un cloud privé.</p><ul class="clean"><li>Définition de l’architecture infrastructure et réseau du cloud privé.</li><li>Structuration de la trajectoire de migration et décommissionnement des socles existants.</li><li>Mise en place des services IaaS et coordination des équipes techniques en mode Agile.</li></ul></article><article class="entry" id="exp-03"><div class="entry-head"><div><h3>Service Owner</h3><div class="meta">Catalogue de services IT - DSI Groupe La Poste</div></div><div class="pill">2022-2023</div></div><p class="impact"><strong>Impact principal:</strong> structuration et industrialisation du catalogue de services d’infrastructure.</p><ul class="clean"><li>Pilotage d’un portefeuille de plus de 1000 services d’infrastructure.</li><li>Mise en place des processus MCO, cycle de vie et gouvernance des services.</li><li>Remise à niveau de la CMDB et industrialisation du catalogue via ServiceNow, en intégrant les enjeux de performance, sécurité et exploitation.</li></ul></article><article class="entry" id="exp-07"><div class="entry-head"><div><h3>Chef de projet informatique &amp; Architecte logiciel</h3><div class="meta">Spécinov</div></div><div class="pill">1994-2000</div></div><p class="impact"><strong>Impact principal:</strong> conception et déploiement de solutions logicielles industrielles distribuées.</p><ul class="clean"><li>Conception et développement d’applications client/serveur en C++.</li><li>Architecture de systèmes logiciels distribués et pilotage de projets au forfait.</li><li>Déploiement de solutions sur plus de 120 sites industriels et relation client.</li></ul></article><article class="entry" id="exp-08"><div class="entry-head"><div><h3>Projets et expériences complémentaires</h3></div></div><p class="impact"><strong>Impact principal:</strong> portefeuille autour de l’innovation, de l’architecture SI et de l’IA.</p><ul class="clean"><li>PMO AGILE industriel et structuration de projets complexes (ENGIE).</li><li>Prototype IoT de maintenance prédictive (Bubbleio).</li><li>Activité indépendante autour de l’architecture SI et de l’IA (DeepRacine).</li></ul></article></section><aside class="section stack side-col"><section class="section stack side-section zone-competences" id="competences"><h2 class="section-title">Compétences</h2><div class="panel skill-group"><div class="skill-row"><header><strong>Architecture SI</strong><span class="muted">expert</span></header><div class="bar"><span style="width: 95%"></span></div></div><div class="skill-row"><header><strong>Infrastructure &amp; reseaux</strong><span class="muted">expert</span></header><div class="bar"><span style="width: 92%"></span></div></div><div class="skill-row"><header><strong>Cybersecurite</strong><span class="muted">avance</span></header><div class="bar"><span style="width: 85%"></span></div></div><div class="skill-row"><header><strong>Transformation IT</strong><span class="muted">avance</span></header><div class="bar"><span style="width: 82%"></span></div></div><div class="skill-row"><header><strong>Systemes industriels</strong><span class="muted">avance</span></header><div class="bar"><span style="width: 68%"></span></div></div></div></section><section class="section stack side-section zone-technos-environnements" id="technos-environnements"><h2 class="section-title">Technos / Environnements</h2><div class="panel mini-list"><div>Microsoft 365, Entra ID, Intune, Defender.</div><div>Fortinet, SD-WAN, VPN, firewalling.</div><div>Windows Server, Linux, VMware.</div><div>Cloud privé / hybride.</div><div>Automatisation et scripting.</div><div>ITIL, PRA/PCA, gouvernance SI.</div></div></section><section class="section stack side-section zone-parcours" id="parcours"><h2 class="section-title">Parcours</h2><div class="panel timeline"><div class="t-item"><strong>ESAIP</strong><div class="muted">Ingénieur maître Informatique Réseau et Télécommunication.</div></div><div class="t-item"><strong>IMIE</strong><div class="muted">Concepteur Développeur Informatique.</div></div><div class="t-item"><strong>Formations complémentaires</strong><div class="muted">en cybersécurité industrielle et gouvernance des systèmes.</div></div></div></section></aside></div></div>
     </section>
 
     <section class="cv-page" id="page-2" data-page="2" aria-labelledby="page-2-title">
-      <header class="cv-header">
-        <h1 id="page-2-title">Eric Racineux</h1>
-      </header>
-      <div class="page-grid page-grid--footer"><section class="section stack main-col"><h2 class="section-title">Parcours complementaire</h2><article class="entry" id="exp-04"><div class="entry-head"><div><h3>Pilote essais et intégration systèmes</h3><div class="meta">ENGIE Ineo Rail / UTS</div></div><div class="pill">2021</div></div><p class="impact"><strong>Impact principal:</strong> structuration et pilotage des essais d’intégration sur un projet ferroviaire complexe.</p><ul class="clean"><li>Définition de la stratégie de validation et des plans d’essais.</li><li>Structuration des méthodes et outils d’intégration.</li><li>Coordination technique entre ingénierie, production et maîtrise d’ouvrage.</li><li>Sécurisation des jalons de validation et de mise en service.</li></ul></article><article class="entry" id="exp-05"><div class="entry-head"><div><h3>Responsable Bureau d’Études</h3><div class="meta">VMI</div></div><div class="pill">2012-2016</div></div><p class="impact"><strong>Impact principal:</strong> transformation et structuration du bureau d’études d’un constructeur de machines industrielles.</p><ul class="clean"><li>Management d’une équipe de 13 à 20 ingénieurs et techniciens.</li><li>Refonte des architectures machines et harmonisation des méthodes.</li><li>Pilotage d’un projet MES pour un site industriel du groupe LVMH.</li><li>Structuration des interfaces entre bureau d’études, production et SI.</li><li>Participation aux choix d’architectures techniques machines et automatisme.</li></ul></article><article class="entry" id="exp-06"><div class="entry-head"><div><h3>Manager Informatique Industrielle</h3><div class="meta">GOSS International</div></div><div class="pill">2000-2011</div></div><p class="impact"><strong>Impact principal:</strong> création et structuration du pôle informatique industrielle.</p><ul class="clean"><li>Architecture et administration de l’infrastructure technique industrielle.</li><li>Mise en place d’un laboratoire de validation et de test.</li><li>Déploiement de solutions de supervision et télé-monitoring.</li><li>Intégration des systèmes informatiques embarqués sur lignes industrielles.</li><li>Coordination technique internationale avec équipes engineering.</li></ul></article><article class="entry" id="exp-09"><div class="entry-head"><div><h3>Développeur logiciel scientifique</h3><div class="meta">ARTUS / Meggitt</div></div><div class="pill">1992-1994</div></div><p class="impact"><strong>Impact principal:</strong> - Développement d’outils logiciels scientifiques pour bancs d’essais.</p><ul class="clean"><li>Traitement de données techniques et visualisation.</li><li>Support aux équipes d’ingénierie.</li></ul></article><article class="entry" id="exp-10"><div class="entry-head"><div><h3>Technicien maintenance industrielle</h3><div class="meta">NOPLY - WEST MI</div></div><div class="pill">1990-1992</div></div><p class="impact"><strong>Impact principal:</strong> - Maintenance d’équipements industriels.</p><ul class="clean"><li>Diagnostic et résolution de pannes techniques.</li><li>Intervention sur systèmes électromécaniques.</li></ul></article></section><aside class="section stack side-col"><section class="section stack side-section zone-bloc-complementaire" id="bloc-complementaire"><h2 class="section-title">Informations complementaires</h2><div class="panel mini-list"><div><strong>Langues:</strong> Français, Anglais, Espagnol.</div><div><strong>Secteurs:</strong> industrie, systèmes critiques, infrastructure IT.</div><div>Profil LinkedIn disponible pour détails du parcours et publications.</div></div></section><section class="section stack side-section zone-explorations-techniques" id="explorations-techniques"><h2 class="section-title">Explorations techniques</h2><div class="panel mini-list"><div>Expérimentation d’outils d’ingénierie assistée par IA.</div><div>Conception d’un agent IA local destiné à assister l’architecture logicielle et l’automatisation de tâches techniques.</div><div>Exploration d’architectures logicielles intégrant IA, automatisation et outils de développement.</div><div>Veille active sur l’évolution des architectures cloud, logiciel et IA.</div></div></section></aside><section class="section stack main-section zone-kpi full-width-zone" id="realisations-resultats"><h2 class="section-title">Realisations / Resultats</h2><div class="kpi"><div class="kpi-box"><strong>30 ans+</strong><span class="muted">d’expérience dans l’IT et les systèmes industriels.</span></div><div class="kpi-box"><strong>Architectures</strong><span class="muted">SI, infrastructure et systèmes industriels.</span></div><div class="kpi-box"><strong>Environnements critiques</strong><span class="muted">industrie, offshore, ferroviaire, plateformes techniques.</span></div><div class="kpi-box"><strong>Pilotage transverse</strong><span class="muted">interface direction, métiers et équipes techniques.</span></div></div></section></div>
+      <div id="page-2-header"><header class="cv-header"><h1 id="page-2-title">Eric Racineux</h1></header></div>
+      <div id="page-2-zones"><div class="page-grid page-grid--footer"><section class="section stack main-col"><h2 class="section-title">Parcours complémentaire</h2><article class="entry" id="exp-04"><div class="entry-head"><div><h3>Pilote essais et intégration systèmes</h3><div class="meta">ENGIE Ineo Rail / UTS</div></div><div class="pill">2021</div></div><p class="impact"><strong>Impact principal:</strong> structuration et pilotage des essais d’intégration sur un projet ferroviaire complexe.</p><ul class="clean"><li>Définition de la stratégie de validation et des plans d’essais.</li><li>Structuration des méthodes et outils d’intégration.</li><li>Coordination technique entre ingénierie, production et maîtrise d’ouvrage.</li><li>Sécurisation des jalons de validation et de mise en service.</li></ul></article><article class="entry" id="exp-05"><div class="entry-head"><div><h3>Responsable Bureau d’Études</h3><div class="meta">VMI</div></div><div class="pill">2012-2016</div></div><p class="impact"><strong>Impact principal:</strong> transformation et structuration du bureau d’études d’un constructeur de machines industrielles.</p><ul class="clean"><li>Management d’une équipe de 13 à 20 ingénieurs et techniciens.</li><li>Refonte des architectures machines et harmonisation des méthodes.</li><li>Pilotage d’un projet MES pour un site industriel du groupe LVMH.</li><li>Structuration des interfaces entre bureau d’études, production et SI.</li><li>Participation aux choix d’architectures techniques machines et automatisme.</li></ul></article><article class="entry" id="exp-06"><div class="entry-head"><div><h3>Manager Informatique Industrielle</h3><div class="meta">GOSS International</div></div><div class="pill">2000-2011</div></div><p class="impact"><strong>Impact principal:</strong> création et structuration du pôle informatique industrielle.</p><ul class="clean"><li>Architecture et administration de l’infrastructure technique industrielle.</li><li>Mise en place d’un laboratoire de validation et de test.</li><li>Déploiement de solutions de supervision et télé-monitoring.</li><li>Intégration des systèmes informatiques embarqués sur lignes industrielles.</li><li>Coordination technique internationale avec équipes engineering.</li></ul></article><article class="entry" id="exp-09"><div class="entry-head"><div><h3>Développeur logiciel scientifique</h3><div class="meta">ARTUS / Meggitt</div></div><div class="pill">1992-1994</div></div><p class="impact"><strong>Impact principal:</strong> - Développement d’outils logiciels scientifiques pour bancs d’essais.</p><ul class="clean"><li>Traitement de données techniques et visualisation.</li><li>Support aux équipes d’ingénierie.</li></ul></article><article class="entry" id="exp-10"><div class="entry-head"><div><h3>Technicien maintenance industrielle</h3><div class="meta">NOPLY - WEST MI</div></div><div class="pill">1990-1992</div></div><p class="impact"><strong>Impact principal:</strong> - Maintenance d’équipements industriels.</p><ul class="clean"><li>Diagnostic et résolution de pannes techniques.</li><li>Intervention sur systèmes électromécaniques.</li></ul></article></section><aside class="section stack side-col"><section class="section stack side-section zone-bloc-complementaire" id="bloc-complementaire"><h2 class="section-title">Informations complémentaires</h2><div class="panel mini-list"><div><strong>Langues:</strong> Français, Anglais, Espagnol.</div><div><strong>Secteurs:</strong> industrie, systèmes critiques, infrastructure IT.</div><div>Profil LinkedIn disponible pour détails du parcours et publications.</div></div></section><section class="section stack side-section zone-explorations-techniques" id="explorations-techniques"><h2 class="section-title">Explorations techniques</h2><div class="panel mini-list"><div>Expérimentation d’outils d’ingénierie assistée par IA.</div><div>Conception d’un agent IA local destiné à assister l’architecture logicielle et l’automatisation de tâches techniques.</div><div>Exploration d’architectures logicielles intégrant IA, automatisation et outils de développement.</div><div>Veille active sur l’évolution des architectures cloud, logiciel et IA.</div></div></section></aside><section class="section stack main-section zone-kpi full-width-zone" id="realisations-resultats"><h2 class="section-title">Réalisations / Résultats</h2><div class="kpi"><div class="kpi-box"><strong>30 ans+</strong><span class="muted">d’expérience dans l’IT et les systèmes industriels.</span></div><div class="kpi-box"><strong>Architectures</strong><span class="muted">SI, infrastructure et systèmes industriels.</span></div><div class="kpi-box"><strong>Env. critiques</strong><span class="muted">industrie, offshore, ferroviaire, plateformes techniques.</span></div><div class="kpi-box"><strong>Pilotage transverse</strong><span class="muted">interface direction, métiers et équipes techniques.</span></div></div></section></div></div>
       <footer class="cv-footer">
-        <p class="cv-note">Ce site a ete cree de maniere experimentale avec Codex 5.4, il utilise une chaine CI/CD GitHub : <a href="https://ericrac.github.io/CV-Eric-RACINEUX/" class="note-link" target="_blank" rel="noreferrer noopener">https://ericrac.github.io/CV-Eric-RACINEUX/</a></p>
-        <p class="cv-update">Derniere mise a jour : 25/03/2026 23:24 (dernier commit)</p>
+        <p class="cv-note" id="page-2-note">Ce site a été créé de manière expérimentale avec Codex 5.4, il utilise une chaîne CI/CD GitHub : <a href="https://ericrac.github.io/CV-Eric-RACINEUX/" class="note-link" target="_blank" rel="noreferrer noopener">https://ericrac.github.io/CV-Eric-RACINEUX/</a></p>
+        <p class="cv-update" id="page-2-update">Dernière mise à jour : 27/03/2026 (dernier commit)</p>
       </footer>
     </section>
   </main>
+
+  <footer class="site-meta no-print">
+    <p class="site-legal" id="site-legal"><span class="site-legal__policy">Préférences d'affichage conservées localement dans le navigateur, sans cookie de suivi ni collecte serveur. Démarche de minimisation RGPD / CNIL.</span><span class="site-legal__author">Auteur : <a href="mailto:eric.racineux@outlook.fr" class="note-link" target="_blank" rel="noreferrer noopener">eric.racineux@outlook.fr</a></span></p>
+  </footer>
 
   <div id="demarche-overlay" class="demarche-overlay no-print" hidden>
     <section class="demarche-panel" role="dialog" aria-modal="true" aria-labelledby="demarche-title">
       <header class="demarche-panel__header">
         <div>
-          <p class="demarche-panel__eyebrow">Démarche</p>
+          <p class="demarche-panel__eyebrow" id="demarche-eyebrow">Démarche</p>
           <h2 id="demarche-title">CV web, méthode et laboratoire IA</h2>
-          <p class="demarche-panel__lede">Un CV hybride qui sert a la fois de support public, de PDF maitrisé, et de terrain d’expérimentation sur l’usage encadré des agents IA.</p>
+          <p class="demarche-panel__lede" id="demarche-lede">Un CV hybride qui sert à la fois de support public, de PDF maîtrisé, et de terrain d’expérimentation sur l’usage encadré des agents IA.</p>
         </div>
         <div class="demarche-panel__actions">
-          <button type="button" id="btn-share-demarche" class="control-btn control-btn--compact" aria-label="Partager cette demarche"><span id="share-demarche-label" class="share-demarche-label">Partager cette démarche</span></button>
-          <button type="button" id="btn-close-demarche" class="control-btn control-btn--compact" aria-label="Fermer la demarche">Fermer</button>
+          <button type="button" id="btn-share-demarche" class="control-btn control-btn--compact" aria-label="Partager cette démarche"><span id="share-demarche-label" class="share-demarche-label">Partager cette démarche</span></button>
+          <button type="button" id="btn-close-demarche" class="control-btn control-btn--compact" aria-label="Fermer">Fermer</button>
         </div>
       </header>
       <div class="demarche-panel__body">
         <p id="demarche-feedback" class="control-feedback demarche-feedback" aria-live="polite" aria-atomic="true" hidden></p>
-        <section class="demarche-summary">
+        <section class="demarche-summary" id="demarche-summary">
           <p>Ce CV web ne sert pas seulement a rendre un parcours consultable en ligne. Il sert aussi de demonstrateur de methode.</p><p>Sur ce projet, l&#x27;humain n&#x27;a pas ecrit directement le code: la production est pilotee via l&#x27;agent IA, sur la base du besoin, des arbitrages et de la connaissance metier.</p><p>Le projet combine dans un meme objet:</p><ul><li>une presentation web lisible et themable</li><li>une impression PDF</li><li>une source de contenu structuree</li><li>une chaine de qualification et de publication automatisee</li><li>une experimentation encadree des agents IA</li></ul><p>L&#x27;objectif n&#x27;est pas de &quot;faire un site avec de l&#x27;IA&quot;, mais de travailler en conditions reelles sur ce qu&#x27;elle accelere, ce qu&#x27;elle fragilise et ce qui doit rester sous controle humain.</p><p>La logique de travail est volontairement courte et iterative: je fais, je verifie, j&#x27;ameliore; puis je recommence. Les evolutions se stabilisent par petits increments, avec commit local regulier puis push CI/CD quand l&#x27;etat est defendable.</p><p>Ce projet montre en pratique:</p><ul><li>la capacite a cadrer un besoin hybride web / document / PDF</li><li>la capacite a industrialiser un petit perimetre sans le rendre opaque</li><li>la capacite a qualifier, publier et faire evoluer un support visible</li><li>la volonte d&#x27;utiliser l&#x27;IA comme levier de travail, avec recul sur ses limites et ses risques</li><li>une facon tres concrete de faire evoluer un projet en mode agile, avec une IA force de proposition mais un cadrage, une verification et un arbitrage qui restent humains</li></ul>
         </section>
         <section class="demarche-flow" aria-labelledby="demarche-flow-title">
           <div class="demarche-flow__header">
-            <p class="demarche-flow__eyebrow">Schéma synthèse</p>
+            <p class="demarche-flow__eyebrow" id="demarche-flow-eyebrow">Schéma synthèse</p>
             <h3 id="demarche-flow-title">Chaîne CI/CD et fonctions de l’agent IA</h3>
           </div>
-          <div class="demarche-flow__grid">
-            <div class="demarche-flow__node">
-              <strong>Source</strong>
-              <span>JSON CV<br>Template HTML<br>CSS / JS</span>
-            </div>
-            <div class="demarche-flow__arrow" aria-hidden="true">→</div>
-            <div class="demarche-flow__node">
-              <strong>Agent IA</strong>
-              <span>Cadrage<br>Refactor<br>Tests<br>Documentation</span>
-            </div>
-            <div class="demarche-flow__arrow" aria-hidden="true">→</div>
-            <div class="demarche-flow__node">
-              <strong>Qualification</strong>
-              <span>Smoke<br>Playwright<br>axe-core<br>PDF</span>
-            </div>
-            <div class="demarche-flow__arrow" aria-hidden="true">→</div>
-            <div class="demarche-flow__node">
-              <strong>Publication</strong>
-              <span>GitHub Actions<br>Pages<br>PDF publics</span>
-            </div>
-          </div>
+          <div class="demarche-flow__grid" id="demarche-flow-grid"><div class="demarche-flow__node"><strong>Source</strong><span>JSON CV<br>Template HTML<br>CSS / JS</span></div><div class="demarche-flow__arrow" aria-hidden="true">→</div><div class="demarche-flow__node"><strong>Agent IA</strong><span>Cadrage<br>Refactor<br>Tests<br>Documentation</span></div><div class="demarche-flow__arrow" aria-hidden="true">→</div><div class="demarche-flow__node"><strong>Qualification</strong><span>Smoke<br>Playwright<br>axe-core<br>PDF</span></div><div class="demarche-flow__arrow" aria-hidden="true">→</div><div class="demarche-flow__node"><strong>Publication</strong><span>GitHub Actions<br>Pages<br>PDF publics</span></div></div>
         </section>
       </div>
     </section>
+    <div class="demarche-mobile-actions" id="demarche-mobile-actions" hidden>
+      <button type="button" id="btn-demarche-top" class="demarche-mobile-btn" aria-label="Revenir en haut de page">
+        <span aria-hidden="true">↑</span>
+      </button>
+    </div>
   </div>
 
   <button type="button" id="btn-scroll-top" class="scroll-top-btn no-print" aria-label="Revenir en haut de page">
     <span aria-hidden="true">↑</span>
   </button>
   <div class="page-jump no-print" aria-label="Navigation rapide entre pages">
-    <button type="button" id="btn-jump-page-1" class="page-jump-btn" aria-label="Aller a la page 1">
+    <button type="button" id="btn-jump-page-1" class="page-jump-btn" aria-label="Aller à la page 1">
       <span aria-hidden="true">↑</span>
     </button>
-    <button type="button" id="btn-jump-page-2" class="page-jump-btn" aria-label="Aller a la page 2">
+    <button type="button" id="btn-jump-page-2" class="page-jump-btn" aria-label="Aller à la page 2">
       <span aria-hidden="true">↓</span>
     </button>
   </div>
 
+  <script id="cv-i18n-catalog" type="application/json">{"fr": {"locale": "fr", "html_lang": "fr", "title": "CV - Eric Racineux", "meta_description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "meta_robots": "index,follow", "meta_keywords": "Eric Racineux, CV Eric Racineux, RSI, Architecte SI, Infrastructure, Systemes industriels, Cybersecurite, Nantes", "canonical_url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "site_name": "CV Eric Racineux", "og_locale": "fr_FR", "seo_json_ld": "{\"@context\": \"https://schema.org\", \"@type\": \"ProfilePage\", \"inLanguage\": \"fr-FR\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"name\": \"CV - Eric Racineux\", \"description\": \"CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.\", \"mainEntity\": {\"@type\": \"Person\", \"name\": \"Eric Racineux\", \"jobTitle\": \"RSI | Architecte & Référent SI senior\", \"description\": \"CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"address\": {\"@type\": \"PostalAddress\", \"addressLocality\": \"Nantes / Vertou\"}, \"sameAs\": [\"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"https://www.linkedin.com/in/eric-racineux-75475a7/\"], \"knowsAbout\": [\"Eric Racineux\", \"CV Eric Racineux\", \"RSI\", \"Architecte SI\", \"Infrastructure\", \"Systemes industriels\", \"Cybersecurite\", \"Nantes\"]}, \"publisher\": {\"@type\": \"Organization\", \"name\": \"CV Eric Racineux\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}, \"_meta\": {\"og_locale\": \"fr_FR\", \"escaped_canonical\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}}", "hero_html": "<section class=\"hero\"><div><h1 id=\"page-1-title\">Eric Racineux<\/h1><div class=\"role\">RSI | Architecte &amp; Référent SI senior<\/div><p class=\"summary\"><strong>Architecte SI | Infrastructure | Systèmes industriels<\/strong><br>RSI et architecte SI senior avec plus de 30 ans d’expérience dans des environnements industriels et techniques exigeants. Spécialisé dans l’architecture des systèmes, l’infrastructure, la cybersécurité et la structuration de systèmes d’information robustes et maintenables.<\/p><div class=\"tags\"><span class=\"tag\">Cybersécurité industrielle<\/span><span class=\"tag\">Infrastructures critiques<\/span><span class=\"tag\">Vision transverse SI / métier<\/span><span class=\"tag\">Agilité<\/span><\/div><\/div><aside class=\"hero-right\"><div class=\"contact-card\"><div class=\"contact-grid\"><div><span class=\"label\">Telephone<\/span><span class=\"value\">+33 6 34 98 67 21<\/span><\/div><div><span class=\"label\">Email<\/span><span class=\"value\">eric.racineux@outlook.fr<\/span><\/div><div><span class=\"label\">Ville<\/span><span class=\"value\">Nantes / Vertou<\/span><\/div><div><span class=\"label\">LinkedIn<\/span><span class=\"value\"><a href=\"https://www.linkedin.com/in/eric-racineux-75475a7/\" class=\"contact-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric-racineux-75475a7<\/a><\/span><\/div><div><span class=\"label\">Mobilité<\/span><span class=\"value\">Nantes / Hybride<\/span><\/div><div><span class=\"label\">Disponibilité<\/span><span class=\"value\">3 mois<\/span><\/div><\/div><\/div><section class=\"panel positioning\"><h2 class=\"section-title\">Positionnement<\/h2><div class=\"mini-list\"><div>Architecte SI orienté cohérence globale des systèmes, structuration des architectures techniques et pilotage des transformations IT dans des environnements industriels et techniques exigeants.<\/div><\/div><\/section><\/aside><\/section>", "page_1_zones": "<div class=\"page-grid\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Expériences clés<\/h2><article class=\"entry\" id=\"exp-01\"><div class=\"entry-head\"><div><h3>RSI<\/h3><div class=\"meta\">Fondation OPEN-C - Nantes<\/div><\/div><div class=\"pill\">2024-Present<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> pilotage et sécurisation du système d’information d’une fondation opérant des plateformes critiques en environnement maritime et industriel.<\/p><ul class=\"clean\"><li>Définition et évolution de l’architecture SI multi-sites (réseaux, cloud, systèmes industriels, cybersécurité).<\/li><li>Structuration de la gouvernance SSI, segmentation réseau et supervision des flux.<\/li><li>Mise en place d’une stratégie de résilience et de continuité de service (PRA/PCA).<\/li><li>Pilotage des projets d’infrastructure et interface directe avec direction, partenaires industriels et équipes techniques.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-02\"><div class=\"entry-head\"><div><h3>Product Owner Infrastructure &amp; Cloud<\/h3><div class=\"meta\">DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2023<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> conception et mise en place de l’infrastructure cible d’un programme de transformation vers un cloud privé.<\/p><ul class=\"clean\"><li>Définition de l’architecture infrastructure et réseau du cloud privé.<\/li><li>Structuration de la trajectoire de migration et décommissionnement des socles existants.<\/li><li>Mise en place des services IaaS et coordination des équipes techniques en mode Agile.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-03\"><div class=\"entry-head\"><div><h3>Service Owner<\/h3><div class=\"meta\">Catalogue de services IT - DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2022-2023<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> structuration et industrialisation du catalogue de services d’infrastructure.<\/p><ul class=\"clean\"><li>Pilotage d’un portefeuille de plus de 1000 services d’infrastructure.<\/li><li>Mise en place des processus MCO, cycle de vie et gouvernance des services.<\/li><li>Remise à niveau de la CMDB et industrialisation du catalogue via ServiceNow, en intégrant les enjeux de performance, sécurité et exploitation.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-07\"><div class=\"entry-head\"><div><h3>Chef de projet informatique &amp; Architecte logiciel<\/h3><div class=\"meta\">Spécinov<\/div><\/div><div class=\"pill\">1994-2000<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> conception et déploiement de solutions logicielles industrielles distribuées.<\/p><ul class=\"clean\"><li>Conception et développement d’applications client/serveur en C++.<\/li><li>Architecture de systèmes logiciels distribués et pilotage de projets au forfait.<\/li><li>Déploiement de solutions sur plus de 120 sites industriels et relation client.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-08\"><div class=\"entry-head\"><div><h3>Projets et expériences complémentaires<\/h3><\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> portefeuille autour de l’innovation, de l’architecture SI et de l’IA.<\/p><ul class=\"clean\"><li>PMO AGILE industriel et structuration de projets complexes (ENGIE).<\/li><li>Prototype IoT de maintenance prédictive (Bubbleio).<\/li><li>Activité indépendante autour de l’architecture SI et de l’IA (DeepRacine).<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-competences\" id=\"competences\"><h2 class=\"section-title\">Compétences<\/h2><div class=\"panel skill-group\"><div class=\"skill-row\"><header><strong>Architecture SI<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 95%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Infrastructure &amp; reseaux<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 92%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Cybersecurite<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 85%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Transformation IT<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 82%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Systemes industriels<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 68%\"><\/span><\/div><\/div><\/div><\/section><section class=\"section stack side-section zone-technos-environnements\" id=\"technos-environnements\"><h2 class=\"section-title\">Technos / Environnements<\/h2><div class=\"panel mini-list\"><div>Microsoft 365, Entra ID, Intune, Defender.<\/div><div>Fortinet, SD-WAN, VPN, firewalling.<\/div><div>Windows Server, Linux, VMware.<\/div><div>Cloud privé / hybride.<\/div><div>Automatisation et scripting.<\/div><div>ITIL, PRA/PCA, gouvernance SI.<\/div><\/div><\/section><section class=\"section stack side-section zone-parcours\" id=\"parcours\"><h2 class=\"section-title\">Parcours<\/h2><div class=\"panel timeline\"><div class=\"t-item\"><strong>ESAIP<\/strong><div class=\"muted\">Ingénieur maître Informatique Réseau et Télécommunication.<\/div><\/div><div class=\"t-item\"><strong>IMIE<\/strong><div class=\"muted\">Concepteur Développeur Informatique.<\/div><\/div><div class=\"t-item\"><strong>Formations complémentaires<\/strong><div class=\"muted\">en cybersécurité industrielle et gouvernance des systèmes.<\/div><\/div><\/div><\/section><\/aside><\/div>", "page_2_header_html": "<header class=\"cv-header\"><h1 id=\"page-2-title\">Eric Racineux<\/h1><\/header>", "page_2_zones": "<div class=\"page-grid page-grid--footer\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Parcours complémentaire<\/h2><article class=\"entry\" id=\"exp-04\"><div class=\"entry-head\"><div><h3>Pilote essais et intégration systèmes<\/h3><div class=\"meta\">ENGIE Ineo Rail / UTS<\/div><\/div><div class=\"pill\">2021<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> structuration et pilotage des essais d’intégration sur un projet ferroviaire complexe.<\/p><ul class=\"clean\"><li>Définition de la stratégie de validation et des plans d’essais.<\/li><li>Structuration des méthodes et outils d’intégration.<\/li><li>Coordination technique entre ingénierie, production et maîtrise d’ouvrage.<\/li><li>Sécurisation des jalons de validation et de mise en service.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-05\"><div class=\"entry-head\"><div><h3>Responsable Bureau d’Études<\/h3><div class=\"meta\">VMI<\/div><\/div><div class=\"pill\">2012-2016<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> transformation et structuration du bureau d’études d’un constructeur de machines industrielles.<\/p><ul class=\"clean\"><li>Management d’une équipe de 13 à 20 ingénieurs et techniciens.<\/li><li>Refonte des architectures machines et harmonisation des méthodes.<\/li><li>Pilotage d’un projet MES pour un site industriel du groupe LVMH.<\/li><li>Structuration des interfaces entre bureau d’études, production et SI.<\/li><li>Participation aux choix d’architectures techniques machines et automatisme.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-06\"><div class=\"entry-head\"><div><h3>Manager Informatique Industrielle<\/h3><div class=\"meta\">GOSS International<\/div><\/div><div class=\"pill\">2000-2011<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> création et structuration du pôle informatique industrielle.<\/p><ul class=\"clean\"><li>Architecture et administration de l’infrastructure technique industrielle.<\/li><li>Mise en place d’un laboratoire de validation et de test.<\/li><li>Déploiement de solutions de supervision et télé-monitoring.<\/li><li>Intégration des systèmes informatiques embarqués sur lignes industrielles.<\/li><li>Coordination technique internationale avec équipes engineering.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-09\"><div class=\"entry-head\"><div><h3>Développeur logiciel scientifique<\/h3><div class=\"meta\">ARTUS / Meggitt<\/div><\/div><div class=\"pill\">1992-1994<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Développement d’outils logiciels scientifiques pour bancs d’essais.<\/p><ul class=\"clean\"><li>Traitement de données techniques et visualisation.<\/li><li>Support aux équipes d’ingénierie.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-10\"><div class=\"entry-head\"><div><h3>Technicien maintenance industrielle<\/h3><div class=\"meta\">NOPLY - WEST MI<\/div><\/div><div class=\"pill\">1990-1992<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Maintenance d’équipements industriels.<\/p><ul class=\"clean\"><li>Diagnostic et résolution de pannes techniques.<\/li><li>Intervention sur systèmes électromécaniques.<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-bloc-complementaire\" id=\"bloc-complementaire\"><h2 class=\"section-title\">Informations complémentaires<\/h2><div class=\"panel mini-list\"><div><strong>Langues:<\/strong> Français, Anglais, Espagnol.<\/div><div><strong>Secteurs:<\/strong> industrie, systèmes critiques, infrastructure IT.<\/div><div>Profil LinkedIn disponible pour détails du parcours et publications.<\/div><\/div><\/section><section class=\"section stack side-section zone-explorations-techniques\" id=\"explorations-techniques\"><h2 class=\"section-title\">Explorations techniques<\/h2><div class=\"panel mini-list\"><div>Expérimentation d’outils d’ingénierie assistée par IA.<\/div><div>Conception d’un agent IA local destiné à assister l’architecture logicielle et l’automatisation de tâches techniques.<\/div><div>Exploration d’architectures logicielles intégrant IA, automatisation et outils de développement.<\/div><div>Veille active sur l’évolution des architectures cloud, logiciel et IA.<\/div><\/div><\/section><\/aside><section class=\"section stack main-section zone-kpi full-width-zone\" id=\"realisations-resultats\"><h2 class=\"section-title\">Réalisations / Résultats<\/h2><div class=\"kpi\"><div class=\"kpi-box\"><strong>30 ans+<\/strong><span class=\"muted\">d’expérience dans l’IT et les systèmes industriels.<\/span><\/div><div class=\"kpi-box\"><strong>Architectures<\/strong><span class=\"muted\">SI, infrastructure et systèmes industriels.<\/span><\/div><div class=\"kpi-box\"><strong>Env. critiques<\/strong><span class=\"muted\">industrie, offshore, ferroviaire, plateformes techniques.<\/span><\/div><div class=\"kpi-box\"><strong>Pilotage transverse<\/strong><span class=\"muted\">interface direction, métiers et équipes techniques.<\/span><\/div><\/div><\/section><\/div>", "page_2_note": "Ce site a été créé de manière expérimentale avec Codex 5.4, il utilise une chaîne CI/CD GitHub : <a href=\"https://ericrac.github.io/CV-Eric-RACINEUX/\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">https://ericrac.github.io/CV-Eric-RACINEUX/<\/a>", "page_2_legal": "<span class=\"site-legal__policy\">Préférences d'affichage conservées localement dans le navigateur, sans cookie de suivi ni collecte serveur. Démarche de minimisation RGPD / CNIL.<\/span><span class=\"site-legal__author\">Auteur : <a href=\"mailto:eric.racineux@outlook.fr\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric.racineux@outlook.fr<\/a><\/span>", "last_update_label": "Dernière mise à jour : 27/03/2026 (dernier commit)", "demarche_short_html": "<p>Ce CV web ne sert pas seulement a rendre un parcours consultable en ligne. Il sert aussi de demonstrateur de methode.<\/p><p>Sur ce projet, l&#x27;humain n&#x27;a pas ecrit directement le code: la production est pilotee via l&#x27;agent IA, sur la base du besoin, des arbitrages et de la connaissance metier.<\/p><p>Le projet combine dans un meme objet:<\/p><ul><li>une presentation web lisible et themable<\/li><li>une impression PDF<\/li><li>une source de contenu structuree<\/li><li>une chaine de qualification et de publication automatisee<\/li><li>une experimentation encadree des agents IA<\/li><\/ul><p>L&#x27;objectif n&#x27;est pas de &quot;faire un site avec de l&#x27;IA&quot;, mais de travailler en conditions reelles sur ce qu&#x27;elle accelere, ce qu&#x27;elle fragilise et ce qui doit rester sous controle humain.<\/p><p>La logique de travail est volontairement courte et iterative: je fais, je verifie, j&#x27;ameliore; puis je recommence. Les evolutions se stabilisent par petits increments, avec commit local regulier puis push CI/CD quand l&#x27;etat est defendable.<\/p><p>Ce projet montre en pratique:<\/p><ul><li>la capacite a cadrer un besoin hybride web / document / PDF<\/li><li>la capacite a industrialiser un petit perimetre sans le rendre opaque<\/li><li>la capacite a qualifier, publier et faire evoluer un support visible<\/li><li>la volonte d&#x27;utiliser l&#x27;IA comme levier de travail, avec recul sur ses limites et ses risques<\/li><li>une facon tres concrete de faire evoluer un projet en mode agile, avec une IA force de proposition mais un cadrage, une verification et un arbitrage qui restent humains<\/li><\/ul>", "demarche_flow_html": "<div class=\"demarche-flow__node\"><strong>Source<\/strong><span>JSON CV<br>Template HTML<br>CSS / JS<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Agent IA<\/strong><span>Cadrage<br>Refactor<br>Tests<br>Documentation<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Qualification<\/strong><span>Smoke<br>Playwright<br>axe-core<br>PDF<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Publication<\/strong><span>GitHub Actions<br>Pages<br>PDF publics<\/span><\/div>", "ui": {"skip_link": "Aller au contenu principal", "controls_aria": "Controles CV", "mobile_menu": "Thèmes", "mobile_menu_open": "Ouvrir le menu des thèmes", "mobile_menu_close": "Fermer le menu des thèmes", "languages_title": "Langue", "language_active": "Langue active : {label}.", "lang_fr": "Français", "lang_en": "English", "themes_title": "Thèmes", "theme_blue": "Bleu", "theme_green": "Vert", "theme_violet": "Rose / Violet", "theme_sunset": "Orange / Jaune", "theme_black": "Noir", "theme_access": "Accessibilité", "theme_active": "Thème actif : {label}.", "mode_title": "Mode", "mode_premium": "Premium", "mode_ats": "ATS", "mode_active": "Mode actif : {label}.", "pages_title": "Pages", "page_1": "Page 1", "page_2": "Page 2", "page_active": "Navigation vers la page {page}.", "actions_title": "Action", "demarche_button": "Démarche", "appearance_toggle": "Affichage inverse", "appearance_toggle_on": "Affichage inverse actif", "appearance_toggle_off": "Affichage système actif", "appearance_state_on": "Inversé", "appearance_state_off": "Normal", "appearance_scope": "Premium uniquement", "appearance_active": "Affichage actif : {label}.", "print_button": "Imprimer via navigateur", "print_unavailable": "Impression indisponible", "download_button": "Télécharger PDF", "download_busy": "Génération PDF...", "download_unavailable": "PDF indisponible", "pdf_progress": "Génération du PDF en cours...", "pdf_success": "PDF pret et telecharge", "pdf_error": "Échec de génération du PDF", "pdf_downloaded": "PDF téléchargé.", "pdf_failed": "Échec de génération du PDF.", "demarche_opened": "Ouverture de la démarche du projet.", "demarche_eyebrow": "Démarche", "demarche_title": "CV web, méthode et laboratoire IA", "demarche_lede": "Un CV hybride qui sert à la fois de support public, de PDF maîtrisé, et de terrain d’expérimentation sur l’usage encadré des agents IA.", "demarche_share": "Partager cette démarche", "demarche_share_copied": "Le lien de la démarche est copié", "demarche_share_prompt": "Copier le lien de la démarche :", "demarche_close": "Fermer", "demarche_flow_eyebrow": "Schéma synthèse", "demarche_flow_title": "Chaîne CI/CD et fonctions de l’agent IA", "jump_page_1": "Aller à la page 1", "jump_page_2": "Aller à la page 2", "scroll_top": "Revenir en haut de page"}}, "en": {"locale": "en", "html_lang": "en", "title": "Resume - Eric Racineux", "meta_description": "Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.", "meta_robots": "index,follow", "meta_keywords": "Eric Racineux, Eric Racineux resume, IT Director, Enterprise Architect, Infrastructure, Industrial systems, Cybersecurity, Nantes", "canonical_url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "site_name": "Eric Racineux Resume", "og_locale": "en_GB", "seo_json_ld": "{\"@context\": \"https://schema.org\", \"@type\": \"ProfilePage\", \"inLanguage\": \"en-GB\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"name\": \"Resume - Eric Racineux\", \"description\": \"Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.\", \"mainEntity\": {\"@type\": \"Person\", \"name\": \"Eric Racineux\", \"jobTitle\": \"IT Director | Senior Enterprise & IT Architect\", \"description\": \"Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"address\": {\"@type\": \"PostalAddress\", \"addressLocality\": \"Nantes / Vertou\"}, \"sameAs\": [\"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"https://www.linkedin.com/in/eric-racineux-75475a7/\"], \"knowsAbout\": [\"Eric Racineux\", \"Eric Racineux resume\", \"IT Director\", \"Enterprise Architect\", \"Infrastructure\", \"Industrial systems\", \"Cybersecurity\", \"Nantes\"]}, \"publisher\": {\"@type\": \"Organization\", \"name\": \"Eric Racineux Resume\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}, \"_meta\": {\"og_locale\": \"en_GB\", \"escaped_canonical\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}}", "hero_html": "<section class=\"hero\"><div><h1 id=\"page-1-title\">Eric Racineux<\/h1><div class=\"role\">IT Director | Senior Enterprise &amp; IT Architect<\/div><p class=\"summary\"><strong>Enterprise Architecture | Infrastructure | Industrial systems<\/strong><br>Senior IT director and enterprise architect with more than 30 years of experience in demanding industrial and technical environments. Focused on systems architecture, infrastructure, cybersecurity and the structuring of robust, maintainable information systems.<\/p><div class=\"tags\"><span class=\"tag\">Industrial cybersecurity<\/span><span class=\"tag\">Critical infrastructure<\/span><span class=\"tag\">Cross-functional IT / business view<\/span><span class=\"tag\">Agility<\/span><\/div><\/div><aside class=\"hero-right\"><div class=\"contact-card\"><div class=\"contact-grid\"><div><span class=\"label\">Phone<\/span><span class=\"value\">+33 6 34 98 67 21<\/span><\/div><div><span class=\"label\">Email<\/span><span class=\"value\">eric.racineux@outlook.fr<\/span><\/div><div><span class=\"label\">City<\/span><span class=\"value\">Nantes / Vertou<\/span><\/div><div><span class=\"label\">LinkedIn<\/span><span class=\"value\"><a href=\"https://www.linkedin.com/in/eric-racineux-75475a7/\" class=\"contact-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric-racineux-75475a7<\/a><\/span><\/div><div><span class=\"label\">Mobility<\/span><span class=\"value\">Nantes / Hybrid<\/span><\/div><div><span class=\"label\">Availability<\/span><span class=\"value\">3 months<\/span><\/div><\/div><\/div><section class=\"panel positioning\"><h2 class=\"section-title\">Positioning<\/h2><div class=\"mini-list\"><div>Enterprise architect focused on overall system consistency, technical architecture structuring and IT transformation leadership in demanding industrial and technical environments.<\/div><\/div><\/section><\/aside><\/section>", "page_1_zones": "<div class=\"page-grid\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Key experience<\/h2><article class=\"entry\" id=\"exp-01\"><div class=\"entry-head\"><div><h3>IT Director<\/h3><div class=\"meta\">Fondation OPEN-C - Nantes<\/div><\/div><div class=\"pill\">2024-Present<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> steering and securing the information system of a foundation operating critical maritime and industrial platforms.<\/p><ul class=\"clean\"><li>Defined and evolved a multi-site IT architecture covering networks, cloud, industrial systems and cybersecurity.<\/li><li>Structured security governance, network segmentation and flow supervision.<\/li><li>Set up a resilience and service continuity strategy (disaster recovery / business continuity).<\/li><li>Led infrastructure projects and worked directly with management, industrial partners and technical teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-02\"><div class=\"entry-head\"><div><h3>Infrastructure &amp; Cloud Product Owner<\/h3><div class=\"meta\">DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2023<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> designed and delivered the target infrastructure for a private cloud transformation programme.<\/p><ul class=\"clean\"><li>Defined the private cloud infrastructure and network architecture.<\/li><li>Structured the migration roadmap and decommissioning of legacy foundations.<\/li><li>Delivered IaaS services and coordinated technical teams in Agile mode.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-03\"><div class=\"entry-head\"><div><h3>Service Owner<\/h3><div class=\"meta\">IT Services Catalogue - DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2022-2023<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> structured and industrialised the infrastructure services catalogue.<\/p><ul class=\"clean\"><li>Managed a portfolio of more than 1000 infrastructure services.<\/li><li>Implemented run, lifecycle and governance processes for services.<\/li><li>Reworked the CMDB and industrialised the catalogue through ServiceNow while integrating performance, security and operations constraints.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-07\"><div class=\"entry-head\"><div><h3>IT Project Manager &amp; Software Architect<\/h3><div class=\"meta\">Specinov<\/div><\/div><div class=\"pill\">1994-2000<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> designed and deployed distributed industrial software solutions.<\/p><ul class=\"clean\"><li>Designed and developed client/server applications in C++.<\/li><li>Architected distributed software systems and led fixed-price projects.<\/li><li>Deployed solutions across more than 120 industrial sites and handled client relationships.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-08\"><div class=\"entry-head\"><div><h3>Additional projects and experience<\/h3><\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> portfolio covering innovation, enterprise architecture and AI.<\/p><ul class=\"clean\"><li>Industrial Agile PMO and structuring of complex ENGIE projects.<\/li><li>Predictive maintenance IoT prototype (Bubbleio).<\/li><li>Independent activity around enterprise architecture and AI (DeepRacine).<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-competences\" id=\"competences\"><h2 class=\"section-title\">Skills<\/h2><div class=\"panel skill-group\"><div class=\"skill-row\"><header><strong>Enterprise architecture<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 95%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Infrastructure &amp; networks<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 92%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Cybersecurity<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 85%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>IT transformation<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 82%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Industrial systems<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 68%\"><\/span><\/div><\/div><\/div><\/section><section class=\"section stack side-section zone-technos-environnements\" id=\"technos-environnements\"><h2 class=\"section-title\">Technologies / Environments<\/h2><div class=\"panel mini-list\"><div>Microsoft 365, Entra ID, Intune, Defender.<\/div><div>Fortinet, SD-WAN, VPN, firewalling.<\/div><div>Windows Server, Linux, VMware.<\/div><div>Private / hybrid cloud.<\/div><div>Automation and scripting.<\/div><div>ITIL, DR/BCP, IT governance.<\/div><\/div><\/section><section class=\"section stack side-section zone-parcours\" id=\"parcours\"><h2 class=\"section-title\">Education<\/h2><div class=\"panel timeline\"><div class=\"t-item\"><strong>ESAIP<\/strong><div class=\"muted\">Engineering degree in IT networks and telecommunications.<\/div><\/div><div class=\"t-item\"><strong>IMIE<\/strong><div class=\"muted\">Software developer and designer diploma.<\/div><\/div><div class=\"t-item\"><strong>Additional training<\/strong><div class=\"muted\">industrial cybersecurity and systems governance.<\/div><\/div><\/div><\/section><\/aside><\/div>", "page_2_header_html": "<header class=\"cv-header\"><h1 id=\"page-2-title\">Eric Racineux<\/h1><\/header>", "page_2_zones": "<div class=\"page-grid page-grid--footer\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Additional experience<\/h2><article class=\"entry\" id=\"exp-04\"><div class=\"entry-head\"><div><h3>Systems Integration &amp; Test Lead<\/h3><div class=\"meta\">ENGIE Ineo Rail / UTS<\/div><\/div><div class=\"pill\">2021<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> structured and led integration testing on a complex rail project.<\/p><ul class=\"clean\"><li>Defined validation strategy and test plans.<\/li><li>Structured integration methods and tooling.<\/li><li>Coordinated engineering, production and client-side technical stakeholders.<\/li><li>Secured validation milestones and service entry.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-05\"><div class=\"entry-head\"><div><h3>Head of Engineering Office<\/h3><div class=\"meta\">VMI<\/div><\/div><div class=\"pill\">2012-2016<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> transformed and structured the engineering office of an industrial machine manufacturer.<\/p><ul class=\"clean\"><li>Managed a team of 13 to 20 engineers and technicians.<\/li><li>Reworked machine architectures and harmonised engineering methods.<\/li><li>Led a MES project for an LVMH industrial site.<\/li><li>Structured interfaces between engineering office, production and IT.<\/li><li>Contributed to machine architecture and automation design choices.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-06\"><div class=\"entry-head\"><div><h3>Industrial IT Manager<\/h3><div class=\"meta\">GOSS International<\/div><\/div><div class=\"pill\">2000-2011<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> created and structured the industrial IT unit.<\/p><ul class=\"clean\"><li>Designed and administered industrial technical infrastructure.<\/li><li>Set up a validation and test laboratory.<\/li><li>Deployed supervision and remote monitoring solutions.<\/li><li>Integrated embedded IT systems on industrial lines.<\/li><li>Coordinated technical work internationally with engineering teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-09\"><div class=\"entry-head\"><div><h3>Scientific Software Developer<\/h3><div class=\"meta\">ARTUS / Meggitt<\/div><\/div><div class=\"pill\">1992-1994<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Developed scientific software tools for test benches.<\/p><ul class=\"clean\"><li>Processed technical data and visualisation.<\/li><li>Supported engineering teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-10\"><div class=\"entry-head\"><div><h3>Industrial Maintenance Technician<\/h3><div class=\"meta\">NOPLY - WEST MI<\/div><\/div><div class=\"pill\">1990-1992<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Maintained industrial equipment.<\/p><ul class=\"clean\"><li>Diagnosed and resolved technical failures.<\/li><li>Worked on electromechanical systems.<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-bloc-complementaire\" id=\"bloc-complementaire\"><h2 class=\"section-title\">Additional information<\/h2><div class=\"panel mini-list\"><div><strong>Languages:<\/strong> French, English, Spanish.<\/div><div><strong>Sectors:<\/strong> industry, critical systems, IT infrastructure.<\/div><div>LinkedIn profile available for detailed background and publications.<\/div><\/div><\/section><section class=\"section stack side-section zone-explorations-techniques\" id=\"explorations-techniques\"><h2 class=\"section-title\">Technical explorations<\/h2><div class=\"panel mini-list\"><div>Experimenting with AI-assisted engineering tooling.<\/div><div>Designing a local AI agent to support software architecture and task automation.<\/div><div>Exploring software architectures combining AI, automation and development tools.<\/div><div>Active watch on cloud, software and AI architecture evolution.<\/div><\/div><\/section><\/aside><section class=\"section stack main-section zone-kpi full-width-zone\" id=\"realisations-resultats\"><h2 class=\"section-title\">Achievements / Outcomes<\/h2><div class=\"kpi\"><div class=\"kpi-box\"><strong>30+ years<\/strong><span class=\"muted\">of experience in IT and industrial systems.<\/span><\/div><div class=\"kpi-box\"><strong>Architectures<\/strong><span class=\"muted\">enterprise IT, infrastructure and industrial systems.<\/span><\/div><div class=\"kpi-box\"><strong>Critical environments<\/strong><span class=\"muted\">industry, offshore, rail and technical platforms.<\/span><\/div><div class=\"kpi-box\"><strong>Cross-funct. leadership<\/strong><span class=\"muted\">interface across management, stakeholders and technical teams.<\/span><\/div><\/div><\/section><\/div>", "page_2_note": "This site was created experimentally with Codex 5.4 and uses a GitHub CI/CD pipeline: <a href=\"https://ericrac.github.io/CV-Eric-RACINEUX/\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">https://ericrac.github.io/CV-Eric-RACINEUX/<\/a>", "page_2_legal": "<span class=\"site-legal__policy\">Display preferences are stored locally in the browser, without tracking cookies or server-side collection. Privacy-by-minimisation approach aligned with GDPR / CNIL.<\/span><span class=\"site-legal__author\">Author: <a href=\"mailto:eric.racineux@outlook.fr\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric.racineux@outlook.fr<\/a><\/span>", "last_update_label": "Last update: 27/03/2026 (latest commit)", "demarche_short_html": "<p>This web CV is not only there to make a career path available online. It also serves as a method demonstrator.<\/p><p>On this project, the human did not write the code directly: production is driven through the AI agent, based on the need, the decisions and domain knowledge.<\/p><p>The project combines several concerns in one visible artifact:<\/p><ul><li>a readable and themeable web presentation<\/li><li>a reliable PDF output<\/li><li>a structured content source<\/li><li>an automated qualification and publication pipeline<\/li><li>a supervised experimentation field for AI agents<\/li><\/ul><p>The point is not to “build a site with AI”, but to work in real conditions on what AI accelerates, what it weakens, and what must remain under human control.<\/p><p>The working loop is intentionally short and iterative: I build, I verify, I improve, then I repeat. Changes are stabilised through small increments, with regular local commits and CI/CD pushes when the state is defendable.<\/p><p>In practice, this project demonstrates:<\/p><ul><li>the ability to frame a hybrid web / document / PDF need<\/li><li>the ability to industrialise a small scope without making it opaque<\/li><li>the ability to qualify, publish and evolve a visible support<\/li><li>the intent to use AI as a work lever while keeping a critical view on its limits and risks<\/li><li>a concrete way to evolve a project in an agile loop, with an AI that is forceful in proposals while framing, verification and final arbitration remain human<\/li><\/ul>", "demarche_flow_html": "<div class=\"demarche-flow__node\"><strong>Source<\/strong><span>CV JSON<br>HTML template<br>CSS / JS<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>AI agent<\/strong><span>Framing<br>Refactor<br>Tests<br>Documentation<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Qualification<\/strong><span>Smoke<br>Playwright<br>axe-core<br>PDF<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Publication<\/strong><span>GitHub Actions<br>Pages<br>Public PDFs<\/span><\/div>", "ui": {"skip_link": "Skip to main content", "controls_aria": "CV controls", "mobile_menu": "Themes", "mobile_menu_open": "Open theme menu", "mobile_menu_close": "Close theme menu", "languages_title": "Language", "language_active": "Active language: {label}.", "lang_fr": "French", "lang_en": "English", "themes_title": "Themes", "theme_blue": "Blue", "theme_green": "Green", "theme_violet": "Pink / Violet", "theme_sunset": "Orange / Yellow", "theme_black": "Black", "theme_access": "Accessibility", "theme_active": "Active theme: {label}.", "mode_title": "Mode", "mode_premium": "Premium", "mode_ats": "ATS", "mode_active": "Active mode: {label}.", "pages_title": "Pages", "page_1": "Page 1", "page_2": "Page 2", "page_active": "Navigated to page {page}.", "actions_title": "Actions", "demarche_button": "Approach", "appearance_toggle": "Inverted display", "appearance_toggle_on": "Inverted display active", "appearance_toggle_off": "System display active", "appearance_state_on": "Inverted", "appearance_state_off": "Normal", "appearance_scope": "Premium only", "appearance_active": "Display mode: {label}.", "print_button": "Print via browser", "print_unavailable": "Print unavailable", "download_button": "Download PDF", "download_busy": "Generating PDF...", "download_unavailable": "PDF unavailable", "pdf_progress": "Generating PDF...", "pdf_success": "PDF ready and downloaded", "pdf_error": "PDF generation failed", "pdf_downloaded": "PDF downloaded.", "pdf_failed": "PDF generation failed.", "demarche_opened": "Project approach opened.", "demarche_eyebrow": "Approach", "demarche_title": "Web CV, method and AI lab", "demarche_lede": "A hybrid CV used both as a public profile, a controlled PDF deliverable and a field lab for supervised use of AI agents.", "demarche_share": "Share this approach", "demarche_share_copied": "The approach link has been copied", "demarche_share_prompt": "Copy the approach link:", "demarche_close": "Close", "demarche_flow_eyebrow": "Summary flow", "demarche_flow_title": "CI/CD pipeline and AI agent roles", "jump_page_1": "Go to page 1", "jump_page_2": "Go to page 2", "scroll_top": "Back to top"}}}</script>
   <script>
 (() => {
   const body = document.body;
@@ -2735,15 +3380,20 @@ body[data-mode="ats"] .kpi-box strong {
 
   const btnModePremium = document.getElementById("btn-mode-premium");
   const btnModeAts = document.getElementById("btn-mode-ats");
+  const btnControlsToggle = document.getElementById("btn-controls-toggle");
   const btnPage1 = document.getElementById("btn-page-1");
   const btnPage2 = document.getElementById("btn-page-2");
   const btnPrint = document.getElementById("btn-print");
   const btnDownloadPdf = document.getElementById("btn-download-pdf");
   const btnDemarche = document.getElementById("btn-demarche");
+  const btnAppearanceCycle = document.getElementById("btn-appearance-cycle");
   const btnShareDemarche = document.getElementById("btn-share-demarche");
   const shareDemarcheLabel = document.getElementById("share-demarche-label");
   const btnCloseDemarche = document.getElementById("btn-close-demarche");
   const demarcheOverlay = document.getElementById("demarche-overlay");
+  const demarchePanel = document.querySelector(".demarche-panel");
+  const demarcheMobileActions = document.getElementById("demarche-mobile-actions");
+  const btnDemarcheTop = document.getElementById("btn-demarche-top");
   const demarcheFeedback = document.getElementById("demarche-feedback");
   const pdfFeedback = document.getElementById("pdf-feedback");
   const btnMobileMenu = document.getElementById("btn-mobile-menu");
@@ -2756,35 +3406,116 @@ body[data-mode="ats"] .kpi-box strong {
   const cvUpdate = document.querySelector(".cv-update");
   const demarcheSummary = document.querySelector(".demarche-summary");
   const pageJump = document.querySelector(".page-jump");
+  const i18nCatalogNode = document.getElementById("cv-i18n-catalog");
+  const skipLink = document.getElementById("skip-link");
+  const cvControls = document.getElementById("cv-controls");
+  const mobileMenuLabel = document.getElementById("mobile-menu-label");
+  const controlsTitleThemes = document.getElementById("controls-title-themes");
+  const controlsTitleMode = document.getElementById("controls-title-mode");
+  const controlsTitlePages = document.getElementById("controls-title-pages");
+  const controlsTitleActions = document.getElementById("controls-title-actions");
+  const themeLabelBlue = document.getElementById("theme-label-blue");
+  const themeLabelGreen = document.getElementById("theme-label-green");
+  const themeLabelViolet = document.getElementById("theme-label-violet");
+  const themeLabelSunset = document.getElementById("theme-label-sunset");
+  const themeLabelBlack = document.getElementById("theme-label-black");
+  const themeLabelAccess = document.getElementById("theme-label-access");
+  const page1Hero = document.getElementById("page-1-hero");
+  const page1Zones = document.getElementById("page-1-zones");
+  const page2Header = document.getElementById("page-2-header");
+  const page2Zones = document.getElementById("page-2-zones");
+  const page2Note = document.getElementById("page-2-note");
+  const siteLegal = document.getElementById("site-legal");
+  const page2Update = document.getElementById("page-2-update");
+  const appearanceStateLabel = document.getElementById("appearance-state-label");
+  const demarcheEyebrow = document.getElementById("demarche-eyebrow");
+  const demarcheTitle = document.getElementById("demarche-title");
+  const demarcheLede = document.getElementById("demarche-lede");
+  const demarcheFlowEyebrow = document.getElementById("demarche-flow-eyebrow");
+  const demarcheFlowTitle = document.getElementById("demarche-flow-title");
+  const demarcheFlowGrid = document.getElementById("demarche-flow-grid");
 
   const STORAGE_KEYS = {
+    locale: "cv-locale",
     mode: "cv-mode",
     page: "cv-page",
     theme: "cv-theme",
+    darkOverride: "cv-dark-override",
+    debug: "cv-debug-enabled",
+    controlsCollapsed: "cv-controls-collapsed",
   };
 
   const THEMES = new Set(["blue", "green", "violet", "sunset", "black", "access"]);
   const contrastPreferenceQuery = window.matchMedia("(prefers-contrast: more), (forced-colors: active)");
-  const defaultPrintLabel = btnPrint ? btnPrint.textContent : "";
-  const defaultDownloadLabel = btnDownloadPdf ? btnDownloadPdf.textContent : "";
-  const defaultShareDemarcheLabel = shareDemarcheLabel ? shareDemarcheLabel.textContent : "";
+  const colorSchemeDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const localeCatalog = (() => {
+    try {
+      return JSON.parse(i18nCatalogNode?.textContent || "{}");
+    } catch (_) {
+      return {};
+    }
+  })();
   let themeBeforePrint = null;
   let pdfDownloadInProgress = false;
   let pdfFeedbackTimerId = null;
   let shareDemarcheTimerId = null;
   let demarcheRouteSyncMuted = false;
+  let currentLocale = "fr";
+  let autoDarkBeforePrint = "false";
+  let printLockActive = false;
+  let debugToggle = null;
+  let debugPanel = null;
+  let debugTitle = null;
+  let debugModeValue = null;
+  let debugLayoutValue = null;
+  let debugThemeValue = null;
+  let debugThemeSourceValue = null;
+  let debugDarkValue = null;
+  let debugDarkSourceValue = null;
+  let debugDarkReasonValue = null;
+  let debugBrowserDarkValue = null;
+  let debugLocaleValue = null;
+  let debugLocaleSourceValue = null;
+  let debugNavigatorLanguageValue = null;
+  let btnDebugDarkAuto = null;
+  let btnDebugDarkLight = null;
+  let btnDebugDarkDark = null;
+  let btnDebugReset = null;
+  let btnDebugLocaleAuto = null;
+  let btnDebugLocaleFr = null;
+  let btnDebugLocaleEn = null;
   const TEMPLATE_TOKEN_PREFIX = "{".repeat(2);
   const DEMARCHE_PLACEHOLDER = `${TEMPLATE_TOKEN_PREFIX}DEMARCHE_SHORT_HTML}}`;
+  const LAST_UPDATE_PLACEHOLDER = `${TEMPLATE_TOKEN_PREFIX}LAST_UPDATE_LABEL}}`;
 
-  const isLocalManagedPdf = () => ["127.0.0.1", "localhost"].includes(window.location.hostname);
+  const isLocalEnvironment = () => ["127.0.0.1", "localhost"].includes(window.location.hostname);
+  const isLocalManagedPdf = () => isLocalEnvironment();
+  const normalizeLocale = (value) => (String(value || "").toLowerCase().startsWith("fr") ? "fr" : "en");
+  const getNavigatorLocale = () => normalizeLocale(navigator.language || navigator.userLanguage || "fr");
+  const getLocalePayload = (locale = currentLocale) => localeCatalog[normalizeLocale(locale)] || localeCatalog.fr || {};
+  const t = (key, locale = currentLocale) => {
+    const controls = getLocalePayload(locale).ui || {};
+    return controls[key] || "";
+  };
+  const getThemeLabel = (theme, locale = currentLocale) => t(`theme_${theme}`, locale) || theme;
   const getManagedPdfFilename = () => {
+    const localeSuffix = currentLocale === "en" ? "-en" : "";
     if (body.dataset.mode === "ats") {
-      return "cv-ats.pdf";
+      return `cv-ats${localeSuffix}.pdf`;
     }
     const theme = body.dataset.theme || "blue";
-    return `cv-${theme}.pdf`;
+    return `cv-${theme}${localeSuffix}.pdf`;
   };
   const getPublicManagedPdfUrl = () => new URL(`pdf/${getManagedPdfFilename()}`, window.location.href).toString();
+  const urlRequestsDebug = () => new URL(window.location.href).searchParams.get("debug") === "1";
+  const isLocalDebugEnabled = () => isLocalEnvironment() && (urlRequestsDebug() || readPreference(STORAGE_KEYS.debug, "false") === "true");
+  const clearPreference = (key) => {
+    try {
+      window.localStorage.removeItem(key);
+    } catch (_) {
+      // Ignore storage restrictions.
+    }
+  };
   const getDemarcheShareUrl = () => {
     const url = new URL(window.location.href);
     url.searchParams.delete("demarche");
@@ -2812,11 +3543,104 @@ body[data-mode="ats"] .kpi-box strong {
     window.history.replaceState({}, "", next);
   };
   const cleanupTemplateArtifacts = () => {
-    if (cvUpdate && cvUpdate.textContent.includes(TEMPLATE_TOKEN_PREFIX)) {
+    if (cvUpdate && (cvUpdate.textContent.includes(TEMPLATE_TOKEN_PREFIX) || cvUpdate.textContent.includes(LAST_UPDATE_PLACEHOLDER))) {
       cvUpdate.hidden = true;
     }
     if (demarcheSummary && demarcheSummary.innerHTML.includes(DEMARCHE_PLACEHOLDER)) {
       demarcheSummary.innerHTML = "";
+    }
+  };
+  const applyLocale = (locale, { persist = true, announceChange = true } = {}) => {
+    const normalizedLocale = normalizeLocale(locale);
+    const payload = getLocalePayload(normalizedLocale);
+    if (!payload || !payload.ui) {
+      return;
+    }
+
+    currentLocale = normalizedLocale;
+    body.dataset.locale = normalizedLocale;
+    document.documentElement.lang = payload.html_lang || normalizedLocale;
+    document.title = payload.title || document.title;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", payload.meta_description || "");
+    document.querySelector('meta[name="keywords"]')?.setAttribute("content", payload.meta_keywords || "");
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", payload.title || "");
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", payload.meta_description || "");
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", payload.title || "");
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", payload.meta_description || "");
+
+    if (persist) {
+      writePreference(STORAGE_KEYS.locale, normalizedLocale);
+    }
+
+    if (skipLink) skipLink.textContent = payload.ui.skip_link || "";
+    if (cvControls) cvControls.setAttribute("aria-label", payload.ui.controls_aria || "");
+    if (mobileMenuLabel) mobileMenuLabel.textContent = payload.ui.mobile_menu || "";
+    if (btnMobileMenu) {
+      const expanded = body.classList.contains("is-controls-open");
+      btnMobileMenu.setAttribute("aria-label", expanded ? (payload.ui.mobile_menu_close || "") : (payload.ui.mobile_menu_open || ""));
+    }
+    if (controlsTitleThemes) controlsTitleThemes.textContent = payload.ui.themes_title || "";
+    if (controlsTitleMode) controlsTitleMode.textContent = payload.ui.mode_title || "";
+    if (controlsTitlePages) controlsTitlePages.textContent = payload.ui.pages_title || "";
+    if (controlsTitleActions) controlsTitleActions.textContent = payload.ui.actions_title || "";
+    if (themeLabelBlue) themeLabelBlue.textContent = payload.ui.theme_blue || "";
+    if (themeLabelGreen) themeLabelGreen.textContent = payload.ui.theme_green || "";
+    if (themeLabelViolet) themeLabelViolet.textContent = payload.ui.theme_violet || "";
+    if (themeLabelSunset) themeLabelSunset.textContent = payload.ui.theme_sunset || "";
+    if (themeLabelBlack) themeLabelBlack.textContent = payload.ui.theme_black || "";
+    if (themeLabelAccess) themeLabelAccess.textContent = payload.ui.theme_access || "";
+    if (btnModePremium) btnModePremium.textContent = payload.ui.mode_premium || "Premium";
+    if (btnModeAts) btnModeAts.textContent = payload.ui.mode_ats || "ATS";
+    if (btnPage1) btnPage1.textContent = payload.ui.page_1 || "Page 1";
+    if (btnPage2) btnPage2.textContent = payload.ui.page_2 || "Page 2";
+    if (btnDemarche) btnDemarche.textContent = payload.ui.demarche_button || "Démarche";
+    if (btnAppearanceCycle) {
+      const appearanceLabelNode = btnAppearanceCycle.querySelector(".appearance-toggle__label");
+      if (appearanceLabelNode) {
+        appearanceLabelNode.textContent = payload.ui.appearance_toggle || "Affichage inverse";
+      }
+      if (appearanceStateLabel) {
+        appearanceStateLabel.textContent = isAppearanceInverted()
+          ? (payload.ui.appearance_state_on || "Inversé")
+          : (payload.ui.appearance_state_off || "Normal");
+      }
+      btnAppearanceCycle.setAttribute("aria-label", getAppearanceLabel(isAppearanceInverted(), normalizedLocale));
+    }
+    if (btnCloseDemarche) {
+      btnCloseDemarche.textContent = payload.ui.demarche_close || "Fermer";
+      btnCloseDemarche.setAttribute("aria-label", payload.ui.demarche_close || "Fermer");
+    }
+    if (shareDemarcheLabel && !btnShareDemarche?.classList.contains("is-copied")) {
+      shareDemarcheLabel.textContent = payload.ui.demarche_share || "";
+    }
+    if (btnShareDemarche) btnShareDemarche.setAttribute("aria-label", payload.ui.demarche_share || "");
+    if (btnScrollTop) btnScrollTop.setAttribute("aria-label", payload.ui.scroll_top || "");
+    if (btnJumpPage1) btnJumpPage1.setAttribute("aria-label", payload.ui.jump_page_1 || "");
+    if (btnJumpPage2) btnJumpPage2.setAttribute("aria-label", payload.ui.jump_page_2 || "");
+    if (btnDemarcheTop) btnDemarcheTop.setAttribute("aria-label", payload.ui.scroll_top || "");
+    if (page1Hero && typeof payload.hero_html === "string") page1Hero.innerHTML = payload.hero_html;
+    if (page1Zones && typeof payload.page_1_zones === "string") page1Zones.innerHTML = payload.page_1_zones;
+    if (page2Header && typeof payload.page_2_header_html === "string") page2Header.innerHTML = payload.page_2_header_html;
+    if (page2Zones && typeof payload.page_2_zones === "string") page2Zones.innerHTML = payload.page_2_zones;
+    if (page2Note && typeof payload.page_2_note === "string") page2Note.innerHTML = payload.page_2_note;
+    if (siteLegal && typeof payload.page_2_legal === "string") siteLegal.innerHTML = payload.page_2_legal;
+    if (page2Update && typeof payload.last_update_label === "string") {
+      page2Update.textContent = payload.last_update_label;
+      page2Update.hidden = false;
+    }
+    if (demarcheEyebrow) demarcheEyebrow.textContent = payload.ui.demarche_eyebrow || "";
+    if (demarcheTitle) demarcheTitle.textContent = payload.ui.demarche_title || "";
+    if (demarcheLede) demarcheLede.textContent = payload.ui.demarche_lede || "";
+    if (demarcheSummary && typeof payload.demarche_short_html === "string") demarcheSummary.innerHTML = payload.demarche_short_html;
+    if (demarcheFlowEyebrow) demarcheFlowEyebrow.textContent = payload.ui.demarche_flow_eyebrow || "";
+    if (demarcheFlowTitle) demarcheFlowTitle.textContent = payload.ui.demarche_flow_title || "";
+    if (demarcheFlowGrid && typeof payload.demarche_flow_html === "string") demarcheFlowGrid.innerHTML = payload.demarche_flow_html;
+
+    syncUi();
+    requestAnimationFrame(layoutCv);
+
+    if (announceChange) {
+      announce((payload.ui.language_active || "").replace("{label}", normalizedLocale === "fr" ? payload.ui.lang_fr : payload.ui.lang_en));
     }
   };
   const closeDemarche = () => {
@@ -2826,6 +3650,10 @@ body[data-mode="ats"] .kpi-box strong {
     if (btnDemarche) {
       btnDemarche.setAttribute("aria-expanded", "false");
     }
+    if (demarchePanel) {
+      demarchePanel.scrollTo({ top: 0, behavior: "auto" });
+    }
+    syncDemarcheMobileActions();
     syncDemarcheUrl(false);
   };
   const openDemarche = () => {
@@ -2835,8 +3663,9 @@ body[data-mode="ats"] .kpi-box strong {
     if (btnDemarche) {
       btnDemarche.setAttribute("aria-expanded", "true");
     }
+    syncDemarcheMobileActions();
     syncDemarcheUrl(true);
-    announce("Ouverture de la demarche du projet.");
+    announce(t("demarche_opened") || "");
   };
 
   const announce = (message) => {
@@ -2854,7 +3683,7 @@ body[data-mode="ats"] .kpi-box strong {
       shareDemarcheTimerId = null;
     }
     if (!label) {
-      shareDemarcheLabel.textContent = defaultShareDemarcheLabel;
+      shareDemarcheLabel.textContent = t("demarche_share") || "";
       btnShareDemarche.removeAttribute("data-state");
       btnShareDemarche.classList.remove("is-copied");
       return;
@@ -2918,6 +3747,392 @@ body[data-mode="ats"] .kpi-box strong {
     } catch (_) {
       return false;
     }
+  };
+
+  const getDebugStrings = () => {
+    if (currentLocale === "en") {
+      return {
+        title: "Local debug",
+        layout: "Layout",
+        mode: "Mode",
+        theme: "Theme",
+        themeSource: "Theme source",
+        darkMode: "Dark mode",
+        darkSource: "Dark source",
+        darkReason: "Dark status",
+        browserDark: "Browser dark",
+        locale: "Locale",
+        localeSource: "Locale source",
+        browserLanguage: "Browser language",
+        auto: "Auto",
+        active: "Active",
+        inactive: "Inactive",
+        manual: "Manual",
+        system: "System",
+        autoDark: "Dark auto",
+        forcedDark: "Forced dark",
+        forcedLight: "Forced light",
+        blockedAccess: "Blocked by accessibility",
+        blockedMode: "Reserved for Premium",
+        browserLight: "Browser reports light",
+        browserDarkActive: "Browser reports dark",
+        light: "Light",
+        dark: "Dark",
+        accessSystem: "Access system",
+        resetDebug: "Reset debug local",
+      };
+    }
+    return {
+      title: "Debug local",
+      layout: "Affichage",
+      mode: "Mode",
+      theme: "Thème",
+      themeSource: "Source thème",
+      darkMode: "Mode sombre",
+      darkSource: "Source sombre",
+      darkReason: "Statut sombre",
+      browserDark: "Sombre navigateur",
+      locale: "Langue",
+      localeSource: "Source langue",
+      browserLanguage: "Langue navigateur",
+      auto: "Auto",
+      active: "Actif",
+      inactive: "Inactif",
+      manual: "Manuel",
+      system: "Système",
+      autoDark: "Sombre auto",
+      forcedDark: "Forcé sombre",
+      forcedLight: "Forcé clair",
+      blockedAccess: "Bloqué par accessibilité",
+      blockedMode: "Réservé au mode Premium",
+      browserLight: "Le navigateur expose clair",
+      browserDarkActive: "Le navigateur expose sombre",
+      light: "Clair",
+      dark: "Sombre",
+      accessSystem: "Accessibilité système",
+      resetDebug: "Réinitialiser le debug local",
+    };
+  };
+
+  const getDarkOverride = () => {
+    const value = readPreference(STORAGE_KEYS.darkOverride, "auto");
+    return value === "dark" || value === "light" || value === "invert" ? value : "auto";
+  };
+
+  const getDarkPreferenceActive = () => {
+    const override = getDarkOverride();
+    if (override === "dark") return true;
+    if (override === "light") return false;
+    if (override === "invert") return !colorSchemeDarkQuery.matches;
+    return colorSchemeDarkQuery.matches;
+  };
+
+  const isAppearanceInverted = () => getDarkPreferenceActive() !== colorSchemeDarkQuery.matches;
+
+  const getAppearanceLabel = (inverted = isAppearanceInverted(), locale = currentLocale) => {
+    return inverted
+      ? (t("appearance_toggle_on", locale) || "Affichage inversé actif")
+      : (t("appearance_toggle_off", locale) || "Affichage système actif");
+  };
+
+  const cycleDarkOverride = () => {
+    if (body.dataset.mode !== "premium" || body.dataset.theme === "access") {
+      return;
+    }
+    const nextInverted = !isAppearanceInverted();
+    if (!nextInverted) {
+      clearPreference(STORAGE_KEYS.darkOverride);
+    } else {
+      writePreference(STORAGE_KEYS.darkOverride, "invert");
+    }
+    syncUi();
+    requestAnimationFrame(layoutCv);
+    announce((t("appearance_active") || "").replace("{label}", getAppearanceLabel(nextInverted)));
+  };
+
+  const getThemeSourceLabel = () => {
+    const labels = getDebugStrings();
+    if (body.dataset.theme === "access" && contrastPreferenceQuery.matches && !hasStoredPreference(STORAGE_KEYS.theme)) {
+      return labels.accessSystem;
+    }
+    return hasStoredPreference(STORAGE_KEYS.theme) ? labels.manual : labels.system;
+  };
+
+  const getLocaleSourceLabel = () => {
+    const labels = getDebugStrings();
+    return hasStoredPreference(STORAGE_KEYS.locale) ? labels.manual : labels.system;
+  };
+
+  const getDarkSourceLabel = () => {
+    const labels = getDebugStrings();
+    const override = getDarkOverride();
+    if (override === "dark") return labels.forcedDark;
+    if (override === "light") return labels.forcedLight;
+    if (override === "invert") return labels.autoDark;
+    return labels.system;
+  };
+
+  const getDarkReasonLabel = () => {
+    const labels = getDebugStrings();
+    const override = getDarkOverride();
+    if (body.dataset.mode !== "premium") return labels.blockedMode;
+    if (body.dataset.theme === "access" || contrastPreferenceQuery.matches) return labels.blockedAccess;
+    if (override === "dark") return labels.forcedDark;
+    if (override === "light") return labels.forcedLight;
+    if (override === "invert") return colorSchemeDarkQuery.matches ? labels.forcedLight : labels.forcedDark;
+    return colorSchemeDarkQuery.matches ? labels.browserDarkActive : labels.browserLight;
+  };
+
+  const createLocalDebugUi = () => {
+    if (!isLocalEnvironment() || document.getElementById("cv-debug-panel")) {
+      return;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "cv-debug no-print";
+    wrapper.innerHTML = `
+      <button type="button" id="btn-debug-toggle" class="cv-debug-toggle" aria-expanded="false" aria-controls="cv-debug-panel">Debug</button>
+      <aside id="cv-debug-panel" class="cv-debug-panel" hidden>
+        <p id="cv-debug-title" class="cv-debug-title">Debug local</p>
+        <dl class="cv-debug-list">
+          <div><dt id="cv-debug-layout-label">Affichage</dt><dd id="cv-debug-layout-value"></dd></div>
+          <div><dt id="cv-debug-mode-label">Mode</dt><dd id="cv-debug-mode-value"></dd></div>
+          <div><dt id="cv-debug-theme-label">Thème</dt><dd id="cv-debug-theme-value"></dd></div>
+          <div><dt id="cv-debug-theme-source-label">Source thème</dt><dd id="cv-debug-theme-source-value"></dd></div>
+          <div><dt id="cv-debug-dark-label">Mode sombre</dt><dd id="cv-debug-dark-value"></dd></div>
+          <div><dt id="cv-debug-dark-source-label">Source sombre</dt><dd id="cv-debug-dark-source-value"></dd></div>
+          <div><dt id="cv-debug-dark-reason-label">Statut sombre</dt><dd id="cv-debug-dark-reason-value"></dd></div>
+          <div><dt id="cv-debug-browser-dark-label">Sombre navigateur</dt><dd id="cv-debug-browser-dark-value"></dd></div>
+          <div><dt id="cv-debug-locale-label">Langue</dt><dd id="cv-debug-locale-value"></dd></div>
+          <div><dt id="cv-debug-locale-source-label">Source langue</dt><dd id="cv-debug-locale-source-value"></dd></div>
+          <div><dt id="cv-debug-browser-language-label">Langue navigateur</dt><dd id="cv-debug-browser-language-value"></dd></div>
+        </dl>
+        <div class="cv-debug-group">
+          <p id="cv-debug-dark-actions-label" class="cv-debug-group-title">Forçage sombre</p>
+          <div class="cv-debug-actions" role="group" aria-labelledby="cv-debug-dark-actions-label">
+            <button type="button" id="btn-debug-dark-auto" class="cv-debug-btn">Auto</button>
+            <button type="button" id="btn-debug-dark-light" class="cv-debug-btn">Clair</button>
+            <button type="button" id="btn-debug-dark-dark" class="cv-debug-btn">Sombre</button>
+          </div>
+        </div>
+        <div class="cv-debug-group">
+          <p id="cv-debug-locale-actions-label" class="cv-debug-group-title">Forçage langue</p>
+          <div class="cv-debug-actions" role="group" aria-labelledby="cv-debug-locale-actions-label">
+            <button type="button" id="btn-debug-locale-auto" class="cv-debug-btn">Auto</button>
+            <button type="button" id="btn-debug-locale-fr" class="cv-debug-btn">FR</button>
+            <button type="button" id="btn-debug-locale-en" class="cv-debug-btn">EN</button>
+          </div>
+        </div>
+        <div class="cv-debug-group">
+          <button type="button" id="btn-debug-reset" class="cv-debug-btn cv-debug-btn--reset">Reset debug local</button>
+        </div>
+      </aside>
+    `;
+    document.body.appendChild(wrapper);
+
+    debugToggle = document.getElementById("btn-debug-toggle");
+    debugPanel = document.getElementById("cv-debug-panel");
+    debugTitle = document.getElementById("cv-debug-title");
+    debugLayoutValue = document.getElementById("cv-debug-layout-value");
+    debugModeValue = document.getElementById("cv-debug-mode-value");
+    debugThemeValue = document.getElementById("cv-debug-theme-value");
+    debugThemeSourceValue = document.getElementById("cv-debug-theme-source-value");
+    debugDarkValue = document.getElementById("cv-debug-dark-value");
+    debugDarkSourceValue = document.getElementById("cv-debug-dark-source-value");
+    debugDarkReasonValue = document.getElementById("cv-debug-dark-reason-value");
+    debugBrowserDarkValue = document.getElementById("cv-debug-browser-dark-value");
+    debugLocaleValue = document.getElementById("cv-debug-locale-value");
+    debugLocaleSourceValue = document.getElementById("cv-debug-locale-source-value");
+    debugNavigatorLanguageValue = document.getElementById("cv-debug-browser-language-value");
+    btnDebugDarkAuto = document.getElementById("btn-debug-dark-auto");
+    btnDebugDarkLight = document.getElementById("btn-debug-dark-light");
+    btnDebugDarkDark = document.getElementById("btn-debug-dark-dark");
+    btnDebugReset = document.getElementById("btn-debug-reset");
+    btnDebugLocaleAuto = document.getElementById("btn-debug-locale-auto");
+    btnDebugLocaleFr = document.getElementById("btn-debug-locale-fr");
+    btnDebugLocaleEn = document.getElementById("btn-debug-locale-en");
+
+    if (debugToggle) {
+      debugToggle.addEventListener("click", () => {
+        const nextState = debugPanel?.hidden !== false;
+        writePreference(STORAGE_KEYS.debug, nextState ? "true" : "false");
+        syncDebugUi();
+      });
+    }
+
+    if (btnDebugLocaleAuto) {
+      btnDebugLocaleAuto.addEventListener("click", () => {
+        clearPreference(STORAGE_KEYS.locale);
+        applyLocale(getNavigatorLocale(), { persist: false });
+      });
+    }
+    if (btnDebugLocaleFr) {
+      btnDebugLocaleFr.addEventListener("click", () => applyLocale("fr"));
+    }
+    if (btnDebugLocaleEn) {
+      btnDebugLocaleEn.addEventListener("click", () => applyLocale("en"));
+    }
+
+    if (btnDebugDarkAuto) {
+      btnDebugDarkAuto.addEventListener("click", () => {
+        clearPreference(STORAGE_KEYS.darkOverride);
+        syncUi();
+        requestAnimationFrame(layoutCv);
+      });
+    }
+    if (btnDebugDarkLight) {
+      btnDebugDarkLight.addEventListener("click", () => {
+        writePreference(STORAGE_KEYS.darkOverride, "light");
+        syncUi();
+        requestAnimationFrame(layoutCv);
+      });
+    }
+    if (btnDebugDarkDark) {
+      btnDebugDarkDark.addEventListener("click", () => {
+        writePreference(STORAGE_KEYS.darkOverride, "dark");
+        syncUi();
+        requestAnimationFrame(layoutCv);
+      });
+    }
+
+    if (btnDebugReset) {
+      btnDebugReset.addEventListener("click", () => {
+        [
+          STORAGE_KEYS.theme,
+          STORAGE_KEYS.darkOverride,
+          STORAGE_KEYS.locale,
+          STORAGE_KEYS.mode,
+          STORAGE_KEYS.page,
+          STORAGE_KEYS.debug,
+          STORAGE_KEYS.controlsCollapsed,
+        ].forEach(clearPreference);
+
+        body.dataset.mode = "premium";
+        body.dataset.page = "1";
+        body.dataset.theme = contrastPreferenceQuery.matches ? "access" : "blue";
+        body.classList.remove("is-controls-open", "is-controls-collapsed");
+        closeDemarche();
+        applyLocale(getNavigatorLocale(), { persist: false, announceChange: false });
+        syncUi();
+        window.scrollTo({ top: 0, behavior: "auto" });
+        requestAnimationFrame(layoutCv);
+        requestAnimationFrame(syncScrollTopButton);
+        announce(t("debug_reset_done") || "Debug local réinitialisé");
+      });
+    }
+  };
+
+  const syncControlsPanel = () => {
+    const collapsed = body.dataset.layout !== "mobile" && readPreference(STORAGE_KEYS.controlsCollapsed, "false") === "true";
+    body.classList.toggle("is-controls-collapsed", collapsed);
+    document.documentElement.style.setProperty("--controls-offset", collapsed ? "64px" : "170px");
+    if (btnControlsToggle) {
+      btnControlsToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+      btnControlsToggle.setAttribute("aria-label", collapsed ? "Deplier le panneau de controles" : "Replier le panneau de controles");
+      btnControlsToggle.title = collapsed ? "Deplier le panneau" : "Replier le panneau";
+    }
+  };
+
+  const syncDebugUi = () => {
+    if (!debugToggle || !debugPanel) {
+      return;
+    }
+
+    const available = isLocalEnvironment() && body.dataset.layout !== "mobile";
+    const enabled = available && isLocalDebugEnabled();
+    const labels = getDebugStrings();
+
+    debugToggle.hidden = !available;
+    debugPanel.hidden = !enabled;
+    debugToggle.setAttribute("aria-expanded", enabled ? "true" : "false");
+    debugToggle.textContent = enabled ? `${labels.title} · on` : labels.title;
+    body.dataset.debug = enabled ? "true" : "false";
+
+    if (!available) {
+      return;
+    }
+
+    const setText = (id, value) => {
+      const node = document.getElementById(id);
+      if (node) {
+        node.textContent = value;
+      }
+    };
+
+    if (debugTitle) debugTitle.textContent = labels.title;
+    setText("cv-debug-layout-label", labels.layout);
+    setText("cv-debug-mode-label", labels.mode);
+    setText("cv-debug-theme-label", labels.theme);
+    setText("cv-debug-theme-source-label", labels.themeSource);
+    setText("cv-debug-dark-label", labels.darkMode);
+    setText("cv-debug-dark-source-label", labels.darkSource);
+    setText("cv-debug-dark-reason-label", labels.darkReason);
+    setText("cv-debug-browser-dark-label", labels.browserDark);
+    setText("cv-debug-locale-label", labels.locale);
+    setText("cv-debug-locale-source-label", labels.localeSource);
+    setText("cv-debug-browser-language-label", labels.browserLanguage);
+    setText("cv-debug-dark-actions-label", labels.darkMode);
+    setText("cv-debug-locale-actions-label", labels.locale);
+
+    if (debugLayoutValue) debugLayoutValue.textContent = body.dataset.layout || "desktop";
+    if (debugModeValue) debugModeValue.textContent = body.dataset.mode || "premium";
+    if (debugThemeValue) debugThemeValue.textContent = body.dataset.theme || "blue";
+    if (debugThemeSourceValue) debugThemeSourceValue.textContent = getThemeSourceLabel();
+    if (debugDarkValue) debugDarkValue.textContent = body.dataset.autoDark === "true" ? labels.active : labels.inactive;
+    if (debugDarkSourceValue) debugDarkSourceValue.textContent = getDarkSourceLabel();
+    if (debugDarkReasonValue) debugDarkReasonValue.textContent = getDarkReasonLabel();
+    if (debugBrowserDarkValue) debugBrowserDarkValue.textContent = colorSchemeDarkQuery.matches ? labels.dark : labels.light;
+    if (debugLocaleValue) debugLocaleValue.textContent = currentLocale;
+    if (debugLocaleSourceValue) debugLocaleSourceValue.textContent = getLocaleSourceLabel();
+    if (debugNavigatorLanguageValue) debugNavigatorLanguageValue.textContent = navigator.language || "fr-FR";
+
+    const darkOverride = getDarkOverride();
+    if (btnDebugDarkAuto) {
+      btnDebugDarkAuto.textContent = labels.auto;
+      btnDebugDarkAuto.classList.toggle("is-active", darkOverride === "auto");
+    }
+    if (btnDebugDarkLight) {
+      btnDebugDarkLight.textContent = labels.light;
+      btnDebugDarkLight.classList.toggle("is-active", darkOverride === "light" || (darkOverride === "invert" && !getDarkPreferenceActive()));
+    }
+    if (btnDebugDarkDark) {
+      btnDebugDarkDark.textContent = labels.dark;
+      btnDebugDarkDark.classList.toggle("is-active", darkOverride === "dark" || (darkOverride === "invert" && getDarkPreferenceActive()));
+    }
+    if (btnDebugReset) {
+      btnDebugReset.textContent = labels.resetDebug;
+    }
+
+    if (btnDebugLocaleAuto) {
+      btnDebugLocaleAuto.textContent = labels.auto;
+      btnDebugLocaleAuto.classList.toggle("is-active", !hasStoredPreference(STORAGE_KEYS.locale));
+    }
+    if (btnDebugLocaleFr) {
+      btnDebugLocaleFr.textContent = "FR";
+      btnDebugLocaleFr.classList.toggle("is-active", currentLocale === "fr" && hasStoredPreference(STORAGE_KEYS.locale));
+    }
+    if (btnDebugLocaleEn) {
+      btnDebugLocaleEn.textContent = "EN";
+      btnDebugLocaleEn.classList.toggle("is-active", currentLocale === "en" && hasStoredPreference(STORAGE_KEYS.locale));
+    }
+  };
+
+  const syncAutoDark = () => {
+    if (printLockActive) {
+      body.dataset.autoDark = "false";
+      body.dataset.darkPreference = "light";
+      document.documentElement.style.colorScheme = "light";
+      return;
+    }
+    const autoDarkEnabled =
+      body.dataset.mode === "premium" &&
+      body.dataset.theme !== "access" &&
+      !contrastPreferenceQuery.matches &&
+      getDarkPreferenceActive();
+
+    body.dataset.autoDark = autoDarkEnabled ? "true" : "false";
+    body.dataset.darkPreference = getDarkPreferenceActive() ? "dark" : "light";
+    document.documentElement.style.colorScheme = autoDarkEnabled ? "dark" : "light";
   };
 
   const setGridHeight = (page) => {
@@ -3052,6 +4267,7 @@ body[data-mode="ats"] .kpi-box strong {
     if (body.dataset.layout !== "mobile") {
       body.classList.remove("is-controls-open");
     }
+    syncControlsPanel();
     if (btnMobileMenu) {
       btnMobileMenu.setAttribute("aria-expanded", body.classList.contains("is-controls-open") ? "true" : "false");
     }
@@ -3073,9 +4289,13 @@ body[data-mode="ats"] .kpi-box strong {
     const mode = body.dataset.mode;
     const page = body.dataset.page;
     const theme = body.dataset.theme;
+    const localePayload = getLocalePayload();
+    const labels = localePayload.ui || {};
 
     if (btnModePremium && btnModeAts) {
       const premiumActive = mode === "premium";
+      btnModePremium.textContent = labels.mode_premium || btnModePremium.textContent;
+      btnModeAts.textContent = labels.mode_ats || btnModeAts.textContent;
       btnModePremium.classList.toggle("is-active", premiumActive);
       btnModeAts.classList.toggle("is-active", !premiumActive);
       btnModePremium.setAttribute("aria-pressed", premiumActive ? "true" : "false");
@@ -3084,6 +4304,8 @@ body[data-mode="ats"] .kpi-box strong {
 
     if (btnPage1 && btnPage2) {
       const page1Active = page === "1";
+      btnPage1.textContent = labels.page_1 || btnPage1.textContent;
+      btnPage2.textContent = labels.page_2 || btnPage2.textContent;
       btnPage1.classList.toggle("is-active", page1Active);
       btnPage2.classList.toggle("is-active", !page1Active);
       btnPage1.setAttribute("aria-pressed", page1Active ? "true" : "false");
@@ -3107,8 +4329,28 @@ body[data-mode="ats"] .kpi-box strong {
       const buttonDisabled = printDisabled || pdfDownloadInProgress;
       btnPrint.disabled = buttonDisabled;
       btnPrint.setAttribute("aria-disabled", buttonDisabled ? "true" : "false");
-      btnPrint.title = printDisabled ? "Le PDF est indisponible en mode haut contraste." : "";
-      btnPrint.textContent = printDisabled ? "Impression indisponible" : defaultPrintLabel;
+      btnPrint.title = printDisabled ? (labels.print_unavailable || "") : "";
+      btnPrint.textContent = printDisabled ? (labels.print_unavailable || "") : (labels.print_button || "");
+    }
+
+    if (btnAppearanceCycle) {
+      const appearanceDisabled = theme === "access" || mode !== "premium";
+      const inverted = isAppearanceInverted();
+      btnAppearanceCycle.disabled = appearanceDisabled;
+      btnAppearanceCycle.setAttribute("aria-disabled", appearanceDisabled ? "true" : "false");
+      btnAppearanceCycle.title = appearanceDisabled ? (labels.appearance_scope || "") : "";
+      btnAppearanceCycle.setAttribute("aria-pressed", inverted && !appearanceDisabled ? "true" : "false");
+      btnAppearanceCycle.classList.toggle("is-active", inverted && !appearanceDisabled);
+      btnAppearanceCycle.setAttribute("aria-label", getAppearanceLabel(inverted));
+      const appearanceLabelNode = btnAppearanceCycle.querySelector(".appearance-toggle__label");
+      if (appearanceLabelNode) {
+        appearanceLabelNode.textContent = labels.appearance_toggle || "Affichage inverse";
+      }
+      if (appearanceStateLabel) {
+        appearanceStateLabel.textContent = inverted && !appearanceDisabled
+          ? (labels.appearance_state_on || "Inversé")
+          : (labels.appearance_state_off || "Normal");
+      }
     }
 
     if (btnDownloadPdf) {
@@ -3117,23 +4359,30 @@ body[data-mode="ats"] .kpi-box strong {
       btnDownloadPdf.classList.toggle("is-busy", pdfDownloadInProgress);
       btnDownloadPdf.disabled = downloadDisabled;
       btnDownloadPdf.setAttribute("aria-disabled", downloadDisabled ? "true" : "false");
-      btnDownloadPdf.title = theme === "access" ? "Le PDF est indisponible en mode haut contraste." : "";
+      btnDownloadPdf.title = theme === "access" ? (labels.download_unavailable || "") : "";
       btnDownloadPdf.textContent = pdfDownloadInProgress
-        ? "Generation PDF..."
-        : (theme === "access" ? "PDF indisponible" : defaultDownloadLabel);
+        ? (labels.download_busy || "")
+        : (theme === "access" ? (labels.download_unavailable || "") : (labels.download_button || ""));
     }
 
     if (pdfFeedback && theme === "access" && !pdfDownloadInProgress) {
       setPdfFeedback("");
     }
+
+    syncAutoDark();
+    syncDebugUi();
   };
 
-  const setTheme = (theme) => {
+  const setTheme = (theme, { persist = true, announceChange = true } = {}) => {
     const normalizedTheme = THEMES.has(theme) ? theme : "blue";
     body.dataset.theme = normalizedTheme;
-    writePreference(STORAGE_KEYS.theme, normalizedTheme);
+    if (persist) {
+      writePreference(STORAGE_KEYS.theme, normalizedTheme);
+    }
     syncUi();
-    announce(`Theme active : ${normalizedTheme === "access" ? "accessibilite" : normalizedTheme}.`);
+    if (announceChange) {
+      announce((t("theme_active") || "").replace("{label}", getThemeLabel(normalizedTheme)));
+    }
     requestAnimationFrame(layoutCv);
   };
 
@@ -3142,7 +4391,7 @@ body[data-mode="ats"] .kpi-box strong {
     body.dataset.mode = normalizedMode;
     writePreference(STORAGE_KEYS.mode, normalizedMode);
     syncUi();
-    announce(`Mode actif : ${normalizedMode === "ats" ? "ATS" : "premium"}.`);
+    announce((t("mode_active") || "").replace("{label}", normalizedMode === "ats" ? (t("mode_ats") || "ATS") : (t("mode_premium") || "Premium")));
     requestAnimationFrame(layoutCv);
   };
 
@@ -3158,7 +4407,7 @@ body[data-mode="ats"] .kpi-box strong {
         mainContent.focus({ preventScroll: true });
       }
     }
-    announce(`Navigation vers la page ${normalizedPage}.`);
+    announce((t("page_active") || "").replace("{page}", normalizedPage));
     syncUi();
   };
 
@@ -3177,8 +4426,8 @@ body[data-mode="ats"] .kpi-box strong {
 
     pdfDownloadInProgress = true;
     syncUi();
-    announce("Generation du PDF...");
-    setPdfFeedback("Generation du PDF en cours...", "progress");
+    announce(t("pdf_progress") || "");
+    setPdfFeedback(t("pdf_progress") || "", "progress");
 
     try {
       const link = document.createElement("a");
@@ -3187,7 +4436,8 @@ body[data-mode="ats"] .kpi-box strong {
       if (isLocalManagedPdf()) {
         const params = new URLSearchParams({
           mode: body.dataset.mode === "ats" ? "ats" : "premium",
-          theme: body.dataset.theme || "blue"
+          theme: body.dataset.theme || "blue",
+          lang: currentLocale
         });
         const response = await fetch(`/__download_pdf?${params.toString()}`, {
           cache: "no-store"
@@ -3213,11 +4463,11 @@ body[data-mode="ats"] .kpi-box strong {
       link.click();
       link.remove();
       cleanup();
-      announce("PDF telecharge.");
-      setPdfFeedback("PDF pret et telecharge.", "success");
+      announce(t("pdf_downloaded") || "");
+      setPdfFeedback(t("pdf_success") || "", "success");
     } catch (_) {
-      announce("Echec de generation du PDF.");
-      setPdfFeedback("Echec de generation du PDF.", "error");
+      announce(t("pdf_failed") || "");
+      setPdfFeedback(t("pdf_error") || "", "error");
     } finally {
       pdfDownloadInProgress = false;
       syncUi();
@@ -3234,20 +4484,45 @@ body[data-mode="ats"] .kpi-box strong {
     btnScrollTop.classList.toggle("is-visible", shouldShow);
   };
 
+  const syncDemarcheMobileActions = () => {
+    if (!demarcheMobileActions) return;
+    const mobileOpen = body.dataset.layout === "mobile" && demarcheOverlay?.hidden === false;
+    demarcheMobileActions.hidden = !mobileOpen;
+    if (btnDemarcheTop) {
+      const scrolled = (demarchePanel?.scrollTop || 0) > 140;
+      const shouldShow = mobileOpen && scrolled;
+      btnDemarcheTop.hidden = !shouldShow;
+      btnDemarcheTop.classList.toggle("is-visible", shouldShow);
+    }
+  };
+
+  const scrollDemarcheTop = () => {
+    if (!demarchePanel) return;
+    demarchePanel.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const toggleMobileControls = () => {
     if (body.dataset.layout !== "mobile") return;
     body.classList.toggle("is-controls-open");
     if (btnMobileMenu) {
       const expanded = body.classList.contains("is-controls-open");
       btnMobileMenu.setAttribute("aria-expanded", expanded ? "true" : "false");
-      btnMobileMenu.setAttribute("aria-label", expanded ? "Fermer le menu des themes" : "Ouvrir le menu des themes");
+      btnMobileMenu.setAttribute("aria-label", expanded ? (t("mobile_menu_close") || "") : (t("mobile_menu_open") || ""));
     }
+  };
+
+  const toggleDesktopControls = () => {
+    if (body.dataset.layout === "mobile") return;
+    const nextCollapsed = readPreference(STORAGE_KEYS.controlsCollapsed, "false") !== "true";
+    writePreference(STORAGE_KEYS.controlsCollapsed, nextCollapsed ? "true" : "false");
+    syncControlsPanel();
   };
 
   if (btnModePremium) btnModePremium.addEventListener("click", () => setMode("premium"));
   if (btnModeAts) btnModeAts.addEventListener("click", () => setMode("ats"));
   if (btnPage1) btnPage1.addEventListener("click", () => setPage("1", { focusContent: true, scrollBehavior: "smooth" }));
   if (btnPage2) btnPage2.addEventListener("click", () => setPage("2", { focusContent: true, scrollBehavior: "smooth" }));
+  if (btnAppearanceCycle) btnAppearanceCycle.addEventListener("click", cycleDarkOverride);
   if (btnPrint) btnPrint.addEventListener("click", printCv);
   if (btnDownloadPdf) btnDownloadPdf.addEventListener("click", downloadManagedPdf);
   if (btnDemarche) {
@@ -3262,21 +4537,22 @@ body[data-mode="ats"] .kpi-box strong {
     });
   }
   if (btnCloseDemarche) btnCloseDemarche.addEventListener("click", closeDemarche);
+  if (btnDemarcheTop) btnDemarcheTop.addEventListener("click", scrollDemarcheTop);
   if (btnShareDemarche) {
     btnShareDemarche.addEventListener("click", async () => {
       const shareUrl = getDemarcheShareUrl();
       try {
         if (navigator.clipboard?.writeText) {
           await navigator.clipboard.writeText(shareUrl);
-          setShareDemarcheState("Le lien de la démarche est copié", "success");
-          announce("Lien de la demarche copie.");
+          setShareDemarcheState(t("demarche_share_copied") || "", "success");
+          announce(t("demarche_share_copied") || "");
         } else {
-          window.prompt("Copier le lien de la démarche :", shareUrl);
-          setShareDemarcheState("Le lien de la démarche est copié", "progress");
+          window.prompt(t("demarche_share_prompt") || "", shareUrl);
+          setShareDemarcheState(t("demarche_share_copied") || "", "progress");
         }
       } catch (_) {
-        window.prompt("Copier le lien de la démarche :", shareUrl);
-        setShareDemarcheState("Le lien de la démarche est copié", "progress");
+        window.prompt(t("demarche_share_prompt") || "", shareUrl);
+        setShareDemarcheState(t("demarche_share_copied") || "", "progress");
       }
     });
   }
@@ -3287,7 +4563,11 @@ body[data-mode="ats"] .kpi-box strong {
       }
     });
   }
+  if (demarchePanel) {
+    demarchePanel.addEventListener("scroll", syncDemarcheMobileActions, { passive: true });
+  }
   if (btnMobileMenu) btnMobileMenu.addEventListener("click", toggleMobileControls);
+  if (btnControlsToggle) btnControlsToggle.addEventListener("click", toggleDesktopControls);
   if (btnScrollTop) btnScrollTop.addEventListener("click", scrollToTop);
   if (btnJumpPage1) btnJumpPage1.addEventListener("click", () => setPage("1", { focusContent: true, scrollBehavior: "smooth" }));
   if (btnJumpPage2) btnJumpPage2.addEventListener("click", () => setPage("2", { focusContent: true, scrollBehavior: "smooth" }));
@@ -3303,21 +4583,32 @@ body[data-mode="ats"] .kpi-box strong {
     });
   });
 
-  const handleSystemContrastPreference = () => {
-    if (!hasStoredPreference(STORAGE_KEYS.theme) && contrastPreferenceQuery.matches) {
-      body.dataset.theme = "access";
+  const handleSystemThemePreferences = () => {
+    if (hasStoredPreference(STORAGE_KEYS.theme)) {
       syncUi();
       requestAnimationFrame(layoutCv);
+      return;
     }
+
+    if (contrastPreferenceQuery.matches) {
+      body.dataset.theme = "access";
+    } else if (body.dataset.theme === "access") {
+      body.dataset.theme = "blue";
+    }
+
+    syncUi();
+    requestAnimationFrame(layoutCv);
   };
 
   window.addEventListener("afterprint", () => {
+    printLockActive = false;
     if (themeBeforePrint) {
       body.dataset.theme = themeBeforePrint;
       themeBeforePrint = null;
-      syncUi();
     }
+    body.dataset.autoDark = autoDarkBeforePrint;
     body.classList.remove("is-printing");
+    syncUi();
     requestAnimationFrame(layoutCv);
   });
 
@@ -3342,22 +4633,29 @@ body[data-mode="ats"] .kpi-box strong {
   });
 
   window.addEventListener("beforeprint", () => {
+    printLockActive = true;
+    autoDarkBeforePrint = body.dataset.autoDark || "false";
+    body.dataset.autoDark = "false";
     if (body.dataset.theme === "access") {
       themeBeforePrint = "access";
       body.dataset.theme = "blue";
-      syncUi();
     }
+    syncUi();
     body.classList.add("is-printing");
   });
 
   window.addEventListener("resize", () => {
     requestAnimationFrame(layoutCv);
     requestAnimationFrame(syncScrollTopButton);
+    requestAnimationFrame(syncDemarcheMobileActions);
   });
 
   window.addEventListener("scroll", syncScrollTopButton, { passive: true });
   if (contrastPreferenceQuery.addEventListener) {
-    contrastPreferenceQuery.addEventListener("change", handleSystemContrastPreference);
+    contrastPreferenceQuery.addEventListener("change", handleSystemThemePreferences);
+  }
+  if (colorSchemeDarkQuery.addEventListener) {
+    colorSchemeDarkQuery.addEventListener("change", handleSystemThemePreferences);
   }
 
   let currentVersion = null;
@@ -3382,8 +4680,13 @@ body[data-mode="ats"] .kpi-box strong {
   };
 
   const defaultTheme = contrastPreferenceQuery.matches ? "access" : (body.dataset.theme || "blue");
+  createLocalDebugUi();
   cleanupTemplateArtifacts();
-  setTheme(readPreference(STORAGE_KEYS.theme, defaultTheme));
+  applyLocale(readPreference(STORAGE_KEYS.locale, getNavigatorLocale()), { announceChange: false });
+  setTheme(readPreference(STORAGE_KEYS.theme, defaultTheme), {
+    persist: hasStoredPreference(STORAGE_KEYS.theme),
+    announceChange: false
+  });
   setMode(readPreference(STORAGE_KEYS.mode, body.dataset.mode || "premium"));
   setPage(readPreference(STORAGE_KEYS.page, body.dataset.page || "1"), { focusContent: false, scrollBehavior: "auto" });
   if (urlRequestsDemarche()) {
@@ -3391,6 +4694,7 @@ body[data-mode="ats"] .kpi-box strong {
   }
   requestAnimationFrame(layoutCv);
   requestAnimationFrame(syncScrollTopButton);
+  requestAnimationFrame(syncDemarcheMobileActions);
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => requestAnimationFrame(layoutCv));
   }
