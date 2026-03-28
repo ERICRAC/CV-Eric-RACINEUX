@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Eric Racineux - CV web</title>
+  <desc id="desc">Carte de partage SEO du CV web d'Eric Racineux, RSI et architecte SI senior.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2f8ff"/>
+      <stop offset="55%" stop-color="#dcecff"/>
+      <stop offset="100%" stop-color="#0f4c81"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#edf5ff" stop-opacity="0.92"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="96" r="180" fill="#8cc8ff" fill-opacity="0.22"/>
+  <circle cx="180" cy="540" r="220" fill="#5ea3da" fill-opacity="0.18"/>
+  <rect x="84" y="74" width="1032" height="482" rx="34" fill="url(#card)" stroke="#9ec8eb" stroke-width="2"/>
+  <text x="132" y="170" fill="#1f6fb2" font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="4">CV WEB PUBLIC</text>
+  <text x="132" y="258" fill="#16324f" font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="72" font-weight="700">Eric Racineux</text>
+  <text x="132" y="326" fill="#0f4c81" font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="34" font-weight="600">RSI | Architecte &amp; Référent SI senior</text>
+  <text x="132" y="396" fill="#33506d" font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="28">Infrastructure, systèmes industriels, cybersécurité, gouvernance SI</text>
+  <g transform="translate(132 454)">
+    <rect width="284" height="56" rx="28" fill="#1f6fb2"/>
+    <text x="142" y="36" text-anchor="middle" fill="#ffffff" font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">CV-Eric-RACINEUX</text>
+  </g>
+</svg>
