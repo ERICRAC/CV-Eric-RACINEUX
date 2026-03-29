@@ -21,7 +21,7 @@
   <meta property="og:image:type" content="image/svg+xml">
   <meta property="og:image:alt" content="Eric Racineux - RSI | Architecte &amp; Référent SI senior">
   <meta property="profile:username" content="Eric Racineux">
-  <meta property="article:modified_time" content="2026-03-28T01:45:21+01:00">
+  <meta property="article:modified_time" content="2026-03-29T23:16:39+02:00">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="CV - Eric Racineux">
   <meta name="twitter:description" content="CV web d&#x27;Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.">
@@ -63,8 +63,8 @@
   --control-width: 170px;
   --controls-offset: 170px;
   --dark-bg-start: rgba(45, 91, 132, 0.34);
-  --dark-bg-mid: rgba(10, 17, 24, 0.96);
-  --dark-bg-end: #081018;
+  --dark-bg-mid: rgba(15, 24, 35, 0.94);
+  --dark-bg-end: #0c1723;
   --dark-surface-top: color-mix(in srgb, #142231 84%, var(--blue-4));
   --dark-surface-bottom: color-mix(in srgb, #0f1924 92%, var(--blue-4));
   --dark-control-bg: #122130;
@@ -151,28 +151,28 @@ body[data-theme="access"] {
 }
 
 body[data-auto-dark="true"][data-mode="premium"] {
-  --bg: #0a1118;
-  --paper: #0f1924;
-  --ink: #edf4fb;
-  --muted: #9fb1c4;
-  --line: #284055;
+  --bg: #0d1620;
+  --paper: #132131;
+  --ink: #f6fbff;
+  --muted: #bccbda;
+  --line: #33506a;
   --blue-1: #8cc8ff;
   --blue-2: #58a8f3;
   --blue-3: #a7d8ff;
-  --blue-4: #163147;
+  --blue-4: #193754;
   --accent: #7cbcff;
   --shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
   --dark-bg-start: rgba(45, 91, 132, 0.34);
-  --dark-bg-mid: rgba(10, 17, 24, 0.96);
-  --dark-bg-end: #081018;
-  --dark-surface-top: color-mix(in srgb, #142231 84%, var(--blue-4));
-  --dark-surface-bottom: color-mix(in srgb, #0f1924 92%, var(--blue-4));
-  --dark-control-bg: #122130;
+  --dark-bg-mid: rgba(15, 24, 35, 0.94);
+  --dark-bg-end: #0c1723;
+  --dark-surface-top: color-mix(in srgb, #18293c 84%, var(--blue-4));
+  --dark-surface-bottom: color-mix(in srgb, #132131 92%, var(--blue-4));
+  --dark-control-bg: #173047;
   --dark-control-active-text: #081018;
-  --dark-bar: #21384c;
-  --dark-chip-top: color-mix(in srgb, #193149 84%, var(--blue-4));
-  --dark-chip-bottom: color-mix(in srgb, #132536 94%, var(--blue-4));
-  --dark-chip-border: color-mix(in srgb, var(--blue-3) 38%, #0f1924);
+  --dark-bar: #29465e;
+  --dark-chip-top: color-mix(in srgb, #213d59 84%, var(--blue-4));
+  --dark-chip-bottom: color-mix(in srgb, #173047 94%, var(--blue-4));
+  --dark-chip-border: color-mix(in srgb, var(--blue-3) 42%, #132131);
   --dark-link: var(--blue-1);
 }
 
@@ -330,6 +330,10 @@ body[data-auto-dark="true"][data-mode="premium"] .cv-controls {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
 }
 
+.mobile-toolbar {
+  display: contents;
+}
+
 .mobile-menu-btn {
   display: none;
   align-items: center;
@@ -346,7 +350,99 @@ body[data-auto-dark="true"][data-mode="premium"] .cv-controls {
   cursor: pointer;
 }
 
+.mobile-appearance-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  border: 1px solid color-mix(in srgb, var(--blue-3) 35%, white);
+  background: color-mix(in srgb, var(--blue-1) 86%, #102033);
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 10px 20px color-mix(in srgb, transparent 84%, var(--blue-1));
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+  }
+
+.mobile-appearance-btn__icon {
+  position: relative;
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(0.5px);
+}
+
+.mobile-appearance-btn__sun,
+.mobile-appearance-btn__moon {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.mobile-appearance-btn__sun svg,
+.mobile-appearance-btn__moon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-appearance-btn__sun circle,
+.mobile-appearance-btn__sun path,
+.mobile-appearance-btn__moon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mobile-appearance-btn__moon path {
+  fill: currentColor;
+  stroke: none;
+}
+
+.mobile-appearance-btn__sun {
+  opacity: 0.92;
+  transform: scale(1);
+}
+
+.mobile-appearance-btn__moon {
+  opacity: 0;
+  transform: scale(0.82);
+}
+
+.mobile-appearance-btn.is-active .mobile-appearance-btn__sun {
+  opacity: 0;
+  transform: scale(0.82);
+}
+
+.mobile-appearance-btn.is-active .mobile-appearance-btn__moon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mobile-appearance-btn:hover,
+.mobile-appearance-btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px color-mix(in srgb, transparent 82%, var(--blue-1));
+}
+
+.mobile-appearance-btn.is-active {
+  background: color-mix(in srgb, var(--blue-1) 88%, #102033);
+  color: #ffffff;
+  border-color: color-mix(in srgb, var(--blue-1) 44%, white);
+}
+
 body[data-auto-dark="true"][data-mode="premium"] .mobile-menu-btn,
+body[data-auto-dark="true"][data-mode="premium"] .mobile-appearance-btn,
 body[data-auto-dark="true"][data-mode="premium"] .controls-toggle-btn,
 body[data-auto-dark="true"][data-mode="premium"] .scroll-top-btn,
 body[data-auto-dark="true"][data-mode="premium"] .page-jump-btn,
@@ -362,9 +458,21 @@ body[data-auto-dark="true"][data-mode="premium"] .control-btn.is-active {
   color: var(--dark-control-active-text);
 }
 
+body[data-auto-dark="true"][data-mode="premium"] .mobile-appearance-btn {
+  background: #ffffff;
+  color: #17324d;
+  border-color: color-mix(in srgb, var(--blue-3) 36%, white);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] .mobile-appearance-btn.is-active {
+  background: color-mix(in srgb, #0e1b28 84%, var(--dark-control-bg));
+  color: #f6fbff;
+  border-color: color-mix(in srgb, var(--blue-3) 32%, #0f1924);
+}
+
 .scroll-top-btn {
   position: fixed;
-  right: 14px;
+  right: var(--scroll-top-right, 14px);
   bottom: 16px;
   z-index: 25;
   display: none;
@@ -434,6 +542,28 @@ body[data-auto-dark="true"][data-mode="premium"] .control-btn.is-active {
   opacity: 0.58;
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.scroll-top-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.scroll-top-btn__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-top-btn__icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .page-jump-btn[data-direction="down"]::after {
@@ -1040,23 +1170,44 @@ body[data-auto-dark="true"][data-mode="premium"] .control-feedback {
 }
 
 .demarche-mobile-btn {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 1px solid color-mix(in srgb, white 40%, var(--blue-2));
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.94);
   color: var(--blue-1);
-  box-shadow: 0 12px 24px color-mix(in srgb, transparent 82%, var(--blue-1));
-  font-size: 22px;
-  font-weight: 700;
+  box-shadow: 0 10px 20px color-mix(in srgb, transparent 80%, var(--blue-1));
+  backdrop-filter: blur(8px);
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);
   transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.demarche-mobile-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.demarche-mobile-btn__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.demarche-mobile-btn__icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .demarche-mobile-btn.is-visible {
@@ -1112,8 +1263,8 @@ body[data-auto-dark="true"][data-mode="premium"] .control-feedback {
   border-radius: 18px;
   border: 1px solid color-mix(in srgb, white 40%, var(--blue-2));
   background:
-    radial-gradient(circle at 22% 18%, color-mix(in srgb, white 34%, transparent) 0%, transparent 24%),
-    linear-gradient(180deg, color-mix(in srgb, white 94%, var(--blue-4)) 0%, color-mix(in srgb, white 86%, var(--blue-4)) 100%);
+    radial-gradient(circle at 22% 18%, color-mix(in srgb, white 18%, transparent) 0%, transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, var(--blue-4) 82%, white) 0%, color-mix(in srgb, var(--blue-4) 94%, var(--blue-2)) 100%);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 78%, transparent),
     0 10px 20px color-mix(in srgb, transparent 86%, var(--blue-1));
@@ -1147,7 +1298,7 @@ body[data-auto-dark="true"][data-mode="premium"] .control-feedback {
   padding: 11px 12px;
   border-radius: 16px;
   border: 1px solid color-mix(in srgb, white 42%, var(--blue-2));
-  background: linear-gradient(180deg, color-mix(in srgb, white 95%, var(--blue-4)) 0%, color-mix(in srgb, white 88%, var(--blue-4)) 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--blue-4) 62%, white) 0%, color-mix(in srgb, var(--blue-4) 78%, var(--bg)) 100%);
   box-shadow: inset 0 1px 0 color-mix(in srgb, white 78%, transparent);
 }
 
@@ -1171,6 +1322,7 @@ body[data-auto-dark="true"][data-mode="premium"] .control-feedback {
   justify-content: flex-end;
   gap: 10px;
   flex-wrap: wrap;
+  margin-right: 16px;
 }
 
 .demarche-panel__eyebrow {
@@ -1339,6 +1491,15 @@ body[data-auto-dark="true"][data-mode="premium"] .demarche-flow__node {
     linear-gradient(180deg, color-mix(in srgb, var(--dark-control-bg) 78%, var(--dark-surface-top)) 0%, color-mix(in srgb, var(--dark-surface-bottom) 90%, var(--dark-control-bg)) 100%);
 }
 
+#btn-close-demarche {
+  border-color: color-mix(in srgb, white 40%, var(--blue-2));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, color-mix(in srgb, white 86%, var(--blue-4)) 100%);
+  color: #17324d;
+  box-shadow:
+    0 10px 20px color-mix(in srgb, transparent 84%, var(--blue-1)),
+    inset 0 1px 0 color-mix(in srgb, white 84%, transparent);
+}
+
 body[data-auto-dark="true"][data-mode="premium"] .demarche-portrait {
   border-color: color-mix(in srgb, var(--blue-3) 26%, #0f1924);
   background:
@@ -1371,6 +1532,15 @@ body[data-auto-dark="true"][data-mode="premium"] .demarche-mobile-btn {
   border-color: color-mix(in srgb, var(--blue-3) 28%, #0f1924);
   color: var(--blue-1);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+}
+
+body[data-auto-dark="true"][data-mode="premium"] #btn-close-demarche {
+  background: linear-gradient(180deg, rgba(248, 252, 255, 0.98) 0%, color-mix(in srgb, white 88%, var(--blue-4)) 100%);
+  border-color: color-mix(in srgb, var(--blue-3) 38%, white);
+  color: #13314e;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
 .demarche-flow__header h3 {
@@ -1571,11 +1741,11 @@ body[data-auto-dark="true"][data-mode="premium"] .kpi-box {
 
 body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] {
   --bg: #0b1711;
-  --paper: #101d16;
-  --muted: #a6c7b2;
-  --blue-1: #9de7ba;
-  --blue-2: #68c58f;
-  --blue-3: #b4efc7;
+  --paper: #122118;
+  --muted: #c2dcca;
+  --blue-1: #c3f7d4;
+  --blue-2: #90ddb0;
+  --blue-3: #d4f9df;
   --blue-4: #113225;
   --accent: #7cd39b;
   --dark-bg-start: rgba(41, 114, 80, 0.34);
@@ -1594,11 +1764,11 @@ body[data-auto-dark="true"][data-mode="premium"][data-theme="green"] {
 
 body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] {
   --bg: #140f19;
-  --paper: #1a1320;
-  --muted: #c6b7d5;
-  --blue-1: #e0b9ff;
-  --blue-2: #c58cff;
-  --blue-3: #edd1ff;
+  --paper: #1d1525;
+  --muted: #ddd1ea;
+  --blue-1: #efd8ff;
+  --blue-2: #dcb7ff;
+  --blue-3: #f6e8ff;
   --blue-4: #2b1739;
   --accent: #d4a1ff;
   --dark-bg-start: rgba(115, 76, 164, 0.34);
@@ -1617,11 +1787,11 @@ body[data-auto-dark="true"][data-mode="premium"][data-theme="violet"] {
 
 body[data-auto-dark="true"][data-mode="premium"][data-theme="sunset"] {
   --bg: #1a1209;
-  --paper: #21170d;
-  --muted: #d2bca3;
-  --blue-1: #ffd18a;
-  --blue-2: #ffb24f;
-  --blue-3: #ffe0b4;
+  --paper: #251910;
+  --muted: #ead7bf;
+  --blue-1: #ffe3b3;
+  --blue-2: #ffc878;
+  --blue-3: #fff0d1;
   --blue-4: #3c2410;
   --accent: #ffc46d;
   --dark-bg-start: rgba(194, 110, 35, 0.32);
@@ -2641,7 +2811,22 @@ body[data-layout="mobile"] .cv-controls {
   backdrop-filter: blur(10px);
 }
 
+body[data-layout="mobile"] {
+  overflow-x: hidden;
+}
+
 body[data-layout="mobile"] .mobile-menu-btn {
+  display: inline-flex;
+}
+
+body[data-layout="mobile"] .mobile-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+body[data-layout="mobile"] .mobile-appearance-btn {
   display: inline-flex;
 }
 
@@ -2651,6 +2836,11 @@ body[data-layout="mobile"] .controls-toggle-btn {
 
 body[data-layout="mobile"] .scroll-top-btn {
   display: inline-flex;
+  right: var(--scroll-top-right, calc(env(safe-area-inset-right, 0px) + 22px));
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+  width: 46px;
+  height: 46px;
+  font-size: 22px;
 }
 
 body[data-layout="mobile"] .page-jump {
@@ -2700,14 +2890,17 @@ body[data-layout="mobile"] .cv-controls .control-btn {
 }
 
 body[data-layout="mobile"] .demarche-overlay {
-  padding: 12px;
+  padding: calc(env(safe-area-inset-top, 0px) + 18px) 12px 12px;
+  overflow-x: clip;
 }
 
 body[data-layout="mobile"] .demarche-panel {
   width: 100%;
-  max-height: calc(100vh - 20px);
+  max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 26px);
   padding: 16px 16px 18px;
   border-radius: 22px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body[data-layout="mobile"] .demarche-mobile-actions {
@@ -2721,6 +2914,7 @@ body[data-layout="mobile"] .demarche-panel__header {
 
 body[data-layout="mobile"] .demarche-panel__intro {
   display: block;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 36px);
 }
 
 body[data-layout="mobile"] .demarche-portrait {
@@ -2729,11 +2923,22 @@ body[data-layout="mobile"] .demarche-portrait {
   align-self: center;
 }
 
+body[data-layout="mobile"] .demarche-about {
+  margin-top: 14px;
+}
+
 body[data-layout="mobile"] .demarche-panel__actions {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
+  order: -1;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  width: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
   gap: 8px;
+  padding-top: 2px;
+  margin-right: 0;
 }
 
 body[data-layout="mobile"] .demarche-panel__header h2 {
@@ -2752,7 +2957,21 @@ body[data-layout="mobile"] .demarche-panel__body {
 }
 
 body[data-layout="mobile"] .demarche-panel .control-btn--compact {
-  width: 100%;
+  width: auto;
+  min-width: 108px;
+  padding-inline: 0.95rem;
+}
+
+body[data-layout="mobile"] #btn-share-demarche {
+  display: none;
+}
+
+body[data-layout="mobile"] #btn-close-demarche {
+  border-color: color-mix(in srgb, white 40%, var(--blue-2));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, color-mix(in srgb, white 86%, var(--blue-4)) 100%);
+  box-shadow:
+    0 10px 20px color-mix(in srgb, transparent 84%, var(--blue-1)),
+    inset 0 1px 0 color-mix(in srgb, white 84%, transparent);
 }
 
 body[data-layout="mobile"] .demarche-feedback {
@@ -2793,6 +3012,7 @@ body[data-layout="mobile"] .cv-shell {
   max-width: 100%;
   padding: 10px;
   gap: 12px;
+  overflow-x: clip;
 }
 
 body[data-layout="mobile"] .cv-page {
@@ -2801,7 +3021,8 @@ body[data-layout="mobile"] .cv-page {
   min-height: 0;
   padding: 12px;
   border-radius: 16px;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 body[data-layout="mobile"] .cv-page::before,
@@ -3602,7 +3823,7 @@ body[data-mode="ats"] .kpi-box strong {
 
 </style>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJDViI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMWY2ZmIyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzVlYTNkYSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgeD0iOCIgeT0iNCIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjU2IiByeD0iOCIgZmlsbD0idXJsKCNnKSIvPgogIDxyZWN0IHg9IjE0IiB5PSIxMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjZmZmZmZmIi8+CiAgPHJlY3QgeD0iMTQiIHk9IjI0IiB3aWR0aD0iMzAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiNlOGY0ZmYiLz4KICA8cmVjdCB4PSIxNCIgeT0iMzIiIHdpZHRoPSIzNCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iI2U4ZjRmZiIvPgogIDxyZWN0IHg9IjE0IiB5PSI0MCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSIjZThmNGZmIi8+CiAgPHRleHQgeD0iMzIiIHk9IjU1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiPkNWPC90ZXh0Pgo8L3N2Zz4K">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "inLanguage": "fr-FR", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "name": "CV - Eric Racineux", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "dateModified": "2026-03-28T01:45:21+01:00", "primaryImageOfPage": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg", "mainEntity": {"@type": "Person", "name": "Eric Racineux", "jobTitle": "RSI | Architecte & Référent SI senior", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "image": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-photo-web.jpg", "email": "mailto:eric.racineux@outlook.fr", "telephone": "+33 6 34 98 67 21", "address": {"@type": "PostalAddress", "addressLocality": "Nantes / Vertou"}, "sameAs": ["https://ericrac.github.io/CV-Eric-RACINEUX/", "https://www.linkedin.com/in/eric-racineux-75475a7/"], "knowsAbout": ["Eric Racineux", "CV Eric Racineux", "RSI", "Architecte SI", "Infrastructure", "Systemes industriels", "Cybersecurite", "Nantes"], "knowsLanguage": ["fr-FR", "en-GB"], "workLocation": {"@type": "Place", "name": "Nantes / Vertou"}, "contactPoint": {"@type": "ContactPoint", "contactType": "professional", "email": "mailto:eric.racineux@outlook.fr", "telephone": "+33 6 34 98 67 21", "availableLanguage": ["French", "English"]}}, "publisher": {"@type": "Organization", "name": "CV Eric Racineux", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/"}, "associatedMedia": [{"@type": "ImageObject", "contentUrl": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg"}, {"@type": "ImageObject", "contentUrl": "https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg"}], "_meta": {"og_locale": "fr_FR", "escaped_canonical": "https://ericrac.github.io/CV-Eric-RACINEUX/"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "inLanguage": "fr-FR", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "name": "CV - Eric Racineux", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "dateModified": "2026-03-29T23:16:39+02:00", "primaryImageOfPage": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg", "mainEntity": {"@type": "Person", "name": "Eric Racineux", "jobTitle": "RSI | Architecte & Référent SI senior", "description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "image": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-photo-web.jpg", "email": "mailto:eric.racineux@outlook.fr", "telephone": "+33 6 34 98 67 21", "address": {"@type": "PostalAddress", "addressLocality": "Nantes / Vertou"}, "sameAs": ["https://ericrac.github.io/CV-Eric-RACINEUX/", "https://www.linkedin.com/in/eric-racineux-75475a7/"], "knowsAbout": ["Eric Racineux", "CV Eric Racineux", "RSI", "Architecte SI", "Infrastructure", "Systemes industriels", "Cybersecurite", "Nantes"], "knowsLanguage": ["fr-FR", "en-GB"], "workLocation": {"@type": "Place", "name": "Nantes / Vertou"}, "contactPoint": {"@type": "ContactPoint", "contactType": "professional", "email": "mailto:eric.racineux@outlook.fr", "telephone": "+33 6 34 98 67 21", "availableLanguage": ["French", "English"]}}, "publisher": {"@type": "Organization", "name": "CV Eric Racineux", "url": "https://ericrac.github.io/CV-Eric-RACINEUX/"}, "associatedMedia": [{"@type": "ImageObject", "contentUrl": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg"}, {"@type": "ImageObject", "contentUrl": "https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg"}], "_meta": {"og_locale": "fr_FR", "escaped_canonical": "https://ericrac.github.io/CV-Eric-RACINEUX/"}}</script>
 </head>
 <body data-mode="premium" data-page="1" data-theme="blue" data-layout="desktop">
   <a class="skip-link no-print" href="#main-content" id="skip-link">Aller au contenu principal</a>
@@ -3612,10 +3833,27 @@ body[data-mode="ats"] .kpi-box strong {
     <button type="button" id="btn-controls-toggle" class="controls-toggle-btn" aria-expanded="true" aria-controls="cv-controls-groups" aria-label="Replier ou deplier le panneau de controles">
       <span class="controls-toggle-icon" aria-hidden="true"></span>
     </button>
-    <button type="button" id="btn-mobile-menu" class="mobile-menu-btn" aria-expanded="false" aria-controls="cv-theme-group" aria-label="Ouvrir le menu des thèmes">
-      <span class="mobile-menu-icon" aria-hidden="true"></span>
-      <span id="mobile-menu-label">Thèmes</span>
-    </button>
+    <div class="mobile-toolbar">
+      <button type="button" id="btn-mobile-menu" class="mobile-menu-btn" aria-expanded="false" aria-controls="cv-theme-group" aria-label="Ouvrir le menu des thèmes">
+        <span class="mobile-menu-icon" aria-hidden="true"></span>
+        <span id="mobile-menu-label">Thèmes</span>
+      </button>
+      <button type="button" id="btn-mobile-appearance" class="mobile-appearance-btn" aria-pressed="false" aria-label="Affichage inverse">
+        <span class="mobile-appearance-btn__icon" aria-hidden="true">
+          <span class="mobile-appearance-btn__sun">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 2.5V5.1M12 18.9V21.5M21.5 12H18.9M5.1 12H2.5M18.72 5.28L16.88 7.12M7.12 16.88L5.28 18.72M18.72 18.72L16.88 16.88M7.12 7.12L5.28 5.28"></path>
+            </svg>
+          </span>
+          <span class="mobile-appearance-btn__moon">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+              <path d="M15.4 2.9C13 3.4 10.9 4.8 9.6 6.8C7.1 10.5 8.1 15.6 11.8 18.1C14.4 19.9 17.8 20 20.4 18.7C19.8 19.8 18.9 20.8 17.8 21.5C13.8 24 8.5 22.8 6 18.8C3.5 14.8 4.7 9.5 8.7 7C10.7 5.8 13 5.3 15.4 5.6C14.8 4.7 14.8 3.7 15.4 2.9Z"></path>
+            </svg>
+          </span>
+        </span>
+      </button>
+    </div>
     <div id="cv-controls-groups" class="cv-controls-groups">
     <div class="controls-group controls-group--themes" id="cv-theme-group" role="group" aria-label="Themes de couleur">
       <div class="controls-title" id="controls-title-themes">Thèmes</div>
@@ -3660,7 +3898,7 @@ body[data-mode="ats"] .kpi-box strong {
       <div id="page-2-zones"><div class="page-grid page-grid--footer"><section class="section stack main-col"><h2 class="section-title">Parcours complémentaire</h2><article class="entry" id="exp-04"><div class="entry-head"><div><h3>Pilote essais et intégration systèmes</h3><div class="meta">ENGIE Ineo Rail / UTS</div></div><div class="pill">2021</div></div><p class="impact"><strong>Impact principal:</strong> structuration et pilotage des essais d’intégration sur un projet ferroviaire complexe.</p><ul class="clean"><li>Définition de la stratégie de validation et des plans d’essais.</li><li>Structuration des méthodes et outils d’intégration.</li><li>Coordination technique entre ingénierie, production et maîtrise d’ouvrage.</li><li>Sécurisation des jalons de validation et de mise en service.</li></ul></article><article class="entry" id="exp-05"><div class="entry-head"><div><h3>Responsable Bureau d’Études</h3><div class="meta">VMI</div></div><div class="pill">2012-2016</div></div><p class="impact"><strong>Impact principal:</strong> transformation et structuration du bureau d’études d’un constructeur de machines industrielles.</p><ul class="clean"><li>Management d’une équipe de 13 à 20 ingénieurs et techniciens.</li><li>Refonte des architectures machines et harmonisation des méthodes.</li><li>Pilotage d’un projet MES pour un site industriel du groupe LVMH.</li><li>Structuration des interfaces entre bureau d’études, production et SI.</li><li>Participation aux choix d’architectures techniques machines et automatisme.</li></ul></article><article class="entry" id="exp-06"><div class="entry-head"><div><h3>Manager Informatique Industrielle</h3><div class="meta">GOSS International</div></div><div class="pill">2000-2011</div></div><p class="impact"><strong>Impact principal:</strong> création et structuration du pôle informatique industrielle.</p><ul class="clean"><li>Architecture et administration de l’infrastructure technique industrielle.</li><li>Mise en place d’un laboratoire de validation et de test.</li><li>Déploiement de solutions de supervision et télé-monitoring.</li><li>Intégration des systèmes informatiques embarqués sur lignes industrielles.</li><li>Coordination technique internationale avec équipes engineering.</li></ul></article><article class="entry" id="exp-09"><div class="entry-head"><div><h3>Développeur logiciel scientifique</h3><div class="meta">ARTUS / Meggitt</div></div><div class="pill">1992-1994</div></div><p class="impact"><strong>Impact principal:</strong> - Développement d’outils logiciels scientifiques pour bancs d’essais.</p><ul class="clean"><li>Traitement de données techniques et visualisation.</li><li>Support aux équipes d’ingénierie.</li></ul></article><article class="entry" id="exp-10"><div class="entry-head"><div><h3>Technicien maintenance industrielle</h3><div class="meta">NOPLY - WEST MI</div></div><div class="pill">1990-1992</div></div><p class="impact"><strong>Impact principal:</strong> - Maintenance d’équipements industriels.</p><ul class="clean"><li>Diagnostic et résolution de pannes techniques.</li><li>Intervention sur systèmes électromécaniques.</li></ul></article></section><aside class="section stack side-col"><section class="section stack side-section zone-bloc-complementaire" id="bloc-complementaire"><h2 class="section-title">Informations complémentaires</h2><div class="panel mini-list"><div><strong>Langues:</strong> Français, Anglais, Espagnol.</div><div><strong>Secteurs:</strong> industrie, systèmes critiques, infrastructure IT.</div><div>Profil LinkedIn disponible pour détails du parcours et publications.</div></div></section><section class="section stack side-section zone-explorations-techniques" id="explorations-techniques"><h2 class="section-title">Explorations techniques</h2><div class="panel mini-list"><div>Expérimentation d’outils d’ingénierie assistée par IA.</div><div>Conception d’un agent IA local destiné à assister l’architecture logicielle et l’automatisation de tâches techniques.</div><div>Exploration d’architectures logicielles intégrant IA, automatisation et outils de développement.</div><div>Veille active sur l’évolution des architectures cloud, logiciel et IA.</div></div></section></aside><section class="section stack main-section zone-kpi full-width-zone" id="realisations-resultats"><h2 class="section-title">Réalisations / Résultats</h2><div class="kpi"><div class="kpi-box"><strong>30 ans+</strong><span class="muted">d’expérience dans l’IT et les systèmes industriels.</span></div><div class="kpi-box"><strong>Architectures</strong><span class="muted">SI, infrastructure et systèmes industriels.</span></div><div class="kpi-box"><strong>Env. critiques</strong><span class="muted">industrie, offshore, ferroviaire, plateformes techniques.</span></div><div class="kpi-box"><strong>Pilotage transverse</strong><span class="muted">interface direction, métiers et équipes techniques.</span></div></div></section></div></div>
       <footer class="cv-footer">
         <p class="cv-note" id="page-2-note">Ce site a été créé de manière expérimentale avec Codex 5.4, il utilise une chaîne CI/CD GitHub : <a href="https://ericrac.github.io/CV-Eric-RACINEUX/" class="note-link" target="_blank" rel="noreferrer noopener">https://ericrac.github.io/CV-Eric-RACINEUX/</a></p>
-        <p class="cv-update" id="page-2-update">Dernière mise à jour : 28/03/2026 (dernier commit)</p>
+        <p class="cv-update" id="page-2-update">Dernière mise à jour : 29/03/2026 (dernier commit)</p>
       </footer>
     </section>
   </main>
@@ -3717,13 +3955,21 @@ body[data-mode="ats"] .kpi-box strong {
     </section>
     <div class="demarche-mobile-actions" id="demarche-mobile-actions" hidden>
       <button type="button" id="btn-demarche-top" class="demarche-mobile-btn" aria-label="Revenir en haut de page">
-        <span aria-hidden="true">↑</span>
+        <span class="demarche-mobile-btn__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M6 14.5L12 8.5L18 14.5" />
+          </svg>
+        </span>
       </button>
     </div>
   </div>
 
   <button type="button" id="btn-scroll-top" class="scroll-top-btn no-print" aria-label="Revenir en haut de page">
-    <span aria-hidden="true">↑</span>
+    <span class="scroll-top-btn__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+        <path d="M6 14.5L12 8.5L18 14.5" />
+      </svg>
+    </span>
   </button>
   <div class="page-jump no-print" aria-label="Navigation rapide entre pages">
     <button type="button" id="btn-jump-page-toggle" class="page-jump-btn" aria-label="Aller à la page 2">
@@ -3735,7 +3981,7 @@ body[data-mode="ats"] .kpi-box strong {
     </button>
   </div>
 
-  <script id="cv-i18n-catalog" type="application/json">{"fr": {"locale": "fr", "html_lang": "fr", "title": "CV - Eric Racineux", "meta_description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "meta_robots": "index,follow", "meta_keywords": "Eric Racineux, CV Eric Racineux, RSI, Architecte SI, Infrastructure, Systemes industriels, Cybersecurite, Nantes", "canonical_url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "site_name": "CV Eric Racineux", "og_locale": "fr_FR", "meta_author": "Eric Racineux", "meta_modified_iso": "2026-03-28T01:45:21+01:00", "social_image_url": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg", "social_image_fallback_url": "https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg", "social_image_alt": "Eric Racineux - RSI | Architecte & Référent SI senior", "profile_photo_url": "profile-photo-web.jpg", "profile_photo_webp_url": "profile-photo-web.webp", "profile_photo_alt": "Eric Racineux - RSI | Architecte & Référent SI senior", "profile_photo_caption": "Portrait public web-only, hors CV imprimable.", "about_title": "À propos", "about_body": "Architecte et référent SI senior, avec un angle d’exécution orienté infrastructures, environnements industriels, cybersécurité et conduite de transformation.", "seo_json_ld": "{\"@context\": \"https://schema.org\", \"@type\": \"ProfilePage\", \"inLanguage\": \"fr-FR\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"name\": \"CV - Eric Racineux\", \"description\": \"CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.\", \"dateModified\": \"2026-03-28T01:45:21+01:00\", \"primaryImageOfPage\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\", \"mainEntity\": {\"@type\": \"Person\", \"name\": \"Eric Racineux\", \"jobTitle\": \"RSI | Architecte & Référent SI senior\", \"description\": \"CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"image\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-photo-web.jpg\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"address\": {\"@type\": \"PostalAddress\", \"addressLocality\": \"Nantes / Vertou\"}, \"sameAs\": [\"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"https://www.linkedin.com/in/eric-racineux-75475a7/\"], \"knowsAbout\": [\"Eric Racineux\", \"CV Eric Racineux\", \"RSI\", \"Architecte SI\", \"Infrastructure\", \"Systemes industriels\", \"Cybersecurite\", \"Nantes\"], \"knowsLanguage\": [\"fr-FR\", \"en-GB\"], \"workLocation\": {\"@type\": \"Place\", \"name\": \"Nantes / Vertou\"}, \"contactPoint\": {\"@type\": \"ContactPoint\", \"contactType\": \"professional\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"availableLanguage\": [\"French\", \"English\"]}}, \"publisher\": {\"@type\": \"Organization\", \"name\": \"CV Eric Racineux\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}, \"associatedMedia\": [{\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\"}, {\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg\"}], \"_meta\": {\"og_locale\": \"fr_FR\", \"escaped_canonical\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}}", "hero_html": "<section class=\"hero\"><div><h1 id=\"page-1-title\">Eric Racineux<\/h1><div class=\"role\">RSI | Architecte &amp; Référent SI senior<\/div><p class=\"summary\"><strong>Architecte SI | Infrastructure | Systèmes industriels<\/strong><br>RSI et architecte SI senior avec plus de 30 ans d’expérience dans des environnements industriels et techniques exigeants. Spécialisé dans l’architecture des systèmes, l’infrastructure, la cybersécurité et la structuration de systèmes d’information robustes et maintenables.<\/p><div class=\"tags\"><span class=\"tag\">Cybersécurité industrielle<\/span><span class=\"tag\">Infrastructures critiques<\/span><span class=\"tag\">Vision transverse SI / métier<\/span><span class=\"tag\">Agilité<\/span><\/div><\/div><aside class=\"hero-right\"><div class=\"contact-card\"><div class=\"contact-grid\"><div><span class=\"label\">Telephone<\/span><span class=\"value\">+33 6 34 98 67 21<\/span><\/div><div><span class=\"label\">Email<\/span><span class=\"value\">eric.racineux@outlook.fr<\/span><\/div><div><span class=\"label\">Ville<\/span><span class=\"value\">Nantes / Vertou<\/span><\/div><div><span class=\"label\">LinkedIn<\/span><span class=\"value\"><a href=\"https://www.linkedin.com/in/eric-racineux-75475a7/\" class=\"contact-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric-racineux-75475a7<\/a><\/span><\/div><div><span class=\"label\">Mobilité<\/span><span class=\"value\">Nantes / Hybride<\/span><\/div><div><span class=\"label\">Disponibilité<\/span><span class=\"value\">3 mois<\/span><\/div><\/div><\/div><section class=\"panel positioning\"><h2 class=\"section-title\">Positionnement<\/h2><div class=\"mini-list\"><div>Architecte SI orienté cohérence globale des systèmes, structuration des architectures techniques et pilotage des transformations IT dans des environnements industriels et techniques exigeants.<\/div><\/div><\/section><\/aside><\/section>", "page_1_zones": "<div class=\"page-grid\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Expériences clés<\/h2><article class=\"entry\" id=\"exp-01\"><div class=\"entry-head\"><div><h3>RSI<\/h3><div class=\"meta\">Fondation OPEN-C - Nantes<\/div><\/div><div class=\"pill\">2024-Present<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> pilotage et sécurisation du système d’information d’une fondation opérant des plateformes critiques en environnement maritime et industriel.<\/p><ul class=\"clean\"><li>Définition et évolution de l’architecture SI multi-sites (réseaux, cloud, systèmes industriels, cybersécurité).<\/li><li>Structuration de la gouvernance SSI, segmentation réseau et supervision des flux.<\/li><li>Mise en place d’une stratégie de résilience et de continuité de service (PRA/PCA).<\/li><li>Pilotage des projets d’infrastructure et interface directe avec direction, partenaires industriels et équipes techniques.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-02\"><div class=\"entry-head\"><div><h3>Product Owner Infrastructure &amp; Cloud<\/h3><div class=\"meta\">DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2023<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> conception et mise en place de l’infrastructure cible d’un programme de transformation vers un cloud privé.<\/p><ul class=\"clean\"><li>Définition de l’architecture infrastructure et réseau du cloud privé.<\/li><li>Structuration de la trajectoire de migration et décommissionnement des socles existants.<\/li><li>Mise en place des services IaaS et coordination des équipes techniques en mode Agile.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-03\"><div class=\"entry-head\"><div><h3>Service Owner<\/h3><div class=\"meta\">Catalogue de services IT - DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2022-2023<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> structuration et industrialisation du catalogue de services d’infrastructure.<\/p><ul class=\"clean\"><li>Pilotage d’un portefeuille de plus de 1000 services d’infrastructure.<\/li><li>Mise en place des processus MCO, cycle de vie et gouvernance des services.<\/li><li>Remise à niveau de la CMDB et industrialisation du catalogue via ServiceNow, en intégrant les enjeux de performance, sécurité et exploitation.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-07\"><div class=\"entry-head\"><div><h3>Chef de projet informatique &amp; Architecte logiciel<\/h3><div class=\"meta\">Spécinov<\/div><\/div><div class=\"pill\">1994-2000<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> conception et déploiement de solutions logicielles industrielles distribuées.<\/p><ul class=\"clean\"><li>Conception et développement d’applications client/serveur en C++.<\/li><li>Architecture de systèmes logiciels distribués et pilotage de projets au forfait.<\/li><li>Déploiement de solutions sur plus de 120 sites industriels et relation client.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-08\"><div class=\"entry-head\"><div><h3>Projets et expériences complémentaires<\/h3><\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> portefeuille autour de l’innovation, de l’architecture SI et de l’IA.<\/p><ul class=\"clean\"><li>PMO AGILE industriel et structuration de projets complexes (ENGIE).<\/li><li>Prototype IoT de maintenance prédictive (Bubbleio).<\/li><li>Activité indépendante autour de l’architecture SI et de l’IA (DeepRacine).<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-competences\" id=\"competences\"><h2 class=\"section-title\">Compétences<\/h2><div class=\"panel skill-group\"><div class=\"skill-row\"><header><strong>Architecture SI<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 95%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Infrastructure &amp; reseaux<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 92%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Cybersecurite<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 85%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Transformation IT<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 82%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Systemes industriels<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 68%\"><\/span><\/div><\/div><\/div><\/section><section class=\"section stack side-section zone-technos-environnements\" id=\"technos-environnements\"><h2 class=\"section-title\">Technos / Environnements<\/h2><div class=\"panel mini-list\"><div>Microsoft 365, Entra ID, Intune, Defender.<\/div><div>Fortinet, SD-WAN, VPN, firewalling.<\/div><div>Windows Server, Linux, VMware.<\/div><div>Cloud privé / hybride.<\/div><div>Automatisation et scripting.<\/div><div>ITIL, PRA/PCA, gouvernance SI.<\/div><\/div><\/section><section class=\"section stack side-section zone-parcours\" id=\"parcours\"><h2 class=\"section-title\">Parcours<\/h2><div class=\"panel timeline\"><div class=\"t-item\"><strong>ESAIP<\/strong><div class=\"muted\">Ingénieur maître Informatique Réseau et Télécommunication.<\/div><\/div><div class=\"t-item\"><strong>IMIE<\/strong><div class=\"muted\">Concepteur Développeur Informatique.<\/div><\/div><div class=\"t-item\"><strong>Formations complémentaires<\/strong><div class=\"muted\">en cybersécurité industrielle et gouvernance des systèmes.<\/div><\/div><\/div><\/section><\/aside><\/div>", "page_2_header_html": "<header class=\"cv-header\"><h1 id=\"page-2-title\">Eric Racineux<\/h1><\/header>", "page_2_zones": "<div class=\"page-grid page-grid--footer\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Parcours complémentaire<\/h2><article class=\"entry\" id=\"exp-04\"><div class=\"entry-head\"><div><h3>Pilote essais et intégration systèmes<\/h3><div class=\"meta\">ENGIE Ineo Rail / UTS<\/div><\/div><div class=\"pill\">2021<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> structuration et pilotage des essais d’intégration sur un projet ferroviaire complexe.<\/p><ul class=\"clean\"><li>Définition de la stratégie de validation et des plans d’essais.<\/li><li>Structuration des méthodes et outils d’intégration.<\/li><li>Coordination technique entre ingénierie, production et maîtrise d’ouvrage.<\/li><li>Sécurisation des jalons de validation et de mise en service.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-05\"><div class=\"entry-head\"><div><h3>Responsable Bureau d’Études<\/h3><div class=\"meta\">VMI<\/div><\/div><div class=\"pill\">2012-2016<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> transformation et structuration du bureau d’études d’un constructeur de machines industrielles.<\/p><ul class=\"clean\"><li>Management d’une équipe de 13 à 20 ingénieurs et techniciens.<\/li><li>Refonte des architectures machines et harmonisation des méthodes.<\/li><li>Pilotage d’un projet MES pour un site industriel du groupe LVMH.<\/li><li>Structuration des interfaces entre bureau d’études, production et SI.<\/li><li>Participation aux choix d’architectures techniques machines et automatisme.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-06\"><div class=\"entry-head\"><div><h3>Manager Informatique Industrielle<\/h3><div class=\"meta\">GOSS International<\/div><\/div><div class=\"pill\">2000-2011<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> création et structuration du pôle informatique industrielle.<\/p><ul class=\"clean\"><li>Architecture et administration de l’infrastructure technique industrielle.<\/li><li>Mise en place d’un laboratoire de validation et de test.<\/li><li>Déploiement de solutions de supervision et télé-monitoring.<\/li><li>Intégration des systèmes informatiques embarqués sur lignes industrielles.<\/li><li>Coordination technique internationale avec équipes engineering.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-09\"><div class=\"entry-head\"><div><h3>Développeur logiciel scientifique<\/h3><div class=\"meta\">ARTUS / Meggitt<\/div><\/div><div class=\"pill\">1992-1994<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Développement d’outils logiciels scientifiques pour bancs d’essais.<\/p><ul class=\"clean\"><li>Traitement de données techniques et visualisation.<\/li><li>Support aux équipes d’ingénierie.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-10\"><div class=\"entry-head\"><div><h3>Technicien maintenance industrielle<\/h3><div class=\"meta\">NOPLY - WEST MI<\/div><\/div><div class=\"pill\">1990-1992<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Maintenance d’équipements industriels.<\/p><ul class=\"clean\"><li>Diagnostic et résolution de pannes techniques.<\/li><li>Intervention sur systèmes électromécaniques.<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-bloc-complementaire\" id=\"bloc-complementaire\"><h2 class=\"section-title\">Informations complémentaires<\/h2><div class=\"panel mini-list\"><div><strong>Langues:<\/strong> Français, Anglais, Espagnol.<\/div><div><strong>Secteurs:<\/strong> industrie, systèmes critiques, infrastructure IT.<\/div><div>Profil LinkedIn disponible pour détails du parcours et publications.<\/div><\/div><\/section><section class=\"section stack side-section zone-explorations-techniques\" id=\"explorations-techniques\"><h2 class=\"section-title\">Explorations techniques<\/h2><div class=\"panel mini-list\"><div>Expérimentation d’outils d’ingénierie assistée par IA.<\/div><div>Conception d’un agent IA local destiné à assister l’architecture logicielle et l’automatisation de tâches techniques.<\/div><div>Exploration d’architectures logicielles intégrant IA, automatisation et outils de développement.<\/div><div>Veille active sur l’évolution des architectures cloud, logiciel et IA.<\/div><\/div><\/section><\/aside><section class=\"section stack main-section zone-kpi full-width-zone\" id=\"realisations-resultats\"><h2 class=\"section-title\">Réalisations / Résultats<\/h2><div class=\"kpi\"><div class=\"kpi-box\"><strong>30 ans+<\/strong><span class=\"muted\">d’expérience dans l’IT et les systèmes industriels.<\/span><\/div><div class=\"kpi-box\"><strong>Architectures<\/strong><span class=\"muted\">SI, infrastructure et systèmes industriels.<\/span><\/div><div class=\"kpi-box\"><strong>Env. critiques<\/strong><span class=\"muted\">industrie, offshore, ferroviaire, plateformes techniques.<\/span><\/div><div class=\"kpi-box\"><strong>Pilotage transverse<\/strong><span class=\"muted\">interface direction, métiers et équipes techniques.<\/span><\/div><\/div><\/section><\/div>", "page_2_note": "Ce site a été créé de manière expérimentale avec Codex 5.4, il utilise une chaîne CI/CD GitHub : <a href=\"https://ericrac.github.io/CV-Eric-RACINEUX/\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">https://ericrac.github.io/CV-Eric-RACINEUX/<\/a>", "page_2_legal": "<span class=\"site-legal__policy\">Préférences d'affichage conservées localement dans le navigateur, sans cookie de suivi ni collecte serveur. Démarche de minimisation RGPD / CNIL.<\/span><span class=\"site-legal__author\">Auteur : <a href=\"mailto:eric.racineux@outlook.fr\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric.racineux@outlook.fr<\/a><\/span>", "last_update_label": "Dernière mise à jour : 28/03/2026 (dernier commit)", "demarche_short_html": "<p>Ce CV web ne sert pas seulement à rendre un parcours consultable en ligne. Il sert aussi de démonstrateur de méthode.<\/p><p>Sur ce projet, l&#x27;humain n&#x27;a pas écrit directement le code : la production est pilotée via l&#x27;agent IA, sur la base du besoin, des arbitrages et de la connaissance métier.<\/p><p>Le projet combine dans un meme objet:<\/p><ul><li>une présentation web lisible et thémable<\/li><li>une impression PDF<\/li><li>une source de contenu structurée<\/li><li>une chaîne de qualification et de publication automatisée<\/li><li>une expérimentation encadrée des agents IA<\/li><\/ul><p>L&#x27;objectif n&#x27;est pas de &quot;faire un site avec de l&#x27;IA&quot;, mais de travailler en conditions réelles sur ce qu&#x27;elle accélère, ce qu&#x27;elle fragilise et ce qui doit rester sous contrôle humain.<\/p><p>La logique de travail est volontairement courte et itérative : je fais, je vérifie, j&#x27;améliore, puis je recommence. Les évolutions se stabilisent par petits incréments, avec commit local régulier puis push CI/CD quand l&#x27;état est défendable.<\/p><p>Ce projet montre en pratique:<\/p><ul><li>la capacité à cadrer un besoin hybride web / document / PDF<\/li><li>la capacité à industrialiser un petit périmètre sans le rendre opaque<\/li><li>la capacité à qualifier, publier et faire évoluer un support visible<\/li><li>la volonté d&#x27;utiliser l&#x27;IA comme levier de travail, avec recul sur ses limites et ses risques<\/li><li>une façon très concrète de faire évoluer un projet en mode agile, avec une IA force de proposition mais un cadrage, une vérification et un arbitrage qui restent humains<\/li><\/ul>", "demarche_flow_html": "<div class=\"demarche-flow__node\"><strong>Source<\/strong><span>JSON CV<br>Template HTML<br>CSS / JS<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Agent IA<\/strong><span>Cadrage<br>Refactor<br>Tests<br>Documentation<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Qualification<\/strong><span>Smoke<br>Playwright<br>axe-core<br>PDF<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Publication<\/strong><span>GitHub Actions<br>Pages<br>PDF publics<\/span><\/div>", "ui": {"skip_link": "Aller au contenu principal", "controls_aria": "Controles CV", "mobile_menu": "Thèmes", "mobile_menu_open": "Ouvrir le menu des thèmes", "mobile_menu_close": "Fermer le menu des thèmes", "languages_title": "Langue", "language_active": "Langue active : {label}.", "lang_fr": "Français", "lang_en": "English", "themes_title": "Thèmes", "theme_blue": "Bleu", "theme_green": "Vert", "theme_violet": "Rose / Violet", "theme_sunset": "Orange / Jaune", "theme_black": "Noir", "theme_access": "Accessibilité", "theme_active": "Thème actif : {label}.", "mode_title": "Mode", "mode_premium": "Premium", "mode_ats": "ATS", "mode_active": "Mode actif : {label}.", "pages_title": "Pages", "page_1": "Page 1", "page_2": "Page 2", "page_active": "Navigation vers la page {page}.", "actions_title": "Action", "demarche_button": "Démarche", "appearance_toggle": "Affichage inverse", "appearance_toggle_on": "Affichage inverse actif", "appearance_toggle_off": "Affichage système actif", "appearance_state_on": "Inversé", "appearance_state_off": "Normal", "appearance_scope": "Premium uniquement", "appearance_tooltip_system_dark": "L’affichage suit actuellement le mode sombre du système. Ce bouton permet de revenir à un affichage clair.", "appearance_active": "Affichage actif : {label}.", "print_button": "Imprimer via navigateur", "print_unavailable": "Impression indisponible", "download_button": "Télécharger PDF", "download_busy": "Génération PDF...", "download_unavailable": "PDF indisponible", "pdf_progress": "Génération du PDF en cours...", "pdf_success": "PDF pret et telecharge", "pdf_error": "Échec de génération du PDF", "pdf_downloaded": "PDF téléchargé.", "pdf_failed": "Échec de génération du PDF.", "demarche_opened": "Ouverture de la démarche du projet.", "demarche_eyebrow": "Démarche", "demarche_title": "CV web, méthode et laboratoire IA", "demarche_lede": "Un CV hybride qui sert à la fois de support public, de PDF maîtrisé, et de terrain d’expérimentation sur l’usage encadré des agents IA.", "demarche_share": "Partager cette démarche", "demarche_share_copied": "Le lien de la démarche est copié", "demarche_share_prompt": "Copier le lien de la démarche :", "demarche_close": "Fermer", "demarche_flow_eyebrow": "Schéma synthèse", "demarche_flow_title": "Chaîne CI/CD et fonctions de l’agent IA", "profile_photo_caption": "Portrait public web-only, hors CV imprimable.", "about_title": "À propos", "about_body": "Architecte et référent SI senior, avec un angle d’exécution orienté infrastructures, environnements industriels, cybersécurité et conduite de transformation.", "jump_page_1": "Aller à la page 1", "jump_page_2": "Aller à la page 2", "scroll_top": "Revenir en haut de page"}}, "en": {"locale": "en", "html_lang": "en", "title": "Resume - Eric Racineux", "meta_description": "Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.", "meta_robots": "index,follow", "meta_keywords": "Eric Racineux, Eric Racineux resume, IT Director, Enterprise Architect, Infrastructure, Industrial systems, Cybersecurity, Nantes", "canonical_url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "site_name": "Eric Racineux Resume", "og_locale": "en_GB", "meta_author": "Eric Racineux", "meta_modified_iso": "2026-03-28T01:45:21+01:00", "social_image_url": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg", "social_image_fallback_url": "https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg", "social_image_alt": "Eric Racineux - IT Director | Senior Enterprise & IT Architect", "profile_photo_url": "profile-photo-web.jpg", "profile_photo_webp_url": "profile-photo-web.webp", "profile_photo_alt": "Eric Racineux - IT Director | Senior Enterprise & IT Architect", "profile_photo_caption": "Public web-only portrait, excluded from the printable CV.", "about_title": "About", "about_body": "Senior IS architect and lead, with an execution-oriented focus on infrastructure, industrial environments, cybersecurity and transformation delivery.", "seo_json_ld": "{\"@context\": \"https://schema.org\", \"@type\": \"ProfilePage\", \"inLanguage\": \"en-GB\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"name\": \"Resume - Eric Racineux\", \"description\": \"Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.\", \"dateModified\": \"2026-03-28T01:45:21+01:00\", \"primaryImageOfPage\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\", \"mainEntity\": {\"@type\": \"Person\", \"name\": \"Eric Racineux\", \"jobTitle\": \"IT Director | Senior Enterprise & IT Architect\", \"description\": \"Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"image\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-photo-web.jpg\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"address\": {\"@type\": \"PostalAddress\", \"addressLocality\": \"Nantes / Vertou\"}, \"sameAs\": [\"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"https://www.linkedin.com/in/eric-racineux-75475a7/\"], \"knowsAbout\": [\"Eric Racineux\", \"Eric Racineux resume\", \"IT Director\", \"Enterprise Architect\", \"Infrastructure\", \"Industrial systems\", \"Cybersecurity\", \"Nantes\"], \"knowsLanguage\": [\"fr-FR\", \"en-GB\"], \"workLocation\": {\"@type\": \"Place\", \"name\": \"Nantes / Vertou\"}, \"contactPoint\": {\"@type\": \"ContactPoint\", \"contactType\": \"professional\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"availableLanguage\": [\"French\", \"English\"]}}, \"publisher\": {\"@type\": \"Organization\", \"name\": \"Eric Racineux Resume\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}, \"associatedMedia\": [{\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\"}, {\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg\"}], \"_meta\": {\"og_locale\": \"en_GB\", \"escaped_canonical\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}}", "hero_html": "<section class=\"hero\"><div><h1 id=\"page-1-title\">Eric Racineux<\/h1><div class=\"role\">IT Director | Senior Enterprise &amp; IT Architect<\/div><p class=\"summary\"><strong>Enterprise Architecture | Infrastructure | Industrial systems<\/strong><br>Senior IT director and enterprise architect with more than 30 years of experience in demanding industrial and technical environments. Focused on systems architecture, infrastructure, cybersecurity and the structuring of robust, maintainable information systems.<\/p><div class=\"tags\"><span class=\"tag\">Industrial cybersecurity<\/span><span class=\"tag\">Critical infrastructure<\/span><span class=\"tag\">Cross-functional IT / business view<\/span><span class=\"tag\">Agility<\/span><\/div><\/div><aside class=\"hero-right\"><div class=\"contact-card\"><div class=\"contact-grid\"><div><span class=\"label\">Phone<\/span><span class=\"value\">+33 6 34 98 67 21<\/span><\/div><div><span class=\"label\">Email<\/span><span class=\"value\">eric.racineux@outlook.fr<\/span><\/div><div><span class=\"label\">City<\/span><span class=\"value\">Nantes / Vertou<\/span><\/div><div><span class=\"label\">LinkedIn<\/span><span class=\"value\"><a href=\"https://www.linkedin.com/in/eric-racineux-75475a7/\" class=\"contact-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric-racineux-75475a7<\/a><\/span><\/div><div><span class=\"label\">Mobility<\/span><span class=\"value\">Nantes / Hybrid<\/span><\/div><div><span class=\"label\">Availability<\/span><span class=\"value\">3 months<\/span><\/div><\/div><\/div><section class=\"panel positioning\"><h2 class=\"section-title\">Positioning<\/h2><div class=\"mini-list\"><div>Enterprise architect focused on overall system consistency, technical architecture structuring and IT transformation leadership in demanding industrial and technical environments.<\/div><\/div><\/section><\/aside><\/section>", "page_1_zones": "<div class=\"page-grid\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Key experience<\/h2><article class=\"entry\" id=\"exp-01\"><div class=\"entry-head\"><div><h3>IT Director<\/h3><div class=\"meta\">Fondation OPEN-C - Nantes<\/div><\/div><div class=\"pill\">2024-Present<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> steering and securing the information system of a foundation operating critical maritime and industrial platforms.<\/p><ul class=\"clean\"><li>Defined and evolved a multi-site IT architecture covering networks, cloud, industrial systems and cybersecurity.<\/li><li>Structured security governance, network segmentation and flow supervision.<\/li><li>Set up a resilience and service continuity strategy (disaster recovery / business continuity).<\/li><li>Led infrastructure projects and worked directly with management, industrial partners and technical teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-02\"><div class=\"entry-head\"><div><h3>Infrastructure &amp; Cloud Product Owner<\/h3><div class=\"meta\">DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2023<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> designed and delivered the target infrastructure for a private cloud transformation programme.<\/p><ul class=\"clean\"><li>Defined the private cloud infrastructure and network architecture.<\/li><li>Structured the migration roadmap and decommissioning of legacy foundations.<\/li><li>Delivered IaaS services and coordinated technical teams in Agile mode.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-03\"><div class=\"entry-head\"><div><h3>Service Owner<\/h3><div class=\"meta\">IT Services Catalogue - DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2022-2023<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> structured and industrialised the infrastructure services catalogue.<\/p><ul class=\"clean\"><li>Managed a portfolio of more than 1000 infrastructure services.<\/li><li>Implemented run, lifecycle and governance processes for services.<\/li><li>Reworked the CMDB and industrialised the catalogue through ServiceNow while integrating performance, security and operations constraints.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-07\"><div class=\"entry-head\"><div><h3>IT Project Manager &amp; Software Architect<\/h3><div class=\"meta\">Specinov<\/div><\/div><div class=\"pill\">1994-2000<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> designed and deployed distributed industrial software solutions.<\/p><ul class=\"clean\"><li>Designed and developed client/server applications in C++.<\/li><li>Architected distributed software systems and led fixed-price projects.<\/li><li>Deployed solutions across more than 120 industrial sites and handled client relationships.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-08\"><div class=\"entry-head\"><div><h3>Additional projects and experience<\/h3><\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> portfolio covering innovation, enterprise architecture and AI.<\/p><ul class=\"clean\"><li>Industrial Agile PMO and structuring of complex ENGIE projects.<\/li><li>Predictive maintenance IoT prototype (Bubbleio).<\/li><li>Independent activity around enterprise architecture and AI (DeepRacine).<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-competences\" id=\"competences\"><h2 class=\"section-title\">Skills<\/h2><div class=\"panel skill-group\"><div class=\"skill-row\"><header><strong>Enterprise architecture<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 95%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Infrastructure &amp; networks<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 92%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Cybersecurity<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 85%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>IT transformation<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 82%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Industrial systems<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 68%\"><\/span><\/div><\/div><\/div><\/section><section class=\"section stack side-section zone-technos-environnements\" id=\"technos-environnements\"><h2 class=\"section-title\">Technologies / Environments<\/h2><div class=\"panel mini-list\"><div>Microsoft 365, Entra ID, Intune, Defender.<\/div><div>Fortinet, SD-WAN, VPN, firewalling.<\/div><div>Windows Server, Linux, VMware.<\/div><div>Private / hybrid cloud.<\/div><div>Automation and scripting.<\/div><div>ITIL, DR/BCP, IT governance.<\/div><\/div><\/section><section class=\"section stack side-section zone-parcours\" id=\"parcours\"><h2 class=\"section-title\">Education<\/h2><div class=\"panel timeline\"><div class=\"t-item\"><strong>ESAIP<\/strong><div class=\"muted\">Engineering degree in IT networks and telecommunications.<\/div><\/div><div class=\"t-item\"><strong>IMIE<\/strong><div class=\"muted\">Software developer and designer diploma.<\/div><\/div><div class=\"t-item\"><strong>Additional training<\/strong><div class=\"muted\">industrial cybersecurity and systems governance.<\/div><\/div><\/div><\/section><\/aside><\/div>", "page_2_header_html": "<header class=\"cv-header\"><h1 id=\"page-2-title\">Eric Racineux<\/h1><\/header>", "page_2_zones": "<div class=\"page-grid page-grid--footer\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Additional experience<\/h2><article class=\"entry\" id=\"exp-04\"><div class=\"entry-head\"><div><h3>Systems Integration &amp; Test Lead<\/h3><div class=\"meta\">ENGIE Ineo Rail / UTS<\/div><\/div><div class=\"pill\">2021<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> structured and led integration testing on a complex rail project.<\/p><ul class=\"clean\"><li>Defined validation strategy and test plans.<\/li><li>Structured integration methods and tooling.<\/li><li>Coordinated engineering, production and client-side technical stakeholders.<\/li><li>Secured validation milestones and service entry.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-05\"><div class=\"entry-head\"><div><h3>Head of Engineering Office<\/h3><div class=\"meta\">VMI<\/div><\/div><div class=\"pill\">2012-2016<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> transformed and structured the engineering office of an industrial machine manufacturer.<\/p><ul class=\"clean\"><li>Managed a team of 13 to 20 engineers and technicians.<\/li><li>Reworked machine architectures and harmonised engineering methods.<\/li><li>Led a MES project for an LVMH industrial site.<\/li><li>Structured interfaces between engineering office, production and IT.<\/li><li>Contributed to machine architecture and automation design choices.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-06\"><div class=\"entry-head\"><div><h3>Industrial IT Manager<\/h3><div class=\"meta\">GOSS International<\/div><\/div><div class=\"pill\">2000-2011<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> created and structured the industrial IT unit.<\/p><ul class=\"clean\"><li>Designed and administered industrial technical infrastructure.<\/li><li>Set up a validation and test laboratory.<\/li><li>Deployed supervision and remote monitoring solutions.<\/li><li>Integrated embedded IT systems on industrial lines.<\/li><li>Coordinated technical work internationally with engineering teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-09\"><div class=\"entry-head\"><div><h3>Scientific Software Developer<\/h3><div class=\"meta\">ARTUS / Meggitt<\/div><\/div><div class=\"pill\">1992-1994<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Developed scientific software tools for test benches.<\/p><ul class=\"clean\"><li>Processed technical data and visualisation.<\/li><li>Supported engineering teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-10\"><div class=\"entry-head\"><div><h3>Industrial Maintenance Technician<\/h3><div class=\"meta\">NOPLY - WEST MI<\/div><\/div><div class=\"pill\">1990-1992<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Maintained industrial equipment.<\/p><ul class=\"clean\"><li>Diagnosed and resolved technical failures.<\/li><li>Worked on electromechanical systems.<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-bloc-complementaire\" id=\"bloc-complementaire\"><h2 class=\"section-title\">Additional information<\/h2><div class=\"panel mini-list\"><div><strong>Languages:<\/strong> French, English, Spanish.<\/div><div><strong>Sectors:<\/strong> industry, critical systems, IT infrastructure.<\/div><div>LinkedIn profile available for detailed background and publications.<\/div><\/div><\/section><section class=\"section stack side-section zone-explorations-techniques\" id=\"explorations-techniques\"><h2 class=\"section-title\">Technical explorations<\/h2><div class=\"panel mini-list\"><div>Experimenting with AI-assisted engineering tooling.<\/div><div>Designing a local AI agent to support software architecture and task automation.<\/div><div>Exploring software architectures combining AI, automation and development tools.<\/div><div>Active watch on cloud, software and AI architecture evolution.<\/div><\/div><\/section><\/aside><section class=\"section stack main-section zone-kpi full-width-zone\" id=\"realisations-resultats\"><h2 class=\"section-title\">Achievements / Outcomes<\/h2><div class=\"kpi\"><div class=\"kpi-box\"><strong>30+ years<\/strong><span class=\"muted\">of experience in IT and industrial systems.<\/span><\/div><div class=\"kpi-box\"><strong>Architectures<\/strong><span class=\"muted\">enterprise IT, infrastructure and industrial systems.<\/span><\/div><div class=\"kpi-box\"><strong>Critical environments<\/strong><span class=\"muted\">industry, offshore, rail and technical platforms.<\/span><\/div><div class=\"kpi-box\"><strong>Cross-funct. leadership<\/strong><span class=\"muted\">interface across management, stakeholders and technical teams.<\/span><\/div><\/div><\/section><\/div>", "page_2_note": "This site was created experimentally with Codex 5.4 and uses a GitHub CI/CD pipeline: <a href=\"https://ericrac.github.io/CV-Eric-RACINEUX/\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">https://ericrac.github.io/CV-Eric-RACINEUX/<\/a>", "page_2_legal": "<span class=\"site-legal__policy\">Display preferences are stored locally in the browser, without tracking cookies or server-side collection. Privacy-by-minimisation approach aligned with GDPR / CNIL.<\/span><span class=\"site-legal__author\">Author: <a href=\"mailto:eric.racineux@outlook.fr\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric.racineux@outlook.fr<\/a><\/span>", "last_update_label": "Last update: 28/03/2026 (latest commit)", "demarche_short_html": "<p>This web CV is not only there to make a career path available online. It also serves as a method demonstrator.<\/p><p>On this project, the human did not write the code directly: production is driven through the AI agent, based on the need, the decisions and domain knowledge.<\/p><p>The project combines several concerns in one visible artifact:<\/p><ul><li>a readable and themeable web presentation<\/li><li>a reliable PDF output<\/li><li>a structured content source<\/li><li>an automated qualification and publication pipeline<\/li><li>a supervised experimentation field for AI agents<\/li><\/ul><p>The point is not to “build a site with AI”, but to work in real conditions on what AI accelerates, what it weakens, and what must remain under human control.<\/p><p>The working loop is intentionally short and iterative: I build, I verify, I improve, then I repeat. Changes are stabilised through small increments, with regular local commits and CI/CD pushes when the state is defendable.<\/p><p>In practice, this project demonstrates:<\/p><ul><li>the ability to frame a hybrid web / document / PDF need<\/li><li>the ability to industrialise a small scope without making it opaque<\/li><li>the ability to qualify, publish and evolve a visible support<\/li><li>the intent to use AI as a work lever while keeping a critical view on its limits and risks<\/li><li>a concrete way to evolve a project in an agile loop, with an AI that is forceful in proposals while framing, verification and final arbitration remain human<\/li><\/ul>", "demarche_flow_html": "<div class=\"demarche-flow__node\"><strong>Source<\/strong><span>CV JSON<br>HTML template<br>CSS / JS<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>AI agent<\/strong><span>Framing<br>Refactor<br>Tests<br>Documentation<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Qualification<\/strong><span>Smoke<br>Playwright<br>axe-core<br>PDF<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Publication<\/strong><span>GitHub Actions<br>Pages<br>Public PDFs<\/span><\/div>", "ui": {"skip_link": "Skip to main content", "controls_aria": "CV controls", "mobile_menu": "Themes", "mobile_menu_open": "Open theme menu", "mobile_menu_close": "Close theme menu", "languages_title": "Language", "language_active": "Active language: {label}.", "lang_fr": "French", "lang_en": "English", "themes_title": "Themes", "theme_blue": "Blue", "theme_green": "Green", "theme_violet": "Pink / Violet", "theme_sunset": "Orange / Yellow", "theme_black": "Black", "theme_access": "Accessibility", "theme_active": "Active theme: {label}.", "mode_title": "Mode", "mode_premium": "Premium", "mode_ats": "ATS", "mode_active": "Active mode: {label}.", "pages_title": "Pages", "page_1": "Page 1", "page_2": "Page 2", "page_active": "Navigated to page {page}.", "actions_title": "Actions", "demarche_button": "Approach", "appearance_toggle": "Inverted display", "appearance_toggle_on": "Inverted display active", "appearance_toggle_off": "System display active", "appearance_state_on": "Inverted", "appearance_state_off": "Normal", "appearance_scope": "Premium only", "appearance_tooltip_system_dark": "The page currently follows the system dark mode. This button switches back to a light display.", "appearance_active": "Display mode: {label}.", "print_button": "Print via browser", "print_unavailable": "Print unavailable", "download_button": "Download PDF", "download_busy": "Generating PDF...", "download_unavailable": "PDF unavailable", "pdf_progress": "Generating PDF...", "pdf_success": "PDF ready and downloaded", "pdf_error": "PDF generation failed", "pdf_downloaded": "PDF downloaded.", "pdf_failed": "PDF generation failed.", "demarche_opened": "Project approach opened.", "demarche_eyebrow": "Approach", "demarche_title": "Web CV, method and AI lab", "demarche_lede": "A hybrid CV used both as a public profile, a controlled PDF deliverable and a field lab for supervised use of AI agents.", "demarche_share": "Share this approach", "demarche_share_copied": "The approach link has been copied", "demarche_share_prompt": "Copy the approach link:", "demarche_close": "Close", "demarche_flow_eyebrow": "Summary flow", "demarche_flow_title": "CI/CD pipeline and AI agent roles", "profile_photo_caption": "Public web-only portrait, excluded from the printable CV.", "about_title": "About", "about_body": "Senior IS architect and lead, with an execution-oriented focus on infrastructure, industrial environments, cybersecurity and transformation delivery.", "jump_page_1": "Go to page 1", "jump_page_2": "Go to page 2", "scroll_top": "Back to top"}}}</script>
+  <script id="cv-i18n-catalog" type="application/json">{"fr": {"locale": "fr", "html_lang": "fr", "title": "CV - Eric Racineux", "meta_description": "CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.", "meta_robots": "index,follow", "meta_keywords": "Eric Racineux, CV Eric Racineux, RSI, Architecte SI, Infrastructure, Systemes industriels, Cybersecurite, Nantes", "canonical_url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "site_name": "CV Eric Racineux", "og_locale": "fr_FR", "meta_author": "Eric Racineux", "meta_modified_iso": "2026-03-29T23:16:39+02:00", "social_image_url": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg", "social_image_fallback_url": "https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg", "social_image_alt": "Eric Racineux - RSI | Architecte & Référent SI senior", "profile_photo_url": "profile-photo-web.jpg", "profile_photo_webp_url": "profile-photo-web.webp", "profile_photo_alt": "Eric Racineux - RSI | Architecte & Référent SI senior", "profile_photo_caption": "Portrait public web-only, hors CV imprimable.", "about_title": "À propos", "about_body": "Architecte et référent SI senior, avec un angle d’exécution orienté infrastructures, environnements industriels, cybersécurité et conduite de transformation.", "seo_json_ld": "{\"@context\": \"https://schema.org\", \"@type\": \"ProfilePage\", \"inLanguage\": \"fr-FR\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"name\": \"CV - Eric Racineux\", \"description\": \"CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.\", \"dateModified\": \"2026-03-29T23:16:39+02:00\", \"primaryImageOfPage\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\", \"mainEntity\": {\"@type\": \"Person\", \"name\": \"Eric Racineux\", \"jobTitle\": \"RSI | Architecte & Référent SI senior\", \"description\": \"CV web d'Eric Racineux, RSI et architecte SI senior specialise en infrastructures, systemes industriels et cybersecurite.\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"image\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-photo-web.jpg\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"address\": {\"@type\": \"PostalAddress\", \"addressLocality\": \"Nantes / Vertou\"}, \"sameAs\": [\"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"https://www.linkedin.com/in/eric-racineux-75475a7/\"], \"knowsAbout\": [\"Eric Racineux\", \"CV Eric Racineux\", \"RSI\", \"Architecte SI\", \"Infrastructure\", \"Systemes industriels\", \"Cybersecurite\", \"Nantes\"], \"knowsLanguage\": [\"fr-FR\", \"en-GB\"], \"workLocation\": {\"@type\": \"Place\", \"name\": \"Nantes / Vertou\"}, \"contactPoint\": {\"@type\": \"ContactPoint\", \"contactType\": \"professional\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"availableLanguage\": [\"French\", \"English\"]}}, \"publisher\": {\"@type\": \"Organization\", \"name\": \"CV Eric Racineux\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}, \"associatedMedia\": [{\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\"}, {\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg\"}], \"_meta\": {\"og_locale\": \"fr_FR\", \"escaped_canonical\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}}", "hero_html": "<section class=\"hero\"><div><h1 id=\"page-1-title\">Eric Racineux<\/h1><div class=\"role\">RSI | Architecte &amp; Référent SI senior<\/div><p class=\"summary\"><strong>Architecte SI | Infrastructure | Systèmes industriels<\/strong><br>RSI et architecte SI senior avec plus de 30 ans d’expérience dans des environnements industriels et techniques exigeants. Spécialisé dans l’architecture des systèmes, l’infrastructure, la cybersécurité et la structuration de systèmes d’information robustes et maintenables.<\/p><div class=\"tags\"><span class=\"tag\">Cybersécurité industrielle<\/span><span class=\"tag\">Infrastructures critiques<\/span><span class=\"tag\">Vision transverse SI / métier<\/span><span class=\"tag\">Agilité<\/span><\/div><\/div><aside class=\"hero-right\"><div class=\"contact-card\"><div class=\"contact-grid\"><div><span class=\"label\">Telephone<\/span><span class=\"value\">+33 6 34 98 67 21<\/span><\/div><div><span class=\"label\">Email<\/span><span class=\"value\">eric.racineux@outlook.fr<\/span><\/div><div><span class=\"label\">Ville<\/span><span class=\"value\">Nantes / Vertou<\/span><\/div><div><span class=\"label\">LinkedIn<\/span><span class=\"value\"><a href=\"https://www.linkedin.com/in/eric-racineux-75475a7/\" class=\"contact-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric-racineux-75475a7<\/a><\/span><\/div><div><span class=\"label\">Mobilité<\/span><span class=\"value\">Nantes / Hybride<\/span><\/div><div><span class=\"label\">Disponibilité<\/span><span class=\"value\">3 mois<\/span><\/div><\/div><\/div><section class=\"panel positioning\"><h2 class=\"section-title\">Positionnement<\/h2><div class=\"mini-list\"><div>Architecte SI orienté cohérence globale des systèmes, structuration des architectures techniques et pilotage des transformations IT dans des environnements industriels et techniques exigeants.<\/div><\/div><\/section><\/aside><\/section>", "page_1_zones": "<div class=\"page-grid\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Expériences clés<\/h2><article class=\"entry\" id=\"exp-01\"><div class=\"entry-head\"><div><h3>RSI<\/h3><div class=\"meta\">Fondation OPEN-C - Nantes<\/div><\/div><div class=\"pill\">2024-Present<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> pilotage et sécurisation du système d’information d’une fondation opérant des plateformes critiques en environnement maritime et industriel.<\/p><ul class=\"clean\"><li>Définition et évolution de l’architecture SI multi-sites (réseaux, cloud, systèmes industriels, cybersécurité).<\/li><li>Structuration de la gouvernance SSI, segmentation réseau et supervision des flux.<\/li><li>Mise en place d’une stratégie de résilience et de continuité de service (PRA/PCA).<\/li><li>Pilotage des projets d’infrastructure et interface directe avec direction, partenaires industriels et équipes techniques.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-02\"><div class=\"entry-head\"><div><h3>Product Owner Infrastructure &amp; Cloud<\/h3><div class=\"meta\">DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2023<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> conception et mise en place de l’infrastructure cible d’un programme de transformation vers un cloud privé.<\/p><ul class=\"clean\"><li>Définition de l’architecture infrastructure et réseau du cloud privé.<\/li><li>Structuration de la trajectoire de migration et décommissionnement des socles existants.<\/li><li>Mise en place des services IaaS et coordination des équipes techniques en mode Agile.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-03\"><div class=\"entry-head\"><div><h3>Service Owner<\/h3><div class=\"meta\">Catalogue de services IT - DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2022-2023<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> structuration et industrialisation du catalogue de services d’infrastructure.<\/p><ul class=\"clean\"><li>Pilotage d’un portefeuille de plus de 1000 services d’infrastructure.<\/li><li>Mise en place des processus MCO, cycle de vie et gouvernance des services.<\/li><li>Remise à niveau de la CMDB et industrialisation du catalogue via ServiceNow, en intégrant les enjeux de performance, sécurité et exploitation.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-07\"><div class=\"entry-head\"><div><h3>Chef de projet informatique &amp; Architecte logiciel<\/h3><div class=\"meta\">Spécinov<\/div><\/div><div class=\"pill\">1994-2000<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> conception et déploiement de solutions logicielles industrielles distribuées.<\/p><ul class=\"clean\"><li>Conception et développement d’applications client/serveur en C++.<\/li><li>Architecture de systèmes logiciels distribués et pilotage de projets au forfait.<\/li><li>Déploiement de solutions sur plus de 120 sites industriels et relation client.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-08\"><div class=\"entry-head\"><div><h3>Projets et expériences complémentaires<\/h3><\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> portefeuille autour de l’innovation, de l’architecture SI et de l’IA.<\/p><ul class=\"clean\"><li>PMO AGILE industriel et structuration de projets complexes (ENGIE).<\/li><li>Prototype IoT de maintenance prédictive (Bubbleio).<\/li><li>Activité indépendante autour de l’architecture SI et de l’IA (DeepRacine).<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-competences\" id=\"competences\"><h2 class=\"section-title\">Compétences<\/h2><div class=\"panel skill-group\"><div class=\"skill-row\"><header><strong>Architecture SI<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 95%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Infrastructure &amp; reseaux<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 92%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Cybersecurite<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 85%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Transformation IT<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 82%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Systemes industriels<\/strong><span class=\"muted\">avance<\/span><\/header><div class=\"bar\"><span style=\"width: 68%\"><\/span><\/div><\/div><\/div><\/section><section class=\"section stack side-section zone-technos-environnements\" id=\"technos-environnements\"><h2 class=\"section-title\">Technos / Environnements<\/h2><div class=\"panel mini-list\"><div>Microsoft 365, Entra ID, Intune, Defender.<\/div><div>Fortinet, SD-WAN, VPN, firewalling.<\/div><div>Windows Server, Linux, VMware.<\/div><div>Cloud privé / hybride.<\/div><div>Automatisation et scripting.<\/div><div>ITIL, PRA/PCA, gouvernance SI.<\/div><\/div><\/section><section class=\"section stack side-section zone-parcours\" id=\"parcours\"><h2 class=\"section-title\">Parcours<\/h2><div class=\"panel timeline\"><div class=\"t-item\"><strong>ESAIP<\/strong><div class=\"muted\">Ingénieur maître Informatique Réseau et Télécommunication.<\/div><\/div><div class=\"t-item\"><strong>IMIE<\/strong><div class=\"muted\">Concepteur Développeur Informatique.<\/div><\/div><div class=\"t-item\"><strong>Formations complémentaires<\/strong><div class=\"muted\">en cybersécurité industrielle et gouvernance des systèmes.<\/div><\/div><\/div><\/section><\/aside><\/div>", "page_2_header_html": "<header class=\"cv-header\"><h1 id=\"page-2-title\">Eric Racineux<\/h1><\/header>", "page_2_zones": "<div class=\"page-grid page-grid--footer\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Parcours complémentaire<\/h2><article class=\"entry\" id=\"exp-04\"><div class=\"entry-head\"><div><h3>Pilote essais et intégration systèmes<\/h3><div class=\"meta\">ENGIE Ineo Rail / UTS<\/div><\/div><div class=\"pill\">2021<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> structuration et pilotage des essais d’intégration sur un projet ferroviaire complexe.<\/p><ul class=\"clean\"><li>Définition de la stratégie de validation et des plans d’essais.<\/li><li>Structuration des méthodes et outils d’intégration.<\/li><li>Coordination technique entre ingénierie, production et maîtrise d’ouvrage.<\/li><li>Sécurisation des jalons de validation et de mise en service.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-05\"><div class=\"entry-head\"><div><h3>Responsable Bureau d’Études<\/h3><div class=\"meta\">VMI<\/div><\/div><div class=\"pill\">2012-2016<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> transformation et structuration du bureau d’études d’un constructeur de machines industrielles.<\/p><ul class=\"clean\"><li>Management d’une équipe de 13 à 20 ingénieurs et techniciens.<\/li><li>Refonte des architectures machines et harmonisation des méthodes.<\/li><li>Pilotage d’un projet MES pour un site industriel du groupe LVMH.<\/li><li>Structuration des interfaces entre bureau d’études, production et SI.<\/li><li>Participation aux choix d’architectures techniques machines et automatisme.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-06\"><div class=\"entry-head\"><div><h3>Manager Informatique Industrielle<\/h3><div class=\"meta\">GOSS International<\/div><\/div><div class=\"pill\">2000-2011<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> création et structuration du pôle informatique industrielle.<\/p><ul class=\"clean\"><li>Architecture et administration de l’infrastructure technique industrielle.<\/li><li>Mise en place d’un laboratoire de validation et de test.<\/li><li>Déploiement de solutions de supervision et télé-monitoring.<\/li><li>Intégration des systèmes informatiques embarqués sur lignes industrielles.<\/li><li>Coordination technique internationale avec équipes engineering.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-09\"><div class=\"entry-head\"><div><h3>Développeur logiciel scientifique<\/h3><div class=\"meta\">ARTUS / Meggitt<\/div><\/div><div class=\"pill\">1992-1994<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Développement d’outils logiciels scientifiques pour bancs d’essais.<\/p><ul class=\"clean\"><li>Traitement de données techniques et visualisation.<\/li><li>Support aux équipes d’ingénierie.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-10\"><div class=\"entry-head\"><div><h3>Technicien maintenance industrielle<\/h3><div class=\"meta\">NOPLY - WEST MI<\/div><\/div><div class=\"pill\">1990-1992<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Maintenance d’équipements industriels.<\/p><ul class=\"clean\"><li>Diagnostic et résolution de pannes techniques.<\/li><li>Intervention sur systèmes électromécaniques.<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-bloc-complementaire\" id=\"bloc-complementaire\"><h2 class=\"section-title\">Informations complémentaires<\/h2><div class=\"panel mini-list\"><div><strong>Langues:<\/strong> Français, Anglais, Espagnol.<\/div><div><strong>Secteurs:<\/strong> industrie, systèmes critiques, infrastructure IT.<\/div><div>Profil LinkedIn disponible pour détails du parcours et publications.<\/div><\/div><\/section><section class=\"section stack side-section zone-explorations-techniques\" id=\"explorations-techniques\"><h2 class=\"section-title\">Explorations techniques<\/h2><div class=\"panel mini-list\"><div>Expérimentation d’outils d’ingénierie assistée par IA.<\/div><div>Conception d’un agent IA local destiné à assister l’architecture logicielle et l’automatisation de tâches techniques.<\/div><div>Exploration d’architectures logicielles intégrant IA, automatisation et outils de développement.<\/div><div>Veille active sur l’évolution des architectures cloud, logiciel et IA.<\/div><\/div><\/section><\/aside><section class=\"section stack main-section zone-kpi full-width-zone\" id=\"realisations-resultats\"><h2 class=\"section-title\">Réalisations / Résultats<\/h2><div class=\"kpi\"><div class=\"kpi-box\"><strong>30 ans+<\/strong><span class=\"muted\">d’expérience dans l’IT et les systèmes industriels.<\/span><\/div><div class=\"kpi-box\"><strong>Architectures<\/strong><span class=\"muted\">SI, infrastructure et systèmes industriels.<\/span><\/div><div class=\"kpi-box\"><strong>Env. critiques<\/strong><span class=\"muted\">industrie, offshore, ferroviaire, plateformes techniques.<\/span><\/div><div class=\"kpi-box\"><strong>Pilotage transverse<\/strong><span class=\"muted\">interface direction, métiers et équipes techniques.<\/span><\/div><\/div><\/section><\/div>", "page_2_note": "Ce site a été créé de manière expérimentale avec Codex 5.4, il utilise une chaîne CI/CD GitHub : <a href=\"https://ericrac.github.io/CV-Eric-RACINEUX/\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">https://ericrac.github.io/CV-Eric-RACINEUX/<\/a>", "page_2_legal": "<span class=\"site-legal__policy\">Préférences d'affichage conservées localement dans le navigateur, sans cookie de suivi ni collecte serveur. Démarche de minimisation RGPD / CNIL.<\/span><span class=\"site-legal__author\">Auteur : <a href=\"mailto:eric.racineux@outlook.fr\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric.racineux@outlook.fr<\/a><\/span>", "last_update_label": "Dernière mise à jour : 29/03/2026 (dernier commit)", "demarche_short_html": "<p>Ce CV web ne sert pas seulement à rendre un parcours consultable en ligne. Il sert aussi de démonstrateur de méthode.<\/p><p>Sur ce projet, l&#x27;humain n&#x27;a pas écrit directement le code : la production est pilotée via l&#x27;agent IA, sur la base du besoin, des arbitrages et de la connaissance métier.<\/p><p>Le projet combine dans un meme objet:<\/p><ul><li>une présentation web lisible et thémable<\/li><li>une impression PDF<\/li><li>une source de contenu structurée<\/li><li>une chaîne de qualification et de publication automatisée<\/li><li>une expérimentation encadrée des agents IA<\/li><\/ul><p>L&#x27;objectif n&#x27;est pas de &quot;faire un site avec de l&#x27;IA&quot;, mais de travailler en conditions réelles sur ce qu&#x27;elle accélère, ce qu&#x27;elle fragilise et ce qui doit rester sous contrôle humain.<\/p><p>La logique de travail est volontairement courte et itérative : je fais, je vérifie, j&#x27;améliore, puis je recommence. Les évolutions se stabilisent par petits incréments, avec commit local régulier puis push CI/CD quand l&#x27;état est défendable.<\/p><p>Ce projet montre en pratique:<\/p><ul><li>la capacité à cadrer un besoin hybride web / document / PDF<\/li><li>la capacité à industrialiser un petit périmètre sans le rendre opaque<\/li><li>la capacité à qualifier, publier et faire évoluer un support visible<\/li><li>la volonté d&#x27;utiliser l&#x27;IA comme levier de travail, avec recul sur ses limites et ses risques<\/li><li>une façon très concrète de faire évoluer un projet en mode agile, avec une IA force de proposition mais un cadrage, une vérification et un arbitrage qui restent humains<\/li><\/ul>", "demarche_flow_html": "<div class=\"demarche-flow__node\"><strong>Source<\/strong><span>JSON CV<br>Template HTML<br>CSS / JS<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Agent IA<\/strong><span>Cadrage<br>Refactor<br>Tests<br>Documentation<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Qualification<\/strong><span>Smoke<br>Playwright<br>axe-core<br>PDF<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Publication<\/strong><span>GitHub Actions<br>Pages<br>PDF publics<\/span><\/div>", "ui": {"skip_link": "Aller au contenu principal", "controls_aria": "Controles CV", "mobile_menu": "Thèmes", "mobile_menu_open": "Ouvrir le menu des thèmes", "mobile_menu_close": "Fermer le menu des thèmes", "languages_title": "Langue", "language_active": "Langue active : {label}.", "lang_fr": "Français", "lang_en": "English", "themes_title": "Thèmes", "theme_blue": "Bleu", "theme_green": "Vert", "theme_violet": "Rose / Violet", "theme_sunset": "Orange / Jaune", "theme_black": "Noir", "theme_access": "Accessibilité", "theme_active": "Thème actif : {label}.", "mode_title": "Mode", "mode_premium": "Premium", "mode_ats": "ATS", "mode_active": "Mode actif : {label}.", "pages_title": "Pages", "page_1": "Page 1", "page_2": "Page 2", "page_active": "Navigation vers la page {page}.", "actions_title": "Action", "demarche_button": "Démarche", "appearance_toggle": "Affichage inverse", "appearance_toggle_on": "Affichage inverse actif", "appearance_toggle_off": "Affichage système actif", "appearance_state_on": "Inversé", "appearance_state_off": "Normal", "appearance_scope": "Premium uniquement", "appearance_tooltip_system_dark": "L’affichage suit actuellement le mode sombre du système. Ce bouton permet de revenir à un affichage clair.", "appearance_active": "Affichage actif : {label}.", "print_button": "Imprimer via navigateur", "print_unavailable": "Impression indisponible", "download_button": "Télécharger PDF", "download_busy": "Génération PDF...", "download_unavailable": "PDF indisponible", "pdf_progress": "Génération du PDF en cours...", "pdf_success": "PDF pret et telecharge", "pdf_error": "Échec de génération du PDF", "pdf_downloaded": "PDF téléchargé.", "pdf_failed": "Échec de génération du PDF.", "demarche_opened": "Ouverture de la démarche du projet.", "demarche_eyebrow": "Démarche", "demarche_title": "CV web, méthode et laboratoire IA", "demarche_lede": "Un CV hybride qui sert à la fois de support public, de PDF maîtrisé, et de terrain d’expérimentation sur l’usage encadré des agents IA.", "demarche_share": "Partager cette démarche", "demarche_share_copied": "Le lien de la démarche est copié", "demarche_share_prompt": "Copier le lien de la démarche :", "demarche_close": "Fermer", "demarche_flow_eyebrow": "Schéma synthèse", "demarche_flow_title": "Chaîne CI/CD et fonctions de l’agent IA", "profile_photo_caption": "Portrait public web-only, hors CV imprimable.", "about_title": "À propos", "about_body": "Architecte et référent SI senior, avec un angle d’exécution orienté infrastructures, environnements industriels, cybersécurité et conduite de transformation.", "jump_page_1": "Aller à la page 1", "jump_page_2": "Aller à la page 2", "scroll_top": "Revenir en haut de page"}}, "en": {"locale": "en", "html_lang": "en", "title": "Resume - Eric Racineux", "meta_description": "Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.", "meta_robots": "index,follow", "meta_keywords": "Eric Racineux, Eric Racineux resume, IT Director, Enterprise Architect, Infrastructure, Industrial systems, Cybersecurity, Nantes", "canonical_url": "https://ericrac.github.io/CV-Eric-RACINEUX/", "site_name": "Eric Racineux Resume", "og_locale": "en_GB", "meta_author": "Eric Racineux", "meta_modified_iso": "2026-03-29T23:16:39+02:00", "social_image_url": "https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg", "social_image_fallback_url": "https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg", "social_image_alt": "Eric Racineux - IT Director | Senior Enterprise & IT Architect", "profile_photo_url": "profile-photo-web.jpg", "profile_photo_webp_url": "profile-photo-web.webp", "profile_photo_alt": "Eric Racineux - IT Director | Senior Enterprise & IT Architect", "profile_photo_caption": "Public web-only portrait, excluded from the printable CV.", "about_title": "About", "about_body": "Senior IS architect and lead, with an execution-oriented focus on infrastructure, industrial environments, cybersecurity and transformation delivery.", "seo_json_ld": "{\"@context\": \"https://schema.org\", \"@type\": \"ProfilePage\", \"inLanguage\": \"en-GB\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"name\": \"Resume - Eric Racineux\", \"description\": \"Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.\", \"dateModified\": \"2026-03-29T23:16:39+02:00\", \"primaryImageOfPage\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\", \"mainEntity\": {\"@type\": \"Person\", \"name\": \"Eric Racineux\", \"jobTitle\": \"IT Director | Senior Enterprise & IT Architect\", \"description\": \"Web resume of Eric Racineux, senior IT director and enterprise architect focused on infrastructure, industrial systems and cybersecurity.\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"image\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-photo-web.jpg\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"address\": {\"@type\": \"PostalAddress\", \"addressLocality\": \"Nantes / Vertou\"}, \"sameAs\": [\"https://ericrac.github.io/CV-Eric-RACINEUX/\", \"https://www.linkedin.com/in/eric-racineux-75475a7/\"], \"knowsAbout\": [\"Eric Racineux\", \"Eric Racineux resume\", \"IT Director\", \"Enterprise Architect\", \"Infrastructure\", \"Industrial systems\", \"Cybersecurity\", \"Nantes\"], \"knowsLanguage\": [\"fr-FR\", \"en-GB\"], \"workLocation\": {\"@type\": \"Place\", \"name\": \"Nantes / Vertou\"}, \"contactPoint\": {\"@type\": \"ContactPoint\", \"contactType\": \"professional\", \"email\": \"mailto:eric.racineux@outlook.fr\", \"telephone\": \"+33 6 34 98 67 21\", \"availableLanguage\": [\"French\", \"English\"]}}, \"publisher\": {\"@type\": \"Organization\", \"name\": \"Eric Racineux Resume\", \"url\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}, \"associatedMedia\": [{\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/profile-social.jpg\"}, {\"@type\": \"ImageObject\", \"contentUrl\": \"https://ericrac.github.io/CV-Eric-RACINEUX/seo-preview.svg\"}], \"_meta\": {\"og_locale\": \"en_GB\", \"escaped_canonical\": \"https://ericrac.github.io/CV-Eric-RACINEUX/\"}}", "hero_html": "<section class=\"hero\"><div><h1 id=\"page-1-title\">Eric Racineux<\/h1><div class=\"role\">IT Director | Senior Enterprise &amp; IT Architect<\/div><p class=\"summary\"><strong>Enterprise Architecture | Infrastructure | Industrial systems<\/strong><br>Senior IT director and enterprise architect with more than 30 years of experience in demanding industrial and technical environments. Focused on systems architecture, infrastructure, cybersecurity and the structuring of robust, maintainable information systems.<\/p><div class=\"tags\"><span class=\"tag\">Industrial cybersecurity<\/span><span class=\"tag\">Critical infrastructure<\/span><span class=\"tag\">Cross-functional IT / business view<\/span><span class=\"tag\">Agility<\/span><\/div><\/div><aside class=\"hero-right\"><div class=\"contact-card\"><div class=\"contact-grid\"><div><span class=\"label\">Phone<\/span><span class=\"value\">+33 6 34 98 67 21<\/span><\/div><div><span class=\"label\">Email<\/span><span class=\"value\">eric.racineux@outlook.fr<\/span><\/div><div><span class=\"label\">City<\/span><span class=\"value\">Nantes / Vertou<\/span><\/div><div><span class=\"label\">LinkedIn<\/span><span class=\"value\"><a href=\"https://www.linkedin.com/in/eric-racineux-75475a7/\" class=\"contact-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric-racineux-75475a7<\/a><\/span><\/div><div><span class=\"label\">Mobility<\/span><span class=\"value\">Nantes / Hybrid<\/span><\/div><div><span class=\"label\">Availability<\/span><span class=\"value\">3 months<\/span><\/div><\/div><\/div><section class=\"panel positioning\"><h2 class=\"section-title\">Positioning<\/h2><div class=\"mini-list\"><div>Enterprise architect focused on overall system consistency, technical architecture structuring and IT transformation leadership in demanding industrial and technical environments.<\/div><\/div><\/section><\/aside><\/section>", "page_1_zones": "<div class=\"page-grid\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Key experience<\/h2><article class=\"entry\" id=\"exp-01\"><div class=\"entry-head\"><div><h3>IT Director<\/h3><div class=\"meta\">Fondation OPEN-C - Nantes<\/div><\/div><div class=\"pill\">2024-Present<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> steering and securing the information system of a foundation operating critical maritime and industrial platforms.<\/p><ul class=\"clean\"><li>Defined and evolved a multi-site IT architecture covering networks, cloud, industrial systems and cybersecurity.<\/li><li>Structured security governance, network segmentation and flow supervision.<\/li><li>Set up a resilience and service continuity strategy (disaster recovery / business continuity).<\/li><li>Led infrastructure projects and worked directly with management, industrial partners and technical teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-02\"><div class=\"entry-head\"><div><h3>Infrastructure &amp; Cloud Product Owner<\/h3><div class=\"meta\">DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2023<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> designed and delivered the target infrastructure for a private cloud transformation programme.<\/p><ul class=\"clean\"><li>Defined the private cloud infrastructure and network architecture.<\/li><li>Structured the migration roadmap and decommissioning of legacy foundations.<\/li><li>Delivered IaaS services and coordinated technical teams in Agile mode.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-03\"><div class=\"entry-head\"><div><h3>Service Owner<\/h3><div class=\"meta\">IT Services Catalogue - DSI Groupe La Poste<\/div><\/div><div class=\"pill\">2022-2023<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> structured and industrialised the infrastructure services catalogue.<\/p><ul class=\"clean\"><li>Managed a portfolio of more than 1000 infrastructure services.<\/li><li>Implemented run, lifecycle and governance processes for services.<\/li><li>Reworked the CMDB and industrialised the catalogue through ServiceNow while integrating performance, security and operations constraints.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-07\"><div class=\"entry-head\"><div><h3>IT Project Manager &amp; Software Architect<\/h3><div class=\"meta\">Specinov<\/div><\/div><div class=\"pill\">1994-2000<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> designed and deployed distributed industrial software solutions.<\/p><ul class=\"clean\"><li>Designed and developed client/server applications in C++.<\/li><li>Architected distributed software systems and led fixed-price projects.<\/li><li>Deployed solutions across more than 120 industrial sites and handled client relationships.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-08\"><div class=\"entry-head\"><div><h3>Additional projects and experience<\/h3><\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> portfolio covering innovation, enterprise architecture and AI.<\/p><ul class=\"clean\"><li>Industrial Agile PMO and structuring of complex ENGIE projects.<\/li><li>Predictive maintenance IoT prototype (Bubbleio).<\/li><li>Independent activity around enterprise architecture and AI (DeepRacine).<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-competences\" id=\"competences\"><h2 class=\"section-title\">Skills<\/h2><div class=\"panel skill-group\"><div class=\"skill-row\"><header><strong>Enterprise architecture<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 95%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Infrastructure &amp; networks<\/strong><span class=\"muted\">expert<\/span><\/header><div class=\"bar\"><span style=\"width: 92%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Cybersecurity<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 85%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>IT transformation<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 82%\"><\/span><\/div><\/div><div class=\"skill-row\"><header><strong>Industrial systems<\/strong><span class=\"muted\">advanced<\/span><\/header><div class=\"bar\"><span style=\"width: 68%\"><\/span><\/div><\/div><\/div><\/section><section class=\"section stack side-section zone-technos-environnements\" id=\"technos-environnements\"><h2 class=\"section-title\">Technologies / Environments<\/h2><div class=\"panel mini-list\"><div>Microsoft 365, Entra ID, Intune, Defender.<\/div><div>Fortinet, SD-WAN, VPN, firewalling.<\/div><div>Windows Server, Linux, VMware.<\/div><div>Private / hybrid cloud.<\/div><div>Automation and scripting.<\/div><div>ITIL, DR/BCP, IT governance.<\/div><\/div><\/section><section class=\"section stack side-section zone-parcours\" id=\"parcours\"><h2 class=\"section-title\">Education<\/h2><div class=\"panel timeline\"><div class=\"t-item\"><strong>ESAIP<\/strong><div class=\"muted\">Engineering degree in IT networks and telecommunications.<\/div><\/div><div class=\"t-item\"><strong>IMIE<\/strong><div class=\"muted\">Software developer and designer diploma.<\/div><\/div><div class=\"t-item\"><strong>Additional training<\/strong><div class=\"muted\">industrial cybersecurity and systems governance.<\/div><\/div><\/div><\/section><\/aside><\/div>", "page_2_header_html": "<header class=\"cv-header\"><h1 id=\"page-2-title\">Eric Racineux<\/h1><\/header>", "page_2_zones": "<div class=\"page-grid page-grid--footer\"><section class=\"section stack main-col\"><h2 class=\"section-title\">Additional experience<\/h2><article class=\"entry\" id=\"exp-04\"><div class=\"entry-head\"><div><h3>Systems Integration &amp; Test Lead<\/h3><div class=\"meta\">ENGIE Ineo Rail / UTS<\/div><\/div><div class=\"pill\">2021<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> structured and led integration testing on a complex rail project.<\/p><ul class=\"clean\"><li>Defined validation strategy and test plans.<\/li><li>Structured integration methods and tooling.<\/li><li>Coordinated engineering, production and client-side technical stakeholders.<\/li><li>Secured validation milestones and service entry.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-05\"><div class=\"entry-head\"><div><h3>Head of Engineering Office<\/h3><div class=\"meta\">VMI<\/div><\/div><div class=\"pill\">2012-2016<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> transformed and structured the engineering office of an industrial machine manufacturer.<\/p><ul class=\"clean\"><li>Managed a team of 13 to 20 engineers and technicians.<\/li><li>Reworked machine architectures and harmonised engineering methods.<\/li><li>Led a MES project for an LVMH industrial site.<\/li><li>Structured interfaces between engineering office, production and IT.<\/li><li>Contributed to machine architecture and automation design choices.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-06\"><div class=\"entry-head\"><div><h3>Industrial IT Manager<\/h3><div class=\"meta\">GOSS International<\/div><\/div><div class=\"pill\">2000-2011<\/div><\/div><p class=\"impact\"><strong>Main impact:<\/strong> created and structured the industrial IT unit.<\/p><ul class=\"clean\"><li>Designed and administered industrial technical infrastructure.<\/li><li>Set up a validation and test laboratory.<\/li><li>Deployed supervision and remote monitoring solutions.<\/li><li>Integrated embedded IT systems on industrial lines.<\/li><li>Coordinated technical work internationally with engineering teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-09\"><div class=\"entry-head\"><div><h3>Scientific Software Developer<\/h3><div class=\"meta\">ARTUS / Meggitt<\/div><\/div><div class=\"pill\">1992-1994<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Developed scientific software tools for test benches.<\/p><ul class=\"clean\"><li>Processed technical data and visualisation.<\/li><li>Supported engineering teams.<\/li><\/ul><\/article><article class=\"entry\" id=\"exp-10\"><div class=\"entry-head\"><div><h3>Industrial Maintenance Technician<\/h3><div class=\"meta\">NOPLY - WEST MI<\/div><\/div><div class=\"pill\">1990-1992<\/div><\/div><p class=\"impact\"><strong>Impact principal:<\/strong> - Maintained industrial equipment.<\/p><ul class=\"clean\"><li>Diagnosed and resolved technical failures.<\/li><li>Worked on electromechanical systems.<\/li><\/ul><\/article><\/section><aside class=\"section stack side-col\"><section class=\"section stack side-section zone-bloc-complementaire\" id=\"bloc-complementaire\"><h2 class=\"section-title\">Additional information<\/h2><div class=\"panel mini-list\"><div><strong>Languages:<\/strong> French, English, Spanish.<\/div><div><strong>Sectors:<\/strong> industry, critical systems, IT infrastructure.<\/div><div>LinkedIn profile available for detailed background and publications.<\/div><\/div><\/section><section class=\"section stack side-section zone-explorations-techniques\" id=\"explorations-techniques\"><h2 class=\"section-title\">Technical explorations<\/h2><div class=\"panel mini-list\"><div>Experimenting with AI-assisted engineering tooling.<\/div><div>Designing a local AI agent to support software architecture and task automation.<\/div><div>Exploring software architectures combining AI, automation and development tools.<\/div><div>Active watch on cloud, software and AI architecture evolution.<\/div><\/div><\/section><\/aside><section class=\"section stack main-section zone-kpi full-width-zone\" id=\"realisations-resultats\"><h2 class=\"section-title\">Achievements / Outcomes<\/h2><div class=\"kpi\"><div class=\"kpi-box\"><strong>30+ years<\/strong><span class=\"muted\">of experience in IT and industrial systems.<\/span><\/div><div class=\"kpi-box\"><strong>Architectures<\/strong><span class=\"muted\">enterprise IT, infrastructure and industrial systems.<\/span><\/div><div class=\"kpi-box\"><strong>Critical environments<\/strong><span class=\"muted\">industry, offshore, rail and technical platforms.<\/span><\/div><div class=\"kpi-box\"><strong>Cross-funct. leadership<\/strong><span class=\"muted\">interface across management, stakeholders and technical teams.<\/span><\/div><\/div><\/section><\/div>", "page_2_note": "This site was created experimentally with Codex 5.4 and uses a GitHub CI/CD pipeline: <a href=\"https://ericrac.github.io/CV-Eric-RACINEUX/\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">https://ericrac.github.io/CV-Eric-RACINEUX/<\/a>", "page_2_legal": "<span class=\"site-legal__policy\">Display preferences are stored locally in the browser, without tracking cookies or server-side collection. Privacy-by-minimisation approach aligned with GDPR / CNIL.<\/span><span class=\"site-legal__author\">Author: <a href=\"mailto:eric.racineux@outlook.fr\" class=\"note-link\" target=\"_blank\" rel=\"noreferrer noopener\">eric.racineux@outlook.fr<\/a><\/span>", "last_update_label": "Last update: 29/03/2026 (latest commit)", "demarche_short_html": "<p>This web CV is not only there to make a career path available online. It also serves as a method demonstrator.<\/p><p>On this project, the human did not write the code directly: production is driven through the AI agent, based on the need, the decisions and domain knowledge.<\/p><p>The project combines several concerns in one visible artifact:<\/p><ul><li>a readable and themeable web presentation<\/li><li>a reliable PDF output<\/li><li>a structured content source<\/li><li>an automated qualification and publication pipeline<\/li><li>a supervised experimentation field for AI agents<\/li><\/ul><p>The point is not to “build a site with AI”, but to work in real conditions on what AI accelerates, what it weakens, and what must remain under human control.<\/p><p>The working loop is intentionally short and iterative: I build, I verify, I improve, then I repeat. Changes are stabilised through small increments, with regular local commits and CI/CD pushes when the state is defendable.<\/p><p>In practice, this project demonstrates:<\/p><ul><li>the ability to frame a hybrid web / document / PDF need<\/li><li>the ability to industrialise a small scope without making it opaque<\/li><li>the ability to qualify, publish and evolve a visible support<\/li><li>the intent to use AI as a work lever while keeping a critical view on its limits and risks<\/li><li>a concrete way to evolve a project in an agile loop, with an AI that is forceful in proposals while framing, verification and final arbitration remain human<\/li><\/ul>", "demarche_flow_html": "<div class=\"demarche-flow__node\"><strong>Source<\/strong><span>CV JSON<br>HTML template<br>CSS / JS<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>AI agent<\/strong><span>Framing<br>Refactor<br>Tests<br>Documentation<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Qualification<\/strong><span>Smoke<br>Playwright<br>axe-core<br>PDF<\/span><\/div><div class=\"demarche-flow__arrow\" aria-hidden=\"true\">→<\/div><div class=\"demarche-flow__node\"><strong>Publication<\/strong><span>GitHub Actions<br>Pages<br>Public PDFs<\/span><\/div>", "ui": {"skip_link": "Skip to main content", "controls_aria": "CV controls", "mobile_menu": "Themes", "mobile_menu_open": "Open theme menu", "mobile_menu_close": "Close theme menu", "languages_title": "Language", "language_active": "Active language: {label}.", "lang_fr": "French", "lang_en": "English", "themes_title": "Themes", "theme_blue": "Blue", "theme_green": "Green", "theme_violet": "Pink / Violet", "theme_sunset": "Orange / Yellow", "theme_black": "Black", "theme_access": "Accessibility", "theme_active": "Active theme: {label}.", "mode_title": "Mode", "mode_premium": "Premium", "mode_ats": "ATS", "mode_active": "Active mode: {label}.", "pages_title": "Pages", "page_1": "Page 1", "page_2": "Page 2", "page_active": "Navigated to page {page}.", "actions_title": "Actions", "demarche_button": "Approach", "appearance_toggle": "Inverted display", "appearance_toggle_on": "Inverted display active", "appearance_toggle_off": "System display active", "appearance_state_on": "Inverted", "appearance_state_off": "Normal", "appearance_scope": "Premium only", "appearance_tooltip_system_dark": "The page currently follows the system dark mode. This button switches back to a light display.", "appearance_active": "Display mode: {label}.", "print_button": "Print via browser", "print_unavailable": "Print unavailable", "download_button": "Download PDF", "download_busy": "Generating PDF...", "download_unavailable": "PDF unavailable", "pdf_progress": "Generating PDF...", "pdf_success": "PDF ready and downloaded", "pdf_error": "PDF generation failed", "pdf_downloaded": "PDF downloaded.", "pdf_failed": "PDF generation failed.", "demarche_opened": "Project approach opened.", "demarche_eyebrow": "Approach", "demarche_title": "Web CV, method and AI lab", "demarche_lede": "A hybrid CV used both as a public profile, a controlled PDF deliverable and a field lab for supervised use of AI agents.", "demarche_share": "Share this approach", "demarche_share_copied": "The approach link has been copied", "demarche_share_prompt": "Copy the approach link:", "demarche_close": "Close", "demarche_flow_eyebrow": "Summary flow", "demarche_flow_title": "CI/CD pipeline and AI agent roles", "profile_photo_caption": "Public web-only portrait, excluded from the printable CV.", "about_title": "About", "about_body": "Senior IS architect and lead, with an execution-oriented focus on infrastructure, industrial environments, cybersecurity and transformation delivery.", "jump_page_1": "Go to page 1", "jump_page_2": "Go to page 2", "scroll_top": "Back to top"}}}</script>
   <script>
 (() => {
   const body = document.body;
@@ -3760,6 +4006,7 @@ body[data-mode="ats"] .kpi-box strong {
   const demarcheFeedback = document.getElementById("demarche-feedback");
   const pdfFeedback = document.getElementById("pdf-feedback");
   const btnMobileMenu = document.getElementById("btn-mobile-menu");
+  const btnMobileAppearance = document.getElementById("btn-mobile-appearance");
   const btnScrollTop = document.getElementById("btn-scroll-top");
   const btnJumpPageToggle = document.getElementById("btn-jump-page-toggle");
   const pageJumpIcon = document.getElementById("page-jump-icon");
@@ -3940,6 +4187,9 @@ body[data-mode="ats"] .kpi-box strong {
     if (btnMobileMenu) {
       const expanded = body.classList.contains("is-controls-open");
       btnMobileMenu.setAttribute("aria-label", expanded ? (payload.ui.mobile_menu_close || "") : (payload.ui.mobile_menu_open || ""));
+    }
+    if (btnMobileAppearance) {
+      btnMobileAppearance.setAttribute("aria-label", payload.ui.appearance_toggle || "Affichage inverse");
     }
     if (controlsTitleThemes) controlsTitleThemes.textContent = payload.ui.themes_title || "";
     if (controlsTitleMode) controlsTitleMode.textContent = payload.ui.mode_title || "";
@@ -4658,6 +4908,7 @@ body[data-mode="ats"] .kpi-box strong {
   };
 
   const layoutCv = () => {
+    const previousLayout = body.dataset.layout;
     body.dataset.layout = isMobileLayout() ? "mobile" : "desktop";
     if (body.dataset.layout !== "mobile") {
       body.classList.remove("is-controls-open");
@@ -4667,8 +4918,16 @@ body[data-mode="ats"] .kpi-box strong {
       btnMobileMenu.setAttribute("aria-expanded", body.classList.contains("is-controls-open") ? "true" : "false");
     }
     if (body.dataset.layout === "mobile") {
+      if (previousLayout !== body.dataset.layout) {
+        syncUi();
+      }
       resetDesktopLayout();
+      syncScrollTopPosition();
       return;
+    }
+
+    if (previousLayout !== body.dataset.layout) {
+      syncUi();
     }
 
     setGridHeight(page1);
@@ -4699,6 +4958,25 @@ body[data-mode="ats"] .kpi-box strong {
     const outsideGap = 29;
     const gutter = Math.max(4, Math.round(window.innerWidth - rect.right - buttonWidth - outsideGap));
     rootStyle.setProperty("--page-jump-right", `${gutter}px`);
+  };
+
+  const syncScrollTopPosition = () => {
+    if (!btnScrollTop) return;
+    if (body.dataset.layout !== "mobile") {
+      rootStyle.removeProperty("--scroll-top-right");
+      return;
+    }
+
+    const activePage = detectVisiblePage() === "2" ? page2 : page1;
+    if (!activePage) {
+      rootStyle.removeProperty("--scroll-top-right");
+      return;
+    }
+
+    const rect = activePage.getBoundingClientRect();
+    const innerGap = 16;
+    const gutter = Math.max(14, Math.round(window.innerWidth - rect.right + innerGap));
+    rootStyle.setProperty("--scroll-top-right", `${gutter}px`);
   };
 
   const syncUi = () => {
@@ -4765,6 +5043,18 @@ body[data-mode="ats"] .kpi-box strong {
           ? (labels.appearance_state_on || "Inversé")
           : (labels.appearance_state_off || "Normal");
       }
+    }
+
+    if (btnMobileAppearance) {
+      const appearanceDisabled = theme === "access" || mode !== "premium";
+      const inverted = isAppearanceInverted();
+      btnMobileAppearance.hidden = body.dataset.layout !== "mobile";
+      btnMobileAppearance.disabled = appearanceDisabled;
+      btnMobileAppearance.setAttribute("aria-disabled", appearanceDisabled ? "true" : "false");
+      btnMobileAppearance.setAttribute("aria-pressed", inverted && !appearanceDisabled ? "true" : "false");
+      btnMobileAppearance.setAttribute("aria-label", labels.appearance_toggle || "Affichage inverse");
+      btnMobileAppearance.title = appearanceDisabled ? (labels.appearance_scope || "") : (labels.appearance_toggle || "");
+      btnMobileAppearance.classList.toggle("is-active", inverted && !appearanceDisabled);
     }
 
     if (btnDownloadPdf) {
@@ -4904,7 +5194,8 @@ body[data-mode="ats"] .kpi-box strong {
 
   const syncScrollTopButton = () => {
     if (!btnScrollTop) return;
-    const shouldShow = body.dataset.layout === "mobile" && window.scrollY > 180;
+    syncScrollTopPosition();
+    const shouldShow = body.dataset.layout === "mobile" && window.scrollY > 90;
     btnScrollTop.classList.toggle("is-visible", shouldShow);
   };
 
@@ -4980,6 +5271,7 @@ body[data-mode="ats"] .kpi-box strong {
   if (btnModePremium) btnModePremium.addEventListener("click", () => setMode("premium"));
   if (btnModeAts) btnModeAts.addEventListener("click", () => setMode("ats"));
   if (btnAppearanceCycle) btnAppearanceCycle.addEventListener("click", cycleDarkOverride);
+  if (btnMobileAppearance) btnMobileAppearance.addEventListener("click", cycleDarkOverride);
   if (btnPrint) btnPrint.addEventListener("click", printCv);
   if (btnDownloadPdf) btnDownloadPdf.addEventListener("click", downloadManagedPdf);
   if (btnDemarche) {
